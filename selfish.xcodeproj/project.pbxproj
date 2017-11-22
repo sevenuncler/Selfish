@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4ABAFCF80B53792B92DC492E /* Pods_selfish.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F814782EE40278912260C417 /* Pods_selfish.framework */; };
 		87ACCDEC1FC4F85C0008F7BA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 87ACCDEB1FC4F85C0008F7BA /* AppDelegate.m */; };
 		87ACCDEF1FC4F85C0008F7BA /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87ACCDEE1FC4F85C0008F7BA /* ViewController.m */; };
 		87ACCDF21FC4F85C0008F7BA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87ACCDF01FC4F85C0008F7BA /* Main.storyboard */; };
@@ -16,6 +17,13 @@
 		87ACCE041FC4F85C0008F7BA /* selfishTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 87ACCE031FC4F85C0008F7BA /* selfishTests.m */; };
 		87ACCE0F1FC4F85C0008F7BA /* selfishUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 87ACCE0E1FC4F85C0008F7BA /* selfishUITests.m */; };
 		87ACCE271FC4FA5A0008F7BA /* HomeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 87ACCE261FC4FA5A0008F7BA /* HomeTableViewCell.m */; };
+		87ACCE321FC5AF4C0008F7BA /* UIImage+Size.m in Sources */ = {isa = PBXBuildFile; fileRef = 87ACCE2C1FC5AF4C0008F7BA /* UIImage+Size.m */; };
+		87ACCE331FC5AF4C0008F7BA /* UIView+Layout.m in Sources */ = {isa = PBXBuildFile; fileRef = 87ACCE2E1FC5AF4C0008F7BA /* UIView+Layout.m */; };
+		87ACCE341FC5AF4C0008F7BA /* SUImageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 87ACCE301FC5AF4C0008F7BA /* SUImageManager.m */; };
+		87ACCE371FC5B1EF0008F7BA /* HomeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 87ACCE361FC5B1EF0008F7BA /* HomeVC.m */; };
+		87ACCE391FC5B4D20008F7BA /* image.png in Resources */ = {isa = PBXBuildFile; fileRef = 87ACCE381FC5B4D20008F7BA /* image.png */; };
+		87ACCE3C1FC5BA7F0008F7BA /* HomeViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 87ACCE3B1FC5BA7F0008F7BA /* HomeViewModel.m */; };
+		87ACCE3F1FC5BDA10008F7BA /* HomeViewHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 87ACCE3E1FC5BDA10008F7BA /* HomeViewHeader.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +44,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		71E838DD0DEEB7533B44F0DE /* Pods-selfish.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-selfish.release.xcconfig"; path = "Pods/Target Support Files/Pods-selfish/Pods-selfish.release.xcconfig"; sourceTree = "<group>"; };
+		788519F427174B6659B77C89 /* Pods-selfish.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-selfish.debug.xcconfig"; path = "Pods/Target Support Files/Pods-selfish/Pods-selfish.debug.xcconfig"; sourceTree = "<group>"; };
 		87ACCDE71FC4F85C0008F7BA /* selfish.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = selfish.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		87ACCDEA1FC4F85C0008F7BA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		87ACCDEB1FC4F85C0008F7BA /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -54,6 +64,21 @@
 		87ACCE101FC4F85C0008F7BA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		87ACCE251FC4FA5A0008F7BA /* HomeTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeTableViewCell.h; sourceTree = "<group>"; };
 		87ACCE261FC4FA5A0008F7BA /* HomeTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeTableViewCell.m; sourceTree = "<group>"; };
+		87ACCE2B1FC5AF4C0008F7BA /* SUImageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUImageManager.h; sourceTree = "<group>"; };
+		87ACCE2C1FC5AF4C0008F7BA /* UIImage+Size.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Size.m"; sourceTree = "<group>"; };
+		87ACCE2D1FC5AF4C0008F7BA /* UIImage+Size.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Size.h"; sourceTree = "<group>"; };
+		87ACCE2E1FC5AF4C0008F7BA /* UIView+Layout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Layout.m"; sourceTree = "<group>"; };
+		87ACCE2F1FC5AF4C0008F7BA /* UIView+Layout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Layout.h"; sourceTree = "<group>"; };
+		87ACCE301FC5AF4C0008F7BA /* SUImageManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SUImageManager.m; sourceTree = "<group>"; };
+		87ACCE311FC5AF4C0008F7BA /* Macros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Macros.h; sourceTree = "<group>"; };
+		87ACCE351FC5B1EF0008F7BA /* HomeVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeVC.h; sourceTree = "<group>"; };
+		87ACCE361FC5B1EF0008F7BA /* HomeVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeVC.m; sourceTree = "<group>"; };
+		87ACCE381FC5B4D20008F7BA /* image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image.png; sourceTree = "<group>"; };
+		87ACCE3A1FC5BA7F0008F7BA /* HomeViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeViewModel.h; sourceTree = "<group>"; };
+		87ACCE3B1FC5BA7F0008F7BA /* HomeViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeViewModel.m; sourceTree = "<group>"; };
+		87ACCE3D1FC5BDA10008F7BA /* HomeViewHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeViewHeader.h; sourceTree = "<group>"; };
+		87ACCE3E1FC5BDA10008F7BA /* HomeViewHeader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeViewHeader.m; sourceTree = "<group>"; };
+		F814782EE40278912260C417 /* Pods_selfish.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_selfish.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +86,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4ABAFCF80B53792B92DC492E /* Pods_selfish.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,6 +107,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7BCC60EE35026FF9BB6FF20F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				788519F427174B6659B77C89 /* Pods-selfish.debug.xcconfig */,
+				71E838DD0DEEB7533B44F0DE /* Pods-selfish.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		87ACCDDE1FC4F85C0008F7BA = {
 			isa = PBXGroup;
 			children = (
@@ -88,6 +123,8 @@
 				87ACCE021FC4F85C0008F7BA /* selfishTests */,
 				87ACCE0D1FC4F85C0008F7BA /* selfishUITests */,
 				87ACCDE81FC4F85C0008F7BA /* Products */,
+				7BCC60EE35026FF9BB6FF20F /* Pods */,
+				B5F79913E1CABDDFDEA59921 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -104,6 +141,7 @@
 		87ACCDE91FC4F85C0008F7BA /* selfish */ = {
 			isa = PBXGroup;
 			children = (
+				87ACCDF81FC4F85C0008F7BA /* Info.plist */,
 				87ACCE1E1FC4F95B0008F7BA /* Network */,
 				87ACCE1F1FC4F95B0008F7BA /* Section */,
 				87ACCE1C1FC4F95B0008F7BA /* Service */,
@@ -135,6 +173,13 @@
 		87ACCE1C1FC4F95B0008F7BA /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				87ACCE311FC5AF4C0008F7BA /* Macros.h */,
+				87ACCE2B1FC5AF4C0008F7BA /* SUImageManager.h */,
+				87ACCE301FC5AF4C0008F7BA /* SUImageManager.m */,
+				87ACCE2D1FC5AF4C0008F7BA /* UIImage+Size.h */,
+				87ACCE2C1FC5AF4C0008F7BA /* UIImage+Size.m */,
+				87ACCE2F1FC5AF4C0008F7BA /* UIView+Layout.h */,
+				87ACCE2E1FC5AF4C0008F7BA /* UIView+Layout.m */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -146,7 +191,6 @@
 				87ACCDF01FC4F85C0008F7BA /* Main.storyboard */,
 				87ACCDF31FC4F85C0008F7BA /* Assets.xcassets */,
 				87ACCDF51FC4F85C0008F7BA /* LaunchScreen.storyboard */,
-				87ACCDF81FC4F85C0008F7BA /* Info.plist */,
 				87ACCDF91FC4F85C0008F7BA /* main.m */,
 				87ACCDEA1FC4F85C0008F7BA /* AppDelegate.h */,
 				87ACCDEB1FC4F85C0008F7BA /* AppDelegate.m */,
@@ -183,6 +227,8 @@
 		87ACCE211FC4F95B0008F7BA /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				87ACCE3A1FC5BA7F0008F7BA /* HomeViewModel.h */,
+				87ACCE3B1FC5BA7F0008F7BA /* HomeViewModel.m */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -190,6 +236,8 @@
 		87ACCE221FC4F95B0008F7BA /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				87ACCE351FC5B1EF0008F7BA /* HomeVC.h */,
+				87ACCE361FC5B1EF0008F7BA /* HomeVC.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -206,6 +254,8 @@
 			children = (
 				87ACCE251FC4FA5A0008F7BA /* HomeTableViewCell.h */,
 				87ACCE261FC4FA5A0008F7BA /* HomeTableViewCell.m */,
+				87ACCE3D1FC5BDA10008F7BA /* HomeViewHeader.h */,
+				87ACCE3E1FC5BDA10008F7BA /* HomeViewHeader.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -229,8 +279,17 @@
 		87ACCE2A1FC4FF940008F7BA /* image */ = {
 			isa = PBXGroup;
 			children = (
+				87ACCE381FC5B4D20008F7BA /* image.png */,
 			);
 			path = image;
+			sourceTree = "<group>";
+		};
+		B5F79913E1CABDDFDEA59921 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F814782EE40278912260C417 /* Pods_selfish.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -240,9 +299,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 87ACCE131FC4F85C0008F7BA /* Build configuration list for PBXNativeTarget "selfish" */;
 			buildPhases = (
+				CFAC2FE1B01F968AB540F613 /* [CP] Check Pods Manifest.lock */,
 				87ACCDE31FC4F85C0008F7BA /* Sources */,
 				87ACCDE41FC4F85C0008F7BA /* Frameworks */,
 				87ACCDE51FC4F85C0008F7BA /* Resources */,
+				1C68BBED0838774A2B8728CB /* [CP] Embed Pods Frameworks */,
+				931C5EE11354971EC3734803 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -342,6 +404,7 @@
 				87ACCDF71FC4F85C0008F7BA /* LaunchScreen.storyboard in Resources */,
 				87ACCDF41FC4F85C0008F7BA /* Assets.xcassets in Resources */,
 				87ACCDF21FC4F85C0008F7BA /* Main.storyboard in Resources */,
+				87ACCE391FC5B4D20008F7BA /* image.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -361,6 +424,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		1C68BBED0838774A2B8728CB /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-selfish/Pods-selfish-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		931C5EE11354971EC3734803 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-selfish/Pods-selfish-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CFAC2FE1B01F968AB540F613 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		87ACCDE31FC4F85C0008F7BA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -368,6 +479,12 @@
 			files = (
 				87ACCDEF1FC4F85C0008F7BA /* ViewController.m in Sources */,
 				87ACCDFA1FC4F85C0008F7BA /* main.m in Sources */,
+				87ACCE331FC5AF4C0008F7BA /* UIView+Layout.m in Sources */,
+				87ACCE341FC5AF4C0008F7BA /* SUImageManager.m in Sources */,
+				87ACCE321FC5AF4C0008F7BA /* UIImage+Size.m in Sources */,
+				87ACCE371FC5B1EF0008F7BA /* HomeVC.m in Sources */,
+				87ACCE3F1FC5BDA10008F7BA /* HomeViewHeader.m in Sources */,
+				87ACCE3C1FC5BA7F0008F7BA /* HomeViewModel.m in Sources */,
 				87ACCE271FC4FA5A0008F7BA /* HomeTableViewCell.m in Sources */,
 				87ACCDEC1FC4F85C0008F7BA /* AppDelegate.m in Sources */,
 			);
@@ -530,6 +647,7 @@
 		};
 		87ACCE141FC4F85C0008F7BA /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 788519F427174B6659B77C89 /* Pods-selfish.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -544,6 +662,7 @@
 		};
 		87ACCE151FC4F85C0008F7BA /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 71E838DD0DEEB7533B44F0DE /* Pods-selfish.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
