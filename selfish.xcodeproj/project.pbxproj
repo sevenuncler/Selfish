@@ -15,6 +15,7 @@
 		87ACCDFA1FC4F85C0008F7BA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 87ACCDF91FC4F85C0008F7BA /* main.m */; };
 		87ACCE041FC4F85C0008F7BA /* selfishTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 87ACCE031FC4F85C0008F7BA /* selfishTests.m */; };
 		87ACCE0F1FC4F85C0008F7BA /* selfishUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 87ACCE0E1FC4F85C0008F7BA /* selfishUITests.m */; };
+		87ACCE271FC4FA5A0008F7BA /* HomeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 87ACCE261FC4FA5A0008F7BA /* HomeTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,8 @@
 		87ACCE0A1FC4F85C0008F7BA /* selfishUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = selfishUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		87ACCE0E1FC4F85C0008F7BA /* selfishUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = selfishUITests.m; sourceTree = "<group>"; };
 		87ACCE101FC4F85C0008F7BA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		87ACCE251FC4FA5A0008F7BA /* HomeTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeTableViewCell.h; sourceTree = "<group>"; };
+		87ACCE261FC4FA5A0008F7BA /* HomeTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeTableViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,15 +104,12 @@
 		87ACCDE91FC4F85C0008F7BA /* selfish */ = {
 			isa = PBXGroup;
 			children = (
-				87ACCDEA1FC4F85C0008F7BA /* AppDelegate.h */,
-				87ACCDEB1FC4F85C0008F7BA /* AppDelegate.m */,
+				87ACCE1E1FC4F95B0008F7BA /* Network */,
+				87ACCE1F1FC4F95B0008F7BA /* Section */,
+				87ACCE1C1FC4F95B0008F7BA /* Service */,
+				87ACCE1D1FC4F95B0008F7BA /* supporting */,
 				87ACCDED1FC4F85C0008F7BA /* ViewController.h */,
 				87ACCDEE1FC4F85C0008F7BA /* ViewController.m */,
-				87ACCDF01FC4F85C0008F7BA /* Main.storyboard */,
-				87ACCDF31FC4F85C0008F7BA /* Assets.xcassets */,
-				87ACCDF51FC4F85C0008F7BA /* LaunchScreen.storyboard */,
-				87ACCDF81FC4F85C0008F7BA /* Info.plist */,
-				87ACCDF91FC4F85C0008F7BA /* main.m */,
 			);
 			path = selfish;
 			sourceTree = "<group>";
@@ -130,6 +130,107 @@
 				87ACCE101FC4F85C0008F7BA /* Info.plist */,
 			);
 			path = selfishUITests;
+			sourceTree = "<group>";
+		};
+		87ACCE1C1FC4F95B0008F7BA /* Service */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		87ACCE1D1FC4F95B0008F7BA /* supporting */ = {
+			isa = PBXGroup;
+			children = (
+				87ACCE281FC4FF940008F7BA /* source */,
+				87ACCDF01FC4F85C0008F7BA /* Main.storyboard */,
+				87ACCDF31FC4F85C0008F7BA /* Assets.xcassets */,
+				87ACCDF51FC4F85C0008F7BA /* LaunchScreen.storyboard */,
+				87ACCDF81FC4F85C0008F7BA /* Info.plist */,
+				87ACCDF91FC4F85C0008F7BA /* main.m */,
+				87ACCDEA1FC4F85C0008F7BA /* AppDelegate.h */,
+				87ACCDEB1FC4F85C0008F7BA /* AppDelegate.m */,
+			);
+			path = supporting;
+			sourceTree = "<group>";
+		};
+		87ACCE1E1FC4F95B0008F7BA /* Network */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		87ACCE1F1FC4F95B0008F7BA /* Section */ = {
+			isa = PBXGroup;
+			children = (
+				87ACCE201FC4F95B0008F7BA /* Home */,
+			);
+			path = Section;
+			sourceTree = "<group>";
+		};
+		87ACCE201FC4F95B0008F7BA /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				87ACCE211FC4F95B0008F7BA /* ViewModel */,
+				87ACCE221FC4F95B0008F7BA /* Controller */,
+				87ACCE231FC4F95B0008F7BA /* Model */,
+				87ACCE241FC4F95B0008F7BA /* View */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		87ACCE211FC4F95B0008F7BA /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		87ACCE221FC4F95B0008F7BA /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		87ACCE231FC4F95B0008F7BA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		87ACCE241FC4F95B0008F7BA /* View */ = {
+			isa = PBXGroup;
+			children = (
+				87ACCE251FC4FA5A0008F7BA /* HomeTableViewCell.h */,
+				87ACCE261FC4FA5A0008F7BA /* HomeTableViewCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		87ACCE281FC4FF940008F7BA /* source */ = {
+			isa = PBXGroup;
+			children = (
+				87ACCE291FC4FF940008F7BA /* video */,
+				87ACCE2A1FC4FF940008F7BA /* image */,
+			);
+			path = source;
+			sourceTree = "<group>";
+		};
+		87ACCE291FC4FF940008F7BA /* video */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = video;
+			sourceTree = "<group>";
+		};
+		87ACCE2A1FC4FF940008F7BA /* image */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = image;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -267,6 +368,7 @@
 			files = (
 				87ACCDEF1FC4F85C0008F7BA /* ViewController.m in Sources */,
 				87ACCDFA1FC4F85C0008F7BA /* main.m in Sources */,
+				87ACCE271FC4FA5A0008F7BA /* HomeTableViewCell.m in Sources */,
 				87ACCDEC1FC4F85C0008F7BA /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
