@@ -43,8 +43,10 @@ static NSString * const reuseHomeHeaderIdentifier   = @"reuseHeader";
     if(nil == cell) {
         cell = [[HomeTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:reuseHomeCellIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.backgroundColor = [UIColor blueColor];
     }
+    cell.cellType = HomeTableViewCellStyleVideo;
+    [cell setNeedsLayout];
+    
     return cell;
 }
 
@@ -53,24 +55,21 @@ static NSString * const reuseHomeHeaderIdentifier   = @"reuseHeader";
     if(nil == header) {
         header = [[HomeViewHeader alloc] initWithReuseIdentifier:reuseHomeHeaderIdentifier];
     }
-    header.textLabel.text = @"主标题";
-    UIFont *myFont = [ UIFont fontWithName: @"Arial" size: 18.0 ];
-    header.textLabel.font = myFont;
-    header.textLabel.textColor = [UIColor redColor];
-    header.detailTextLabel.text = @"副标题";
-    header.detailTextLabel.font = myFont;
-    header.contentView.backgroundColor = [UIColor greenColor];
     return header;
 }
 
 #pragma mark - UITableViewDelegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return [self cellHeightForItem:nil];
+    return [self cellHeightForItem:nil] + 100;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 100;
+    return 90;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
 }
 
 

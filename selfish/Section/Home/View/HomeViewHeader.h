@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface HomeViewHeader : UITableViewHeaderFooterView
-
+@property(nonatomic,strong) UILabel *titleLabel;
+@property(nonatomic,strong) UILabel *subtitleLabel;
 @end

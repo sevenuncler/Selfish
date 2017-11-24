@@ -24,6 +24,7 @@
 		87ACCE391FC5B4D20008F7BA /* image.png in Resources */ = {isa = PBXBuildFile; fileRef = 87ACCE381FC5B4D20008F7BA /* image.png */; };
 		87ACCE3C1FC5BA7F0008F7BA /* HomeViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 87ACCE3B1FC5BA7F0008F7BA /* HomeViewModel.m */; };
 		87ACCE3F1FC5BDA10008F7BA /* HomeViewHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 87ACCE3E1FC5BDA10008F7BA /* HomeViewHeader.m */; };
+		87ACCE421FC7A4490008F7BA /* HomeAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 87ACCE411FC7A4490008F7BA /* HomeAnimator.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +79,8 @@
 		87ACCE3B1FC5BA7F0008F7BA /* HomeViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeViewModel.m; sourceTree = "<group>"; };
 		87ACCE3D1FC5BDA10008F7BA /* HomeViewHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeViewHeader.h; sourceTree = "<group>"; };
 		87ACCE3E1FC5BDA10008F7BA /* HomeViewHeader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeViewHeader.m; sourceTree = "<group>"; };
+		87ACCE401FC7A4490008F7BA /* HomeAnimator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeAnimator.h; sourceTree = "<group>"; };
+		87ACCE411FC7A4490008F7BA /* HomeAnimator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeAnimator.m; sourceTree = "<group>"; };
 		F814782EE40278912260C417 /* Pods_selfish.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_selfish.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -238,6 +241,8 @@
 			children = (
 				87ACCE351FC5B1EF0008F7BA /* HomeVC.h */,
 				87ACCE361FC5B1EF0008F7BA /* HomeVC.m */,
+				87ACCE401FC7A4490008F7BA /* HomeAnimator.h */,
+				87ACCE411FC7A4490008F7BA /* HomeAnimator.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -478,6 +483,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				87ACCDEF1FC4F85C0008F7BA /* ViewController.m in Sources */,
+				87ACCE421FC7A4490008F7BA /* HomeAnimator.m in Sources */,
 				87ACCDFA1FC4F85C0008F7BA /* main.m in Sources */,
 				87ACCE331FC5AF4C0008F7BA /* UIView+Layout.m in Sources */,
 				87ACCE341FC5AF4C0008F7BA /* SUImageManager.m in Sources */,
