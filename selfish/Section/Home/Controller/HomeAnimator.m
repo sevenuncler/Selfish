@@ -8,17 +8,42 @@
 
 #import "HomeAnimator.h"
 #import "UIView+Layout.h"
+#import "HomeVC.h"
+#import "HomeTableViewCell.h"
+#import "DetailVC.h"
 
 @implementation HomeAnimator
 
 #pragma mark - UIViewControllerAnimatedTransitioning
 
 - (NSTimeInterval)transitionDuration:(nullable id <UIViewControllerContextTransitioning>)transitionContext {
-    return 2;
+    return 0.5;
 }
 
 - (void)animateTransition:(id <UIViewControllerContextTransitioning>)transitionContext {
-    [self presentAnimation:transitionContext];
+    UIViewController *fromVC = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
+    if([fromVC isMemberOfClass:[HomeVC class]]) {
+        switch (self.homeAnimatorType) {
+            case HomeAnimatorTypeDefault:
+                [self presentAnimation:transitionContext];
+                break;
+            case HomeAnimatorTypeMagicMove:
+                [self magicMovePresentionAnimation:transitionContext];
+            default:
+                break;
+        }
+    }else if([fromVC isMemberOfClass:[DetailVC class]]) {
+        switch (self.homeAnimatorType) {
+            case HomeAnimatorTypeDefault:
+                [self presentAnimation:transitionContext];
+                break;
+            case HomeAnimatorTypeMagicMove:
+                [self magicMovePopAnimation:transitionContext];
+            default:
+                break;
+        }
+    }
+    
 }
 
 - (void)presentAnimation:(id <UIViewControllerContextTransitioning>)transitionContext {
@@ -53,6 +78,59 @@
             //然后移除截图视图，因为下次触发present会重新截图
             [tempView removeFromSuperview];
         }
+    }];
+}
+
+- (void)magicMovePresentionAnimation:(id <UIViewControllerContextTransitioning>)transitionContext {
+    DetailVC *toVC = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
+    HomeVC *fromVC = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
+    HomeTableViewCell *cell = [fromVC.tableView cellForRowAtIndexPath:fromVC.currentIndexPath];
+    UIView *containerView = transitionContext.containerView;
+    __block UIView *snapShot = [cell.coverImageView snapshotViewAfterScreenUpdates:NO]; //为什么是NO？
+    snapShot.frame = [cell.coverImageView convertRect:cell.coverImageView.bounds toView:containerView];
+    
+    fromVC.view.hidden = YES;
+    toVC.view.hidden = YES;
+    toVC.topImageView.hidden = YES;
+    
+    [containerView addSubview:toVC.view];
+    [containerView addSubview:snapShot];
+    [UIView animateWithDuration:[self transitionDuration:transitionContext] animations:^{
+        snapShot.frame = [toVC.topImageView convertRect:toVC.topImageView.bounds toView:containerView];
+        toVC.view.hidden = NO;
+    } completion:^(BOOL finished) {
+        [transitionContext completeTransition:YES];
+        toVC.topImageView.hidden = NO;
+        [snapShot removeFromSuperview];
+    }];
+}
+
+- (void)magicMovePopAnimation:(id <UIViewControllerContextTransitioning>)transitionContext {
+    DetailVC *fromVC = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
+    HomeVC *toVC = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
+    
+    UIView *containerView = transitionContext.containerView;
+    __block UIView *snapShotView = [fromVC.topImageView snapshotViewAfterScreenUpdates:NO];
+    snapShotView.frame = [fromVC.topImageView convertRect:fromVC.topImageView.bounds toView:containerView];
+    fromVC.view.hidden = YES;
+    
+    UIView *toViewSnapshot = [toVC.view snapshotViewAfterScreenUpdates:NO];
+    toViewSnapshot.frame = [toVC.view convertRect:toVC.view.bounds toView:containerView];
+    toViewSnapshot.alpha = 0;
+//    [containerView addSubview:toViewSnapshot];
+    [containerView addSubview:snapShotView];
+//    toVC.view.alpha = 0;
+    toVC.view.hidden = NO;
+    HomeTableViewCell *cell = [toVC.tableView cellForRowAtIndexPath:toVC.currentIndexPath];
+    cell.alpha = 0;
+    [UIView animateWithDuration:[self transitionDuration:transitionContext] animations:^{
+//        cell.alpha = 1;
+        snapShotView.frame = [cell.coverImageView convertRect:cell.coverImageView.bounds toView:containerView];
+//        toVC.view.alpha = 1;
+    } completion:^(BOOL finished) {
+        [transitionContext completeTransition:YES];
+        snapShotView.hidden = YES;
+        cell.alpha = 1;
     }];
 }
 

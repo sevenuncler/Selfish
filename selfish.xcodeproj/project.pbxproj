@@ -25,6 +25,7 @@
 		87ACCE3C1FC5BA7F0008F7BA /* HomeViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 87ACCE3B1FC5BA7F0008F7BA /* HomeViewModel.m */; };
 		87ACCE3F1FC5BDA10008F7BA /* HomeViewHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 87ACCE3E1FC5BDA10008F7BA /* HomeViewHeader.m */; };
 		87ACCE421FC7A4490008F7BA /* HomeAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 87ACCE411FC7A4490008F7BA /* HomeAnimator.m */; };
+		87ACCE451FC860CB0008F7BA /* DetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 87ACCE441FC860CB0008F7BA /* DetailVC.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +82,8 @@
 		87ACCE3E1FC5BDA10008F7BA /* HomeViewHeader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeViewHeader.m; sourceTree = "<group>"; };
 		87ACCE401FC7A4490008F7BA /* HomeAnimator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeAnimator.h; sourceTree = "<group>"; };
 		87ACCE411FC7A4490008F7BA /* HomeAnimator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeAnimator.m; sourceTree = "<group>"; };
+		87ACCE431FC860CA0008F7BA /* DetailVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailVC.h; sourceTree = "<group>"; };
+		87ACCE441FC860CB0008F7BA /* DetailVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailVC.m; sourceTree = "<group>"; };
 		F814782EE40278912260C417 /* Pods_selfish.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_selfish.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -243,6 +246,8 @@
 				87ACCE361FC5B1EF0008F7BA /* HomeVC.m */,
 				87ACCE401FC7A4490008F7BA /* HomeAnimator.h */,
 				87ACCE411FC7A4490008F7BA /* HomeAnimator.m */,
+				87ACCE431FC860CA0008F7BA /* DetailVC.h */,
+				87ACCE441FC860CB0008F7BA /* DetailVC.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -491,6 +496,7 @@
 				87ACCE371FC5B1EF0008F7BA /* HomeVC.m in Sources */,
 				87ACCE3F1FC5BDA10008F7BA /* HomeViewHeader.m in Sources */,
 				87ACCE3C1FC5BA7F0008F7BA /* HomeViewModel.m in Sources */,
+				87ACCE451FC860CB0008F7BA /* DetailVC.m in Sources */,
 				87ACCE271FC4FA5A0008F7BA /* HomeTableViewCell.m in Sources */,
 				87ACCDEC1FC4F85C0008F7BA /* AppDelegate.m in Sources */,
 			);

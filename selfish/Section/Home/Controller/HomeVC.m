@@ -7,14 +7,16 @@
 //
 
 #import "HomeVC.h"
-#import "HomeViewModel.h"
+#import <ReactiveCocoa/ReactiveCocoa.h>
 #import "Macros.h"
 #import "UIView+Layout.h"
 #import "ViewController.h"
 #import "HomeAnimator.h"
+#import "HomeViewModel.h"
+#import "DetailVC.h"
+
 
 @interface HomeVC () <UIViewControllerTransitioningDelegate>
-@property(nonatomic,strong) UITableView *tableView;
 @property(nonatomic,strong) HomeViewModel *homeViewModel;
 @property(nonatomic,strong) HomeAnimator  *homeAnimator;
 @end
@@ -26,27 +28,40 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     self.homeAnimator = [HomeAnimator new];
+    self.homeAnimator.homeAnimatorType = HomeAnimatorTypeMagicMove;
     
-//    [self.view addSubview:self.tableView];
+    [self.view addSubview:self.tableView];
     [self setUpBind];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)dealloc {
+    NSLog(@"我被销毁了");
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    ViewController *vc = [ViewController new];
-    vc.view.backgroundColor = [UIColor redColor];
-    vc.modalPresentationStyle = UIModalPresentationCustom;
-    vc.transitioningDelegate  = self;
-    [self presentViewController:vc animated:YES completion:nil];
+    
 }
 
 - (void)setUpBind {
+    @weakify(self);
+    [self.homeViewModel.selectedIndexSignal subscribeNext:^(id x) {
+        @strongify(self);
+        self.currentIndexPath = x;
+        [self presentVCAction:nil];
+    }];
+    
     self.tableView.dataSource = self.homeViewModel;
     self.tableView.delegate   = self.homeViewModel;
+    
+    
+}
+
+- (void)presentVCAction:(id)sender {
+    UIViewController *vc = [DetailVC new];
+    vc.view.backgroundColor = [UIColor whiteColor];
+    vc.modalPresentationStyle = UIModalPresentationCustom;
+    vc.transitioningDelegate  = self;
+    [self presentViewController:vc animated:YES completion:nil];
 }
 
 - (id <UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source {

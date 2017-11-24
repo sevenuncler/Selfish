@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface HomeVC : UIViewController
-
+@property(nonatomic,strong) NSIndexPath *currentIndexPath;
+@property(nonatomic,strong) UITableView *tableView;
 @end

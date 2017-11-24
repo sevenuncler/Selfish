@@ -9,6 +9,12 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-@interface HomeAnimator : NSObject <UIViewControllerAnimatedTransitioning>
+typedef NS_ENUM(NSInteger, HomeAnimatorType) {
+        HomeAnimatorTypeDefault,
+        HomeAnimatorTypeMagicMove,
+        HomeAnimatorTypeSpread
+};
 
+@interface HomeAnimator : NSObject <UIViewControllerAnimatedTransitioning>
+@property(nonatomic,assign) HomeAnimatorType homeAnimatorType;
 @end

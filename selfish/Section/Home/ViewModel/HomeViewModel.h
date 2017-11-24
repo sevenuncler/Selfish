@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import <ReactiveCocoa/ReactiveCocoa.h>
 
 @interface HomeViewModel : NSObject <UITableViewDataSource, UITableViewDelegate>
+@property(nonatomic,strong) RACSubject *selectedIndexSignal;
 @end

@@ -69,7 +69,16 @@ static NSString * const reuseHomeHeaderIdentifier   = @"reuseHeader";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+    [self.selectedIndexSignal sendNext:indexPath];
+}
+
+#pragma mark - Getter & Setter
+
+- (RACSubject *)selectedIndexSignal {
+    if(!_selectedIndexSignal) {
+        _selectedIndexSignal = [RACSubject subject];
+    }
+    return _selectedIndexSignal;
 }
 
 
