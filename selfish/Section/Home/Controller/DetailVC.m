@@ -21,7 +21,7 @@
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    [self dismissViewControllerAnimated:YES completion:nil];
+//    [self dismissViewControllerAnimated:YES completion:nil];
     
 }
 
@@ -31,6 +31,9 @@
         _topImageView.image = [UIImage imageNamed:@"image"];
     }
     return _topImageView;
+}
+
+- (void)dealloc {
 }
 
 @end

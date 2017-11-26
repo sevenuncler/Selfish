@@ -9,6 +9,10 @@
 #import "AppDelegate.h"
 #import "HomeVC.h"
 #import "Macros.h"
+#import "SFShopTableVC.h"
+#import "SFShopDetailVC.h"
+#import "SFTabBarController.h"
+#import "SFNavigationController.h"
 @interface AppDelegate ()
 
 @end
@@ -18,7 +22,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     UIWindow *window = [[UIWindow alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
-    UIViewController *vc = [HomeVC new];
+    UIViewController *vc = [SFTabBarController new];
+    UINavigationController *naviVC = [[SFNavigationController alloc] initWithRootViewController:vc];
     window.rootViewController = vc;
     self.window = window;
     [self.window makeKeyAndVisible];

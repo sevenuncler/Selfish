@@ -11,18 +11,19 @@
 #import "HomeVC.h"
 #import "HomeTableViewCell.h"
 #import "DetailVC.h"
+#import "SFNavigationController.h"
 
 @implementation HomeAnimator
 
 #pragma mark - UIViewControllerAnimatedTransitioning
 
 - (NSTimeInterval)transitionDuration:(nullable id <UIViewControllerContextTransitioning>)transitionContext {
-    return 0.5;
+    return 0.4;
 }
 
 - (void)animateTransition:(id <UIViewControllerContextTransitioning>)transitionContext {
     UIViewController *fromVC = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
-    if([fromVC isMemberOfClass:[HomeVC class]]) {
+    if([fromVC isMemberOfClass:[HomeVC class]] || [fromVC isKindOfClass:[UINavigationController class]] || [fromVC isKindOfClass:[UITabBarController class]]) {
         switch (self.homeAnimatorType) {
             case HomeAnimatorTypeDefault:
                 [self presentAnimation:transitionContext];
@@ -38,10 +39,12 @@
                 [self presentAnimation:transitionContext];
                 break;
             case HomeAnimatorTypeMagicMove:
-                [self magicMovePopAnimation:transitionContext];
+                [self magicMoveDismissAnimation:transitionContext];
             default:
                 break;
         }
+    }else {
+        [transitionContext completeTransition:NO];
     }
     
 }
@@ -51,7 +54,7 @@
     UIViewController *toVC = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
     UIViewController *fromVC = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
     //snapshotViewAfterScreenUpdates可以对某个视图截图，我们采用对这个截图做动画代替直接对vc1做动画，因为在手势过渡中直接使用vc1动画会和手势有冲突，    如果不需要实现手势的话，就可以不是用截图视图了，大家可以自行尝试一下
-    UIView *tempView = [fromVC.view snapshotViewAfterScreenUpdates:NO];
+    UIView *tempView = [fromVC.view snapshotViewAfterScreenUpdates:YES];
     tempView.frame = fromVC.view.frame;
     //因为对截图做动画，vc1就可以隐藏了
     fromVC.view.hidden = YES;
@@ -84,12 +87,27 @@
 - (void)magicMovePresentionAnimation:(id <UIViewControllerContextTransitioning>)transitionContext {
     DetailVC *toVC = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
     HomeVC *fromVC = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
+
+    if([fromVC isKindOfClass:[UINavigationController class]]) {
+        fromVC = (HomeVC *)((UINavigationController *)fromVC).topViewController;
+        if([fromVC isKindOfClass:[UITabBarController class]]) {
+            fromVC = ((UITabBarController *)fromVC).childViewControllers[0];
+        }
+        if([fromVC isKindOfClass:[UINavigationController class]]) {
+            fromVC = (HomeVC *)((UINavigationController *)fromVC).topViewController;
+        }
+    }
+    if([fromVC isKindOfClass:[UITabBarController class]]) {
+        fromVC = ((UITabBarController *)fromVC).childViewControllers[0];
+        if([fromVC isKindOfClass:[UINavigationController class]]) {
+            fromVC = (HomeVC *)((UINavigationController *)fromVC).topViewController;
+        }
+    }
     HomeTableViewCell *cell = [fromVC.tableView cellForRowAtIndexPath:fromVC.currentIndexPath];
     UIView *containerView = transitionContext.containerView;
     __block UIView *snapShot = [cell.coverImageView snapshotViewAfterScreenUpdates:NO]; //为什么是NO？
     snapShot.frame = [cell.coverImageView convertRect:cell.coverImageView.bounds toView:containerView];
     
-    fromVC.view.hidden = YES;
     toVC.view.hidden = YES;
     toVC.topImageView.hidden = YES;
     
@@ -105,32 +123,48 @@
     }];
 }
 
-- (void)magicMovePopAnimation:(id <UIViewControllerContextTransitioning>)transitionContext {
+- (void)magicMoveDismissAnimation:(id <UIViewControllerContextTransitioning>)transitionContext {
     DetailVC *fromVC = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
     HomeVC *toVC = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
-    
+    if([toVC isKindOfClass:[UINavigationController class]]) {
+        toVC = (HomeVC *)((UINavigationController *)toVC).topViewController;
+        if([toVC isKindOfClass:[UITabBarController class]]) {
+            toVC = ((UITabBarController *)toVC).childViewControllers[0];
+        }
+        if([toVC isKindOfClass:[UINavigationController class]]) {
+            toVC = (HomeVC *)((UINavigationController *)toVC).topViewController;
+        }
+    }
+    if([toVC isKindOfClass:[UITabBarController class]]) {
+        toVC = ((UITabBarController *)toVC).childViewControllers[0];
+        if([toVC isKindOfClass:[UINavigationController class]]) {
+            toVC = (HomeVC *)((UINavigationController *)toVC).topViewController;
+        }
+    }
     UIView *containerView = transitionContext.containerView;
     __block UIView *snapShotView = [fromVC.topImageView snapshotViewAfterScreenUpdates:NO];
     snapShotView.frame = [fromVC.topImageView convertRect:fromVC.topImageView.bounds toView:containerView];
     fromVC.view.hidden = YES;
     
-    UIView *toViewSnapshot = [toVC.view snapshotViewAfterScreenUpdates:NO];
-    toViewSnapshot.frame = [toVC.view convertRect:toVC.view.bounds toView:containerView];
-    toViewSnapshot.alpha = 0;
-//    [containerView addSubview:toViewSnapshot];
+
     [containerView addSubview:snapShotView];
-//    toVC.view.alpha = 0;
     toVC.view.hidden = NO;
     HomeTableViewCell *cell = [toVC.tableView cellForRowAtIndexPath:toVC.currentIndexPath];
-    cell.alpha = 0;
+    cell.coverImageView.alpha = 0;
+    
     [UIView animateWithDuration:[self transitionDuration:transitionContext] animations:^{
-//        cell.alpha = 1;
         snapShotView.frame = [cell.coverImageView convertRect:cell.coverImageView.bounds toView:containerView];
-//        toVC.view.alpha = 1;
     } completion:^(BOOL finished) {
-        [transitionContext completeTransition:YES];
-        snapShotView.hidden = YES;
-        cell.alpha = 1;
+        BOOL isCancelled = [transitionContext transitionWasCancelled];
+        [transitionContext completeTransition:!isCancelled];
+        if(isCancelled) {
+            [snapShotView removeFromSuperview];
+            fromVC.view.hidden = NO;
+        }else {
+            [snapShotView removeFromSuperview];
+            cell.coverImageView.alpha = 1;
+        }
+        
     }];
 }
 
