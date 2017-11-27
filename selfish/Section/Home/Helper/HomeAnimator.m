@@ -138,7 +138,7 @@
     if([toVC isKindOfClass:[UITabBarController class]]) {
         toVC = ((UITabBarController *)toVC).childViewControllers[0];
         if([toVC isKindOfClass:[UINavigationController class]]) {
-            toVC = (HomeVC *)((UINavigationController *)toVC).topViewController;
+            toVC = (HomeVC *)((UINavigationController *)toVC    ).topViewController;
         }
     }
     UIView *containerView = transitionContext.containerView;

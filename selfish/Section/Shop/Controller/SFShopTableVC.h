@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SFShopTableVC : UITableViewController
-
+@interface SFShopTableVC : UIViewController
+@property(nonatomic,strong) UITableView *tableView;
 @end

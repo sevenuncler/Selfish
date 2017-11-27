@@ -10,11 +10,13 @@
 #import "SFShopTableViewCell.h"
 #import "UIView+Layout.h"
 #import "SFShopDetailVC.h"
+#import "Macros.h"
+#import "SFShopCatagoryToolBarView.h"
 
 static NSString * const reuseIdentifier = @"商家表单元";
 
-@interface SFShopTableVC ()
-
+@interface SFShopTableVC ()<UITableViewDataSource, UITableViewDelegate>
+@property(nonatomic,strong) SFShopCatagoryToolBarView *catagorySegment;
 @end
 
 @implementation SFShopTableVC
@@ -24,7 +26,11 @@ static NSString * const reuseIdentifier = @"商家表单元";
     //vc.view往下移动，不让其被导航栏遮挡，与automaticalAjustScrollViewInsect差不多（略微差别）
     self.edgesForExtendedLayout  = UIRectEdgeNone;
     self.navigationController.navigationBar.translucent = NO;
+    [self.view addSubview:self.catagorySegment];
+    [self.view addSubview:self.tableView];
+    
     [self.tableView registerClass:[SFShopTableViewCell class] forCellReuseIdentifier:reuseIdentifier];
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -60,48 +66,20 @@ static NSString * const reuseIdentifier = @"商家表单元";
     [self presentViewController:vc animated:YES completion:nil];
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+- (SFShopCatagoryToolBarView *)catagorySegment {
+    if(!_catagorySegment) {
+        _catagorySegment = [[SFShopCatagoryToolBarView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44)];
+    }
+    return _catagorySegment;
 }
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+- (UITableView *)tableView {
+    if(!_tableView) {
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, self.catagorySegment.botton, SCREEN_WIDTH, self.view.size.height-88) style:UITableViewStylePlain];
+        _tableView.dataSource = self;
+        _tableView.delegate   = self;
+    }
+    return _tableView;
 }
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
