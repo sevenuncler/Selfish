@@ -29,6 +29,8 @@
     [self.tableView registerClass:[SFShopDetailTitleCell class] forCellReuseIdentifier:@"SFShopDetailTitleCell"];
     [self.tableView registerClass:[SFShopDetailMenuCell class] forCellReuseIdentifier:@"SFShopDetailMenuCell"];
     [self.tableView registerClass:[SongViewCell class] forCellReuseIdentifier:@"SongViewCell"];
+    
+    self.title = @"店铺名称";
 }
 
 - (void)didReceiveMemoryWarning {

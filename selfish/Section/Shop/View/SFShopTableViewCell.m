@@ -43,6 +43,8 @@
     //封面
     CGFloat height = self.size.height - 2*PADDING;
     self.shopCoverImageView.frame = CGRectMake(PADDING, PADDING, height/0.7, height);
+    self.shopCoverImageView.layer.cornerRadius = 15;
+    self.shopCoverImageView.clipsToBounds = YES;
     
     //名称
     [self.shopNameLabel sizeToFit];

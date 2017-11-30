@@ -8,7 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol SFShopCatagoryViewDelegate
+
+@end
+
 @interface SFShopCatagoryView : UIView
 @property(nonatomic,strong) UITableView *menuTableView;
 @property(nonatomic,strong) UITableView *contentTableView;
+@property(nonatomic,weak)   id<SFShopCatagoryViewDelegate> delegate;
+
+- (void)refresh;
 @end

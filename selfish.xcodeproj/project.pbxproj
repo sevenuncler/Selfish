@@ -247,6 +247,9 @@
 		877030421FCB8D63006F410D /* SFShopCatagoryViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 877030411FCB8D63006F410D /* SFShopCatagoryViewModel.m */; };
 		877030451FCB8E55006F410D /* SFCatagoryItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 877030441FCB8E55006F410D /* SFCatagoryItem.m */; };
 		877030481FCB9349006F410D /* SFShopCatagoryToolBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 877030471FCB9349006F410D /* SFShopCatagoryToolBarView.m */; };
+		8770304B1FCC4276006F410D /* SFShopCatagoryViewModel2.m in Sources */ = {isa = PBXBuildFile; fileRef = 8770304A1FCC4276006F410D /* SFShopCatagoryViewModel2.m */; };
+		8770304E1FCD9182006F410D /* SFShopCreateVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8770304D1FCD9182006F410D /* SFShopCreateVC.m */; };
+		877030511FCE3580006F410D /* SUSQLManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 877030501FCE3580006F410D /* SUSQLManager.m */; };
 		87ACCDEC1FC4F85C0008F7BA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 87ACCDEB1FC4F85C0008F7BA /* AppDelegate.m */; };
 		87ACCDEF1FC4F85C0008F7BA /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87ACCDEE1FC4F85C0008F7BA /* ViewController.m */; };
 		87ACCDF21FC4F85C0008F7BA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87ACCDF01FC4F85C0008F7BA /* Main.storyboard */; };
@@ -551,6 +554,12 @@
 		877030441FCB8E55006F410D /* SFCatagoryItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFCatagoryItem.m; sourceTree = "<group>"; };
 		877030461FCB9349006F410D /* SFShopCatagoryToolBarView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFShopCatagoryToolBarView.h; sourceTree = "<group>"; };
 		877030471FCB9349006F410D /* SFShopCatagoryToolBarView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFShopCatagoryToolBarView.m; sourceTree = "<group>"; };
+		877030491FCC4276006F410D /* SFShopCatagoryViewModel2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFShopCatagoryViewModel2.h; sourceTree = "<group>"; };
+		8770304A1FCC4276006F410D /* SFShopCatagoryViewModel2.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFShopCatagoryViewModel2.m; sourceTree = "<group>"; };
+		8770304C1FCD9182006F410D /* SFShopCreateVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFShopCreateVC.h; sourceTree = "<group>"; };
+		8770304D1FCD9182006F410D /* SFShopCreateVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFShopCreateVC.m; sourceTree = "<group>"; };
+		8770304F1FCE3580006F410D /* SUSQLManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SUSQLManager.h; sourceTree = "<group>"; };
+		877030501FCE3580006F410D /* SUSQLManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SUSQLManager.m; sourceTree = "<group>"; };
 		87ACCDE71FC4F85C0008F7BA /* selfish.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = selfish.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		87ACCDEA1FC4F85C0008F7BA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		87ACCDEB1FC4F85C0008F7BA /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -681,8 +690,8 @@
 		87702E401FC9B121006F410D /* Shop */ = {
 			isa = PBXGroup;
 			children = (
-				87702E411FC9B121006F410D /* ViewModel */,
 				87702E421FC9B121006F410D /* Controller */,
+				87702E411FC9B121006F410D /* ViewModel */,
 				87702E431FC9B121006F410D /* Model */,
 				87702E441FC9B121006F410D /* View */,
 				87702E451FC9B121006F410D /* Helper */,
@@ -695,6 +704,8 @@
 			children = (
 				877030401FCB8D63006F410D /* SFShopCatagoryViewModel.h */,
 				877030411FCB8D63006F410D /* SFShopCatagoryViewModel.m */,
+				877030491FCC4276006F410D /* SFShopCatagoryViewModel2.h */,
+				8770304A1FCC4276006F410D /* SFShopCatagoryViewModel2.m */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -706,6 +717,8 @@
 				87702E531FC9B737006F410D /* SFShopTableVC.m */,
 				87702E581FCA9DE9006F410D /* SFShopDetailVC.h */,
 				87702E591FCA9DE9006F410D /* SFShopDetailVC.m */,
+				8770304C1FCD9182006F410D /* SFShopCreateVC.h */,
+				8770304D1FCD9182006F410D /* SFShopCreateVC.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -859,6 +872,8 @@
 		87702E511FC9B1E2006F410D /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				8770304F1FCE3580006F410D /* SUSQLManager.h */,
+				877030501FCE3580006F410D /* SUSQLManager.m */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -1700,8 +1715,10 @@
 				8770303F1FCB8A84006F410D /* SFShopCatagoryView.m in Sources */,
 				87702E6F1FCAB416006F410D /* StatusView.m in Sources */,
 				87ACCE3F1FC5BDA10008F7BA /* HomeViewHeader.m in Sources */,
+				877030511FCE3580006F410D /* SUSQLManager.m in Sources */,
 				87702E7B1FCAB884006F410D /* SFShopItem.m in Sources */,
 				87702E541FC9B737006F410D /* SFShopTableVC.m in Sources */,
+				8770304E1FCD9182006F410D /* SFShopCreateVC.m in Sources */,
 				87ACCE491FC91E4F0008F7BA /* HomeInteractiveAnimator.m in Sources */,
 				87702E721FCAB4D7006F410D /* SUTableViewCell.m in Sources */,
 				87702E5A1FCA9DE9006F410D /* SFShopDetailVC.m in Sources */,
@@ -1710,6 +1727,7 @@
 				87702E571FC9B780006F410D /* SFShopTableViewCell.m in Sources */,
 				87ACCE3C1FC5BA7F0008F7BA /* HomeViewModel.m in Sources */,
 				87ACCE451FC860CB0008F7BA /* DetailVC.m in Sources */,
+				8770304B1FCC4276006F410D /* SFShopCatagoryViewModel2.m in Sources */,
 				877030481FCB9349006F410D /* SFShopCatagoryToolBarView.m in Sources */,
 				87ACCE271FC4FA5A0008F7BA /* HomeTableViewCell.m in Sources */,
 				87702E811FCAEBE5006F410D /* SFTabBarController.m in Sources */,

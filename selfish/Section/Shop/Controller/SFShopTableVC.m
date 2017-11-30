@@ -12,11 +12,18 @@
 #import "SFShopDetailVC.h"
 #import "Macros.h"
 #import "SFShopCatagoryToolBarView.h"
+#import "SFShopCatagoryView.h"
+#import "SFShopCatagoryViewModel.h"
+#import "SFShopCatagoryViewModel2.h"
 
 static NSString * const reuseIdentifier = @"商家表单元";
 
 @interface SFShopTableVC ()<UITableViewDataSource, UITableViewDelegate>
 @property(nonatomic,strong) SFShopCatagoryToolBarView *catagorySegment;
+@property(nonatomic,strong) SFShopCatagoryView *shopCatagoryView;
+@property(nonatomic,strong) SFShopCatagoryViewModel *shopCatagoryViewModel;
+@property(nonatomic,strong) SFShopCatagoryViewModel2 *shopCatagoryViewModel2;
+
 @end
 
 @implementation SFShopTableVC
@@ -28,14 +35,47 @@ static NSString * const reuseIdentifier = @"商家表单元";
     self.navigationController.navigationBar.translucent = NO;
     [self.view addSubview:self.catagorySegment];
     [self.view addSubview:self.tableView];
+    [self.view addSubview:self.shopCatagoryView];
     
     [self.tableView registerClass:[SFShopTableViewCell class] forCellReuseIdentifier:reuseIdentifier];
+    
+    [self setUpBind];
 
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)setUpBind {
+    self.shopCatagoryView.menuTableView.dataSource = self.shopCatagoryViewModel;
+    self.shopCatagoryView.menuTableView.delegate = self.shopCatagoryViewModel;
+    self.shopCatagoryView.contentTableView.dataSource = self.shopCatagoryViewModel2;
+    self.shopCatagoryView.contentTableView.delegate = self.shopCatagoryViewModel2;
+    __weak typeof(self) weakSelf = self;
+    self.shopCatagoryViewModel.handler = ^void(NSIndexPath *indexPath, SFCatagoryItem *item) {
+        weakSelf.shopCatagoryViewModel2.item = item;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [weakSelf.shopCatagoryView.contentTableView reloadData];
+        });
+    };
+    ComplectionHandler complectionHander = ^void(SFCatagoryItem *item, NSInteger idx) {
+        NSLog(@"%@ %ld", item, idx);
+        [weakSelf.shopCatagoryView refresh];
+        weakSelf.shopCatagoryView.hidden = YES;
+    };
+    self.shopCatagoryViewModel.complectionHandler = complectionHander;
+    self.shopCatagoryViewModel2.complectionHandler = complectionHander;
+    
+    [self.catagorySegment.leftButton addTarget:self action:@selector(onLeftButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    [self.catagorySegment.centerButton addTarget:self action:@selector(onLeftButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    [self.catagorySegment.rightButton addTarget:self action:@selector(onLeftButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+
+}
+
+- (void)onLeftButtonAction:(id)sender {
+    self.shopCatagoryView.hidden = !self.shopCatagoryView.hidden;
 }
 
 #pragma mark - Table view data source
@@ -63,7 +103,8 @@ static NSString * const reuseIdentifier = @"商家表单元";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     SFShopDetailVC *vc = [SFShopDetailVC new];
-    [self presentViewController:vc animated:YES completion:nil];
+    vc.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (SFShopCatagoryToolBarView *)catagorySegment {
@@ -81,5 +122,28 @@ static NSString * const reuseIdentifier = @"商家表单元";
     }
     return _tableView;
 }
+
+- (SFShopCatagoryView *)shopCatagoryView {
+    if(!_shopCatagoryView) {
+        _shopCatagoryView = [[SFShopCatagoryView alloc] initWithFrame:CGRectMake(0, self.catagorySegment.botton, SCREEN_WIDTH, SCREEN_WIDTH/0.85)];
+        _shopCatagoryView.hidden = YES;
+    }
+    return _shopCatagoryView;
+}
+
+- (SFShopCatagoryViewModel *)shopCatagoryViewModel {
+    if(!_shopCatagoryViewModel) {
+        _shopCatagoryViewModel = [SFShopCatagoryViewModel new];
+    }
+    return _shopCatagoryViewModel;
+}
+
+- (SFShopCatagoryViewModel2 *)shopCatagoryViewModel2 {
+    if(!_shopCatagoryViewModel2) {
+        _shopCatagoryViewModel2 = [SFShopCatagoryViewModel2 new];
+    }
+    return _shopCatagoryViewModel2;
+}
+
 
 @end

@@ -8,12 +8,15 @@
 
 #import "SUItem.h"
 
-@interface SFSubCatagory : SUItem
-@property(nonatomic,strong) NSString   *name;
-@property(nonatomic,assign) NSInteger  count;
-@end
+
+@class SFSubCatagory;
 
 @interface SFCatagoryItem : SUItem
 @property(nonatomic,strong) NSString *name;
 @property(nonatomic,copy)   NSArray<SFSubCatagory *>  *subCatagories;
+@end
+
+@interface SFSubCatagory : SUItem
+@property(nonatomic,strong) NSString   *name;
+@property(nonatomic,assign) NSInteger  count;
 @end

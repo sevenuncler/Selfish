@@ -36,17 +36,26 @@
     self.contentTableView.left = width;
 }
 
+- (void)refresh {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.menuTableView reloadData];
+        [self.contentTableView reloadData];
+    });
+}
+
 - (UITableView *)menuTableView {
     if(!_menuTableView) {
-        _menuTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, 3*WIDTH) style:UITableViewStyleGrouped];
+        _menuTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, 3*WIDTH) style:UITableViewStylePlain];
+        _menuTableView.tableFooterView = [UIView new];
     }
     return _menuTableView;
 }
 
 - (UITableView *)contentTableView {
     if(!_contentTableView) {
-        _contentTableView = [[UITableView alloc] initWithFrame:CGRectMake(WIDTH+1, 0, WIDTH*2, 3*WIDTH)  style:UITableViewStyleGrouped];
+        _contentTableView = [[UITableView alloc] initWithFrame:CGRectMake(WIDTH+1, 0, WIDTH*2, 3*WIDTH)  style:UITableViewStylePlain];
         _contentTableView.backgroundColor = [UIColor lightGrayColor];
+        _contentTableView.tableFooterView = [UIView new];
     }
     return _contentTableView;
 }

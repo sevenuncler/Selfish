@@ -11,3 +11,7 @@
 @implementation SFCatagoryItem
 
 @end
+
+@implementation SFSubCatagory
+
+@end

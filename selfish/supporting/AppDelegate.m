@@ -13,6 +13,7 @@
 #import "SFShopDetailVC.h"
 #import "SFTabBarController.h"
 #import "SFNavigationController.h"
+#import "SFShopCreateVC.h"
 @interface AppDelegate ()
 
 @end
@@ -22,8 +23,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     UIWindow *window = [[UIWindow alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
-    UIViewController *vc = [SFTabBarController new];
-    UINavigationController *naviVC = [[SFNavigationController alloc] initWithRootViewController:vc];
+    UIViewController *vc = [SFShopCreateVC new];
     window.rootViewController = vc;
     self.window = window;
     [self.window makeKeyAndVisible];

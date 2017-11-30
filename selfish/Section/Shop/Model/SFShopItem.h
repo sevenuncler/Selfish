@@ -10,11 +10,11 @@
 #import <CoreLocation/CoreLocation.h>
 
 @interface SFShopItem : SUItem
-@property(nonatomic,copy) NSString      *sid;
-@property(nonatomic,copy) NSArray       *pics;
-@property(nonatomic,copy) NSString      *name;
-@property(nonatomic,strong) CLLocation  *location;
-@property(nonatomic,strong) NSString    *locationName;
-@property(nonatomic,copy) NSArray       *tags;
-@property(nonatomic,copy) NSString      *commentsID;
+@property(nonatomic,copy)   NSString        *sid;
+@property(nonatomic,copy)   NSArray         *pics;
+@property(nonatomic,copy)   NSString        *name;
+@property(nonatomic,strong) CLLocation      *location;
+@property(nonatomic,strong) NSString        *locationName;
+@property(nonatomic,copy)   NSArray         *tags;
+@property(nonatomic,copy)   NSString        *commentsID;
 @end
