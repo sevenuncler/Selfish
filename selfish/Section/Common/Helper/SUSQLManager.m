@@ -8,6 +8,7 @@
 
 #import "SUSQLManager.h"
 #import <sqlite3.h>
+#import <objc/runtime.h>
 
 @implementation SUSQLManager
 {
@@ -43,6 +44,30 @@
     }
 }
 
+- (void)createTableWithClass:(Class)clz {
+    unsigned int count = 0;
+    objc_property_t *propertyList = class_copyPropertyList(clz, &count);
+    NSMutableDictionary *keyValues = [NSMutableDictionary dictionary];
+    for(int i=0; i<count; i++) {
+        objc_property_t property = propertyList[i];
+        const char *name = property_getName(property);
+        NSString *type = [self getPropertyType:property];
+        type = [self getCTypeWithType:type];
+        [keyValues setValue:type forKey:[NSString stringWithUTF8String:name]];
+    }
+    NSString *className = NSStringFromClass([self class]);
+    NSString *tableID   = [NSString stringWithFormat:@"%@id", [[className substringToIndex:1] lowercaseString]];
+    NSMutableString *createTableSQL = [NSMutableString stringWithFormat:@"CREATE TABLE IF NOT EXISTS '%@' ('%@' INTEGER PRIMARY KEY AUTOINCREMENT", className, tableID];
+    [keyValues enumerateKeysAndObjectsWithOptions:NSEnumerationConcurrent usingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+        if(![key isEqualToString:tableID]) {
+            [createTableSQL appendString:[NSString stringWithFormat:@", '%@' %@", key, obj]];
+        }
+    }];
+    [createTableSQL appendString:@")"];
+    [self createTable:createTableSQL];
+
+}
+
 - (void)createTable:(NSString *)sql {
     if(!_db) {
         [self openDB];
@@ -50,7 +75,7 @@
     char *error = NULL;
     int result = sqlite3_exec(_db, [sql UTF8String], nil, nil, &error);
     if(SQLITE_OK == result) {
-        NSLog(@"表创建成功");
+        NSLog(@"表创建成功:%@", sql);
     }else {
         printf("创建表出错:%s",error);
         NSLog(@"创建失败");
@@ -147,5 +172,25 @@
     [self closeDB];
 }
 
+#pragma mark - Private
+
+- (NSString *)getPropertyType:(objc_property_t)property {
+    const char *attribute = property_getAttributes(property);
+    NSString *attr = [NSString stringWithUTF8String:attribute];
+    NSArray *contents = [attr componentsSeparatedByString:@","];
+    NSString *type = contents[0];
+    type = [type substringWithRange:NSMakeRange(3, type.length-4)];
+    return type;
+}
+
+- (NSString *)getCTypeWithType:(NSString *)type {
+    NSString *cType = nil;
+    if([type isEqualToString:@"NSString"]) {
+        cType = @"text";
+    }else if([type isEqualToString:@"NSInteger"]) {
+        cType = @"int";
+    }
+    return cType;
+}
 
 @end

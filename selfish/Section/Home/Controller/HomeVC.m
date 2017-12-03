@@ -27,7 +27,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
     self.automaticallyAdjustsScrollViewInsets = NO;
+#pragma clang diagnostic pop
     self.view.backgroundColor = [UIColor redColor];
     self.homeAnimator = [HomeAnimator new];
     self.homeAnimator.homeAnimatorType = HomeAnimatorTypeMagicMove;

@@ -1,5 +1,6 @@
 PODS:
   - FLAnimatedImage (1.0.12)
+  - HCSStarRatingView (1.4.5)
   - MJExtension (3.0.13)
   - ReactiveCocoa (2.5):
     - ReactiveCocoa/UI (= 2.5)
@@ -11,14 +12,16 @@ PODS:
 
 DEPENDENCIES:
   - FLAnimatedImage (~> 1.0)
+  - HCSStarRatingView (~> 1.4.5)
   - MJExtension (~> 3.0.13)
   - ReactiveCocoa (~> 2.5)
 
 SPEC CHECKSUMS:
   FLAnimatedImage: 4a0b56255d9b05f18b6dd7ee06871be5d3b89e31
+  HCSStarRatingView: bff3f89314d3b5013ce826ea11897d3129ff6b8c
   MJExtension: 5932755f451458eefa24239358817f8d291240c7
   ReactiveCocoa: e2db045570aa97c695e7aa97c2bcab222ae51f4a
 
-PODFILE CHECKSUM: ea4ed25497d4569d10ce517e13faf6d21fba3c92
+PODFILE CHECKSUM: 43ec86a64d365351315b3e888592e7d5bd88cc51
 
 COCOAPODS: 1.2.1

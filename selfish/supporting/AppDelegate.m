@@ -14,6 +14,11 @@
 #import "SFTabBarController.h"
 #import "SFNavigationController.h"
 #import "SFShopCreateVC.h"
+#import "SFShopCustomeVC.h"
+#import "SFShopCustomeDecorationVC.h"
+#import "SFShopCustomeFoodVC.h"
+//#import <MagicalRecord/MagicalRecord.h>
+
 @interface AppDelegate ()
 
 @end
@@ -23,10 +28,11 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     UIWindow *window = [[UIWindow alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
-    UIViewController *vc = [SFShopCreateVC new];
+    UIViewController *vc = [SFTabBarController new];
     window.rootViewController = vc;
     self.window = window;
     [self.window makeKeyAndVisible];
+//    [MagicalRecord setupCoreDataStackWithStoreNamed:@"magical_db.sqlite"];
     return YES;
 }
 
@@ -55,6 +61,7 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+//    [MagicalRecord cleanUp];
 }
 
 

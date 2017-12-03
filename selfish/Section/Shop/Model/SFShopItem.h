@@ -9,6 +9,8 @@
 #import "SUItem.h"
 #import <CoreLocation/CoreLocation.h>
 
+@class SUSQLManager;
+
 @interface SFShopItem : SUItem
 @property(nonatomic,copy)   NSString        *sid;
 @property(nonatomic,copy)   NSArray         *pics;
@@ -17,4 +19,7 @@
 @property(nonatomic,strong) NSString        *locationName;
 @property(nonatomic,copy)   NSArray         *tags;
 @property(nonatomic,copy)   NSString        *commentsID;
+
++ (void)createItemWithDictionary:(NSDictionary *)json;
+- (void)createTable;
 @end

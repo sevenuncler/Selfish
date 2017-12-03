@@ -16,6 +16,7 @@
 - (void)deleteRows;
 
 - (void)createTable:(NSString *)sql;
+- (void)createTableWithClass:(Class)clz;
 - (void)insertRow:(NSString *)sql;
 - (NSArray *)queryRows:(NSString *)sql;
 - (void)deleteRows:(NSString *)sql;

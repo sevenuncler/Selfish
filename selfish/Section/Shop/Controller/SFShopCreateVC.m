@@ -10,6 +10,7 @@
 #import <ReactiveCocoa/ReactiveCocoa.h>
 #import "UIView+Layout.h"
 #import "SUSQLManager.h"
+#import "SFShopItem.h"
 
 @interface SFShopCreateVC ()
 @property(nonatomic,strong) UILabel *shopNameLabel;
@@ -33,10 +34,10 @@
     [self.view addSubview:self.shopTypeLabel];
     [self.view addSubview:self.shopTypeTF];
     [self.view addSubview:self.submitButton];
-    SUSQLManager *manager = [SUSQLManager defaultManager];
-    [manager createTable];
-    [manager insertRow];
-    NSArray *result = [manager queryRows];
+
+    
+    SFShopItem *item = [SFShopItem new];
+    [item createTable];
 }
 
 - (void)didReceiveMemoryWarning {

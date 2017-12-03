@@ -10,6 +10,7 @@
 #import "SUSettingItem.h"
 #import "UIImage+Size.h"
 #import "SUGeneralItem.h"
+#import "SFAcountLoginVC.h"
 
 @interface AccountVC ()
 @end
@@ -87,7 +88,7 @@ static NSString * const reuseCell2= @"reuseAccountCell2";
             {
                 SUSettingItem *settingItem = [SUSettingItem new];
                 settingItem.leftImage = @"cm2_set_icn_vip";
-                settingItem.title     = @"会员中心";
+                settingItem.title     = @"创建店铺";
                 settingItem.style     = 1;
                 settingItem.itemFrame = CGRectMake(0, 0, 0, 40);
                 [generalItem.contentItems addObject:settingItem];
@@ -282,6 +283,18 @@ static NSString * const reuseCell2= @"reuseAccountCell2";
 
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     return nil;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self validateUser];
+}
+
+- (void)validateUser {
+    if(YES) {
+        UIViewController *vc = [SFAcountLoginVC new];
+        UINavigationController *naviVC = [[UINavigationController alloc] initWithRootViewController:vc];
+        [self presentViewController:naviVC animated:YES completion:nil];
+    }
 }
 
 /*

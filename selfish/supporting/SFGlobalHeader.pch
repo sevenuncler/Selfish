@@ -1,0 +1,17 @@
+//
+//  SFGlobalHeader.pch
+//  selfish
+//
+//  Created by He on 2017/12/2.
+//  Copyright © 2017年 He. All rights reserved.
+//
+
+#ifndef SFGlobalHeader_pch
+#define SFGlobalHeader_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+#import "UIView+Layout.h"
+#import "Macros.h"
+#import "SUHeader.h"
+#endif /* SFGlobalHeader_pch */

@@ -15,6 +15,7 @@
 #import "SFShopCatagoryView.h"
 #import "SFShopCatagoryViewModel.h"
 #import "SFShopCatagoryViewModel2.h"
+#import "SFShopFoodRandomVC.h"
 
 static NSString * const reuseIdentifier = @"商家表单元";
 
@@ -38,14 +39,35 @@ static NSString * const reuseIdentifier = @"商家表单元";
     [self.view addSubview:self.shopCatagoryView];
     
     [self.tableView registerClass:[SFShopTableViewCell class] forCellReuseIdentifier:reuseIdentifier];
-    
+
     [self setUpBind];
 
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self setUpNavigator];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)setUpNavigator {
+    self.title = @"商铺";
+    
+    UIBarButtonItem *leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"定位" style:UIBarButtonItemStylePlain target:self action:@selector(handleBackAction:)];
+    self.navigationItem.leftBarButtonItem = leftBarButtonItem;
+    
+    UIBarButtonItem *rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"随便" style:UIBarButtonItemStylePlain target:self action:@selector(handleRandomAction:)];
+    self.navigationItem.rightBarButtonItem = rightBarButtonItem;
+}
+
+- (void)handleRandomAction:(id)sender {
+    SFShopFoodRandomVC *vc = [SFShopFoodRandomVC new];
+    UINavigationController *navi = [[UINavigationController alloc] initWithRootViewController: vc];
+    [self presentViewController:navi animated:YES completion:nil];
 }
 
 - (void)setUpBind {
