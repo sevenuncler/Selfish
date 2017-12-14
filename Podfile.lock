@@ -1,6 +1,7 @@
 PODS:
   - FLAnimatedImage (1.0.12)
   - HCSStarRatingView (1.4.5)
+  - MBProgressHUD (1.0.0)
   - MJExtension (3.0.13)
   - ReactiveCocoa (2.5):
     - ReactiveCocoa/UI (= 2.5)
@@ -9,19 +10,24 @@ PODS:
   - ReactiveCocoa/no-arc (2.5)
   - ReactiveCocoa/UI (2.5):
     - ReactiveCocoa/Core
+  - SVProgressHUD (2.2.2)
 
 DEPENDENCIES:
   - FLAnimatedImage (~> 1.0)
   - HCSStarRatingView (~> 1.4.5)
+  - MBProgressHUD (~> 1.0.0)
   - MJExtension (~> 3.0.13)
   - ReactiveCocoa (~> 2.5)
+  - SVProgressHUD (~> 2.2.2)
 
 SPEC CHECKSUMS:
   FLAnimatedImage: 4a0b56255d9b05f18b6dd7ee06871be5d3b89e31
   HCSStarRatingView: bff3f89314d3b5013ce826ea11897d3129ff6b8c
+  MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
   MJExtension: 5932755f451458eefa24239358817f8d291240c7
   ReactiveCocoa: e2db045570aa97c695e7aa97c2bcab222ae51f4a
+  SVProgressHUD: 59b2d3dabacbd051576d21d32293ca7228dc18b0
 
-PODFILE CHECKSUM: 43ec86a64d365351315b3e888592e7d5bd88cc51
+PODFILE CHECKSUM: ef7b62d353c57ebecd23cb79fb56954c80ed011c
 
 COCOAPODS: 1.2.1

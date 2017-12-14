@@ -8,6 +8,7 @@
 
 #import "SFAcountLoginVC.h"
 #import "SFAccountRegisterVC.h"
+#import <SVProgressHUD/SVProgressHUD.h>
 
 @interface SFAcountLoginVC ()
 
@@ -90,6 +91,71 @@
     SFAccountRegisterVC *vc = [SFAccountRegisterVC new];
     [self.navigationController pushViewController:vc animated:YES];
 }
+    
+- (void)handleLoginAction:(id)sender {
+    if(![self isFormDataValidated]) {
+        [SVProgressHUD showErrorWithStatus:@"账号或密码不能为空"];
+        return;
+    }
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSString *path = [NSString stringWithFormat:@"%@/account/login", SELFISH_HOST];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:path]];
+    [request setValue:@"application/json;charset=utf-8" forHTTPHeaderField:@"content-type"];
+
+    NSDictionary *json = @{
+                           @"username": self.accountTextField.text,
+                           @"password": self.passwordTextField.text
+                           };
+    NSData *data = [NSJSONSerialization dataWithJSONObject:json options:NSJSONWritingPrettyPrinted error:nil];
+    request.HTTPBody = data;
+    request.HTTPMethod = @"post";
+    
+    NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        if(error) {
+            [SVProgressHUD showErrorWithStatus:@"登录失败"];
+            [SVProgressHUD dismissWithDelay:1];
+            return;
+        }
+        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+        if([dict[@"success"] isEqualToString:@"true"]) {
+            [SVProgressHUD showWithStatus:@"登录成功"];
+            NSDictionary *content = dict[@"content"];
+            [[NSUserDefaults standardUserDefaults] setValue:content[@"username"] forKey:@"username"];
+            id avator = content[@"avator"];
+            if(avator != [NSNull null]) {
+                [[NSUserDefaults standardUserDefaults] setValue:avator forKey:@"avator"];
+            }
+            id aid = content[@"aid"];
+            if(aid != [NSNull null]) {
+                [[NSUserDefaults standardUserDefaults] setValue:aid forKey:@"aid"];
+                [[NSUserDefaults standardUserDefaults] setValue:@"true" forKey:@"isLogin"];
+            }
+
+            [SVProgressHUD dismissWithDelay:0.25];
+            [self handleLoginSuccessAction:nil];
+            return;
+        }else {
+            [SVProgressHUD showWithStatus:@"登录失败"];
+            [SVProgressHUD dismissWithDelay:1];
+            return;
+        }
+        return;
+    }];
+    [dataTask resume];
+}
+    
+- (BOOL)isFormDataValidated {
+    if(self.accountTextField.text!=nil && self.passwordTextField.text!=nil) {
+        return true;
+    }
+    return false;
+}
+
+    - (void)handleLoginSuccessAction:(id)sender {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self dismissViewControllerAnimated:YES completion:nil];
+        });
+}
 
 - (UILabel *)accountLabel {
     if(!_accountLabel) {
@@ -131,6 +197,7 @@
         _submitButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_submitButton setTitle:@"登录" forState:UIControlStateNormal];
         [_submitButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [_submitButton addTarget:self action:@selector(handleLoginAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _submitButton;
 }

@@ -5,4 +5,6 @@ target 'selfish' do
    	pod 'FLAnimatedImage', '~> 1.0' 
    	pod 'MJExtension', '~> 3.0.13'
     pod 'HCSStarRatingView', '~> 1.4.5'
+    pod 'MBProgressHUD', '~> 1.0.0'
+    pod 'SVProgressHUD', '~> 2.2.2'
 end

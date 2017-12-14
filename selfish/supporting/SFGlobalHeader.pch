@@ -14,4 +14,10 @@
 #import "UIView+Layout.h"
 #import "Macros.h"
 #import "SUHeader.h"
+
+#define SELFISH_MAJRO_COLOR ([UIColor colorWithRed:arc4random()%255/255.f green:arc4random()%255/255.f blue:arc4random()%255/255.f alpha:0.9])
+
+
+
+#define SELFISH_HOST (@"http://192.168.0.102:8080")
 #endif /* SFGlobalHeader_pch */

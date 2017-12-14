@@ -61,7 +61,6 @@
 }
 
 - (void)handleBackAction:(id)sender {
-    [self.dynamicAnimator removeAllBehaviors];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

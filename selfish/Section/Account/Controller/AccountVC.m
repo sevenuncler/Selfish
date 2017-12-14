@@ -13,6 +13,7 @@
 #import "SFAcountLoginVC.h"
 
 @interface AccountVC ()
+    
 @end
 static NSString * const reuseCell = @"reuseAccoutCell";
 static NSString * const reuseCell2= @"reuseAccountCell2";
@@ -104,7 +105,7 @@ static NSString * const reuseCell2= @"reuseAccountCell2";
             {
                 SUSettingItem *settingItem = [SUSettingItem new];
                 settingItem.leftImage = @"cm2_set_icn_combo";
-                settingItem.title     = @"在线听歌免流量";
+                settingItem.title     = @"商店管理";
                 settingItem.style     = 1;
                 settingItem.itemFrame = CGRectMake(0, 0, 0, 40);
                 [generalItem.contentItems addObject:settingItem];
@@ -152,30 +153,6 @@ static NSString * const reuseCell2= @"reuseAccountCell2";
                 settingItem.itemFrame = CGRectMake(0, 0, 0, 40);
                 [generalItem.contentItems addObject:settingItem];
             }
-            {
-                SUSettingItem *settingItem = [SUSettingItem new];
-                settingItem.leftImage = @"cm2_set_icn_time";
-                settingItem.title     = @"定时关闭";
-                settingItem.style     = 1;
-                settingItem.itemFrame = CGRectMake(0, 0, 0, 40);
-                [generalItem.contentItems addObject:settingItem];
-            }
-            {
-                SUSettingItem *settingItem = [SUSettingItem new];
-                settingItem.leftImage = @"cm2_set_icn_alamclock";
-                settingItem.title     = @"音乐闹钟";
-                settingItem.style     = 1;
-                settingItem.itemFrame = CGRectMake(0, 0, 0, 40);
-                [generalItem.contentItems addObject:settingItem];
-            }
-            {
-                SUSettingItem *settingItem = [SUSettingItem new];
-                settingItem.leftImage = @"cm2_set_icn_vehicle";
-                settingItem.title     = @"驾驶模式";
-                settingItem.style     = 1;
-                settingItem.itemFrame = CGRectMake(0, 0, 0, 40);
-                [generalItem.contentItems addObject:settingItem];
-            }
         }
         [self.items addObject:generalItem];
     }
@@ -190,7 +167,7 @@ static NSString * const reuseCell2= @"reuseAccountCell2";
             {
                 SUSettingItem *settingItem = [SUSettingItem new];
                 settingItem.leftImage = @"cm2_set_icn_share";
-                settingItem.title     = @"分享网易云音乐";
+                settingItem.title     = @"分享一人食";
                 settingItem.style     = 1;
                 settingItem.itemFrame = CGRectMake(0, 0, 0, 40);
                 [generalItem.contentItems addObject:settingItem];
@@ -290,11 +267,13 @@ static NSString * const reuseCell2= @"reuseAccountCell2";
 }
 
 - (void)validateUser {
-    if(YES) {
+    id aid = [[NSUserDefaults standardUserDefaults] stringForKey:@"aid"];
+    if(aid == nil || aid == [NSNull null]) {
         UIViewController *vc = [SFAcountLoginVC new];
         UINavigationController *naviVC = [[UINavigationController alloc] initWithRootViewController:vc];
         [self presentViewController:naviVC animated:YES completion:nil];
     }
+    NSLog(@"xxxx");
 }
 
 /*
