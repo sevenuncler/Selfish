@@ -13,6 +13,29 @@
 
 @implementation SFShopItem
 
+    - (void)add {
+        
+    }
+    
+    - (void)delete {
+        
+    }
+    
+    - (void)update {
+        
+    }
+    
+    + (void)queryByAccountID:(NSString *)aid complection:(Handler)handler {
+        NSURLSession *session = [NSURLSession sharedSession];
+        NSString *urlPath = [NSString stringWithFormat:@"%@/shop/query?account_aid=%@",SELFISH_HOST,aid];
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlPath]];
+        request.HTTPMethod = @"GET";
+       [[session dataTaskWithRequest:request completionHandler:handler] resume];
+    }
+    
+    - (void)query {
+        
+    }
 
 + (void)createItemWithDictionary:(NSDictionary *)json {
 //    SFShopItem *item = [SFShopItem mj_objectWithKeyValues:json];

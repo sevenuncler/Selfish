@@ -18,6 +18,8 @@
 #import "SFShopCustomeDecorationVC.h"
 #import "SFShopCustomeFoodVC.h"
 //#import <MagicalRecord/MagicalRecord.h>
+#import <JLRoutes/JLRoutes.h>
+#import "RoutesConfig.h"
 
 @interface AppDelegate ()
 
@@ -32,9 +34,22 @@
     window.rootViewController = vc;
     self.window = window;
     [self.window makeKeyAndVisible];
-//    [MagicalRecord setupCoreDataStackWithStoreNamed:@"magical_db.sqlite"];
+    [RoutesConfig setUpRoutes:@"Selfish"];
     return YES;
 }
+    
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+    return [JLRoutes routeURL:url];
+}
+    
+- (BOOL)application:(UIApplication*)application openURL:(NSURL*)url sourceApplication:(NSString*)sourceApplication annotation:(id)annotation {
+    return[JLRoutes routeURL:url];
+}
+    
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options{
+        return [[JLRoutes routesForScheme:@"Selfish"]routeURL:url];
+}
+
 
 
 - (void)applicationWillResignActive:(UIApplication *)application {

@@ -11,6 +11,10 @@
 #import "UIImage+Size.h"
 #import "SUGeneralItem.h"
 #import "SFAcountLoginVC.h"
+#import <JLRoutes/JLRoutes.h>
+#import "SFShopItem.h"
+#import <MJExtension/MJExtension.h>
+#import "SFAccount.h"
 
 @interface AccountVC ()
     
@@ -108,6 +112,33 @@ static NSString * const reuseCell2= @"reuseAccountCell2";
                 settingItem.title     = @"商店管理";
                 settingItem.style     = 1;
                 settingItem.itemFrame = CGRectMake(0, 0, 0, 40);
+                settingItem.hander = ^{
+                    NSString *aid = [[NSUserDefaults standardUserDefaults] valueForKey:@"aid"];
+                    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+                    __block SFShopItem *shopItem;
+                    [SFAccount shopsWithAccountID:aid complection:^(NSData *data, NSURLResponse *response, NSError *error) {
+                        if(error) {
+                            dispatch_semaphore_signal(semaphore);
+                            return;
+                        }
+                        NSError *jsonError = nil;
+                        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&jsonError];
+                        NSArray *shops = json[@"content"];
+                        if(shops && shops.count>0) {
+                            shopItem = [SFShopItem mj_objectWithKeyValues:shops[0]];
+                        }
+                        dispatch_semaphore_signal(semaphore);
+                    }];
+                    NSString *url = @"Selfish://push/SFShopCreateVC?titleText=fromFirst";
+                    if(dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER) == 0) {
+                        if(shopItem != nil) {
+                            url = @"Selfish://push/SFShopCustomeVC";
+                        }
+                    }
+                    
+                    NSDictionary *dict = @{@"navi": self.navigationController};
+                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url] options:dict completionHandler:nil];
+                };
                 [generalItem.contentItems addObject:settingItem];
             }
         }
@@ -263,17 +294,28 @@ static NSString * const reuseCell2= @"reuseAccountCell2";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self validateUser];
-}
-
-- (void)validateUser {
-    id aid = [[NSUserDefaults standardUserDefaults] stringForKey:@"aid"];
-    if(aid == nil || aid == [NSNull null]) {
+    if(![self validateUser]) {
         UIViewController *vc = [SFAcountLoginVC new];
         UINavigationController *naviVC = [[UINavigationController alloc] initWithRootViewController:vc];
         [self presentViewController:naviVC animated:YES completion:nil];
+    }else {
+        SUGeneralItem *generalItem = [self.items objectAtIndex:indexPath.section];
+        SUSettingItem *settingItem = (SUSettingItem *)[generalItem.contentItems objectAtIndex:indexPath.row];
+       if(settingItem.hander) {
+         settingItem.hander();
+       }
     }
-    NSLog(@"xxxx");
+}
+
+- (BOOL)validateUser {
+    id aid = [[NSUserDefaults standardUserDefaults] stringForKey:@"aid"];
+    id isLogin = [[NSUserDefaults standardUserDefaults] stringForKey:@"isLogin"];
+    //登录成功
+    if(aid != nil && aid != [NSNull null] && isLogin != nil && [isLogin isEqualToString:@"true"]) {
+        return YES;
+    }
+    return NO;
+    
 }
 
 /*

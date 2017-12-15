@@ -11,6 +11,7 @@
 #import "UIView+Layout.h"
 #import "SUSQLManager.h"
 #import "SFShopItem.h"
+#import <SVProgressHUD/SVProgressHUD.h>
 
 @interface SFShopCreateVC ()
 @property(nonatomic,strong) UILabel *shopNameLabel;
@@ -26,6 +27,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self setUpNavigator];
     self.view.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.shopNameLabel];
     [self.view addSubview:self.shopNameTF];
@@ -44,11 +46,29 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+    
+- (void)setUpNavigator {
+        self.title = @"创建商店";
+        
+        UIBarButtonItem *leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(backHandler:)];
+    self.navigationController.navigationBar.backgroundColor = [UIColor redColor];
+        self.navigationItem.leftBarButtonItem = leftBarButtonItem;
+
+        self.navigationItem.rightBarButtonItem = nil;
+}
+
+- (void)backHandler:(id)sender {
+    if(self.navigationController) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+    
 -(void)viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];
     CGFloat padding = 15;
     self.shopNameLabel.left = padding;
-    self.shopNameLabel.top  = 64;
+    self.shopNameLabel.top  = 0;
     
     self.shopNameTF.size = CGSizeMake(self.view.size.width-3*padding - self.shopNameLabel.right, self.shopNameLabel.size.height);
     self.shopNameTF.left = self.shopNameLabel.right + padding;
@@ -72,6 +92,40 @@
     self.submitButton.top = self.shopTypeTF.botton;
     self.submitButton.left = 0;
     self.submitButton.backgroundColor = [UIColor redColor];
+}
+    
+#pragma makr - Private
+
+- (void)handleCreateAction:(id)sender {
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSString *path = [NSString stringWithFormat:@"%@/shop", SELFISH_HOST];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:path]];
+    [request setValue:@"application/json;charset=utf-8" forHTTPHeaderField:@"content-type"];
+    request.HTTPMethod = @"post";
+    id aid = [[NSUserDefaults standardUserDefaults] stringForKey:@"aid"];
+    NSDictionary *json = @{
+                           @"name"  : self.shopNameTF.text,
+                           @"pics"  : @"",
+                           @"tags"  : @"",
+                           @"locationName" : self.shopLocationTF.text,
+                           @"account_aid" : aid
+                           };
+    request.HTTPBody = [NSJSONSerialization dataWithJSONObject:json options:NSJSONWritingPrettyPrinted error:nil];
+    NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+        NSLog(@"%@", json);
+        [[NSUserDefaults standardUserDefaults] setObject:json[@"sid"] forKey:@"sid"];
+        NSString *path =  @"Selfish://push/SFShopCustomeVC";
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:path] options:@{} completionHandler:nil];
+    }];
+    [dataTask resume];
+}
+
+- (BOOL)validateFormData {
+    if(self.shopNameTF.text == nil) {
+        return NO;
+    }
+    return YES;
 }
 
 - (UILabel *)shopNameLabel {
@@ -133,6 +187,7 @@
         _submitButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_submitButton setTitle:@"创建" forState:UIControlStateNormal];
         _submitButton.size = CGSizeMake(self.view.size.width, 44);
+        [_submitButton addTarget:self action:@selector(handleCreateAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _submitButton;
 }

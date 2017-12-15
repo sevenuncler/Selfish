@@ -70,6 +70,7 @@
     if(!_menuAddButton) {
         _menuAddButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_menuAddButton setImage:[UIImage imageNamed:@"image"] forState:UIControlStateNormal];
+        [_menuAddButton addTarget:self action:@selector(handleShopAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _menuAddButton;
 }
@@ -86,8 +87,20 @@
     if(!_shopDetailAddButton) {
         _shopDetailAddButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_shopDetailAddButton setImage:[UIImage imageNamed:@"image"] forState:UIControlStateNormal];
+        [_shopDetailAddButton addTarget:self action:@selector(handleFoodAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _shopDetailAddButton;
 }
+
+    - (void)handleFoodAction:(id)sender {
+        NSString *url = @"Selfish://push/SFShopCustomeFoodVC";
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url] options:@{} completionHandler:nil];
+    }
+    
+    - (void)handleShopAction:(id)sender {
+        NSString *url = @"Selfish://push/SFShopCustomeDecorationVC";
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url] options:@{} completionHandler:nil];
+    }
+    
 
 @end

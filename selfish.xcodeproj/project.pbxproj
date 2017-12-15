@@ -277,6 +277,8 @@
 		877030941FD4467B006F410D /* 5.png in Resources */ = {isa = PBXBuildFile; fileRef = 877030871FD4467B006F410D /* 5.png */; };
 		877030951FD4467B006F410D /* 2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 877030881FD4467B006F410D /* 2@2x.png */; };
 		877631EA1FE16E63009EA696 /* SUNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 877631E91FE16E63009EA696 /* SUNetworkManager.m */; };
+		877631ED1FE2B882009EA696 /* RoutesConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 877631EC1FE2B882009EA696 /* RoutesConfig.m */; };
+		877631F21FE40EBA009EA696 /* SFAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 877631F11FE40EBA009EA696 /* SFAccount.m */; };
 		87ACCDEC1FC4F85C0008F7BA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 87ACCDEB1FC4F85C0008F7BA /* AppDelegate.m */; };
 		87ACCDEF1FC4F85C0008F7BA /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87ACCDEE1FC4F85C0008F7BA /* ViewController.m */; };
 		87ACCDF21FC4F85C0008F7BA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87ACCDF01FC4F85C0008F7BA /* Main.storyboard */; };
@@ -629,6 +631,10 @@
 		877030881FD4467B006F410D /* 2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "2@2x.png"; sourceTree = "<group>"; };
 		877631E81FE16E63009EA696 /* SUNetworkManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SUNetworkManager.h; sourceTree = "<group>"; };
 		877631E91FE16E63009EA696 /* SUNetworkManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SUNetworkManager.m; sourceTree = "<group>"; };
+		877631EB1FE2B882009EA696 /* RoutesConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RoutesConfig.h; sourceTree = "<group>"; };
+		877631EC1FE2B882009EA696 /* RoutesConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RoutesConfig.m; sourceTree = "<group>"; };
+		877631F01FE40EBA009EA696 /* SFAccount.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFAccount.h; sourceTree = "<group>"; };
+		877631F11FE40EBA009EA696 /* SFAccount.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFAccount.m; sourceTree = "<group>"; };
 		87ACCDE71FC4F85C0008F7BA /* selfish.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = selfish.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		87ACCDEA1FC4F85C0008F7BA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		87ACCDEB1FC4F85C0008F7BA /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -742,6 +748,8 @@
 			children = (
 				87702E851FCAEEB2006F410D /* SUSettingItem.h */,
 				87702E861FCAEEB2006F410D /* SUSettingItem.m */,
+				877631F01FE40EBA009EA696 /* SFAccount.h */,
+				877631F11FE40EBA009EA696 /* SFAccount.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -968,6 +976,8 @@
 				8770304F1FCE3580006F410D /* SUSQLManager.h */,
 				877030501FCE3580006F410D /* SUSQLManager.m */,
 				8770306B1FD2EBAB006F410D /* SUHeader.h */,
+				877631EB1FE2B882009EA696 /* RoutesConfig.h */,
+				877631EC1FE2B882009EA696 /* RoutesConfig.m */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -1484,7 +1494,7 @@
 				TargetAttributes = {
 					87ACCDE61FC4F85C0008F7BA = {
 						CreatedOnToolsVersion = 9.1;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 					87ACCDFE1FC4F85C0008F7BA = {
 						CreatedOnToolsVersion = 9.1;
@@ -1831,6 +1841,7 @@
 				87702E601FCAACAF006F410D /* SFShopDetailTitleCell.m in Sources */,
 				8770303C1FCAFD27006F410D /* SFNavigationController.m in Sources */,
 				87ACCDEF1FC4F85C0008F7BA /* ViewController.m in Sources */,
+				877631F21FE40EBA009EA696 /* SFAccount.m in Sources */,
 				87702E631FCAAF36006F410D /* SFShopDetailMenuCell.m in Sources */,
 				877030771FD3DCBC006F410D /* SFAcountLoginVC.m in Sources */,
 				87ACCE421FC7A4490008F7BA /* HomeAnimator.m in Sources */,
@@ -1875,6 +1886,7 @@
 				877030641FD2E511006F410D /* SFShopCustomeRowPic.m in Sources */,
 				877030481FCB9349006F410D /* SFShopCatagoryToolBarView.m in Sources */,
 				87ACCE271FC4FA5A0008F7BA /* HomeTableViewCell.m in Sources */,
+				877631ED1FE2B882009EA696 /* RoutesConfig.m in Sources */,
 				87702E811FCAEBE5006F410D /* SFTabBarController.m in Sources */,
 				8770305D1FD2DA8F006F410D /* SFShopCustomeRowView.m in Sources */,
 				87ACCDEC1FC4F85C0008F7BA /* AppDelegate.m in Sources */,
@@ -2044,13 +2056,16 @@
 			baseConfigurationReference = 788519F427174B6659B77C89 /* Pods-selfish.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = ZA43ZW39F3;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = 569GNZ5392;
 				GCC_PREFIX_HEADER = "$(SCRROOT)selfish/supporting/SFGlobalHeader.pch";
 				INFOPLIST_FILE = selfish/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.wuxia.sevenuncle.selfish;
+				PRODUCT_BUNDLE_IDENTIFIER = com.netease.NRTC.demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "8c791842-6629-4d9e-be46-1c7163b06259";
+				PROVISIONING_PROFILE_SPECIFIER = "NRTC Demo";
 				SHARED_PRECOMPS_DIR = "$(OBJROOT)/SharedPrecompiledHeaders";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -2061,13 +2076,16 @@
 			baseConfigurationReference = 71E838DD0DEEB7533B44F0DE /* Pods-selfish.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = ZA43ZW39F3;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = 569GNZ5392;
 				GCC_PREFIX_HEADER = "$(SCRROOT)selfish/supporting/SFGlobalHeader.pch";
 				INFOPLIST_FILE = selfish/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.wuxia.sevenuncle.selfish;
+				PRODUCT_BUNDLE_IDENTIFIER = com.netease.NRTC.demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "8c791842-6629-4d9e-be46-1c7163b06259";
+				PROVISIONING_PROFILE_SPECIFIER = "NRTC Demo";
 				SHARED_PRECOMPS_DIR = "$(OBJROOT)/SharedPrecompiledHeaders";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

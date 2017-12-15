@@ -20,6 +20,12 @@
 @property(nonatomic,copy)   NSArray         *tags;
 @property(nonatomic,copy)   NSString        *commentsID;
 
+
 + (void)createItemWithDictionary:(NSDictionary *)json;
 - (void)createTable;
+
++ (void)queryByAccountID:(NSString *)sid complection:(Handler)handler;
+
+    
+    
 @end
