@@ -35,6 +35,7 @@
     self.window = window;
     [self.window makeKeyAndVisible];
     [RoutesConfig setUpRoutes:@"Selfish"];
+    window.tintColor = SELFISH_MAJRO_COLOR;
     return YES;
 }
     

@@ -2,6 +2,7 @@ PODS:
   - FLAnimatedImage (1.0.12)
   - HCSStarRatingView (1.4.5)
   - JLRoutes (2.0.5)
+  - Masonry (1.1.0)
   - MBProgressHUD (1.0.0)
   - MJExtension (3.0.13)
   - ReactiveCocoa (2.5):
@@ -17,6 +18,7 @@ DEPENDENCIES:
   - FLAnimatedImage (~> 1.0)
   - HCSStarRatingView (~> 1.4.5)
   - JLRoutes (~> 2.0.5)
+  - Masonry (~> 1.1.0)
   - MBProgressHUD (~> 1.0.0)
   - MJExtension (~> 3.0.13)
   - ReactiveCocoa (~> 2.5)
@@ -26,11 +28,12 @@ SPEC CHECKSUMS:
   FLAnimatedImage: 4a0b56255d9b05f18b6dd7ee06871be5d3b89e31
   HCSStarRatingView: bff3f89314d3b5013ce826ea11897d3129ff6b8c
   JLRoutes: 2a5ee61d739b51a98c9d8112bee5149a19de8854
+  Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
   MJExtension: 5932755f451458eefa24239358817f8d291240c7
   ReactiveCocoa: e2db045570aa97c695e7aa97c2bcab222ae51f4a
   SVProgressHUD: 59b2d3dabacbd051576d21d32293ca7228dc18b0
 
-PODFILE CHECKSUM: 560591143f1f6e49a969fc36b92291c8fcca2584
+PODFILE CHECKSUM: 1867d59cfed63ac29d197f1d117de76459a455ea
 
 COCOAPODS: 1.2.1

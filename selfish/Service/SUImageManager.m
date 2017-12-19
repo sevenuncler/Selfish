@@ -34,6 +34,21 @@
     }
 }
 
+- (void)setImageView:(UIImageView *)imageView withURL:(NSURL *)url {
+    if([self objectForKey:url]) {
+        imageView.image = [self objectForKey:url];
+    }else {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
+            [self setObject:image forKey:url];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                imageView.image = image;
+            });
+        });
+        
+    }
+}
+
 - (void)fetchImageWithURL:(NSString *)url finish:(void(^)(UIImage *))finishHandler {
     if([self objectForKey:url]) {
         if(finishHandler) {

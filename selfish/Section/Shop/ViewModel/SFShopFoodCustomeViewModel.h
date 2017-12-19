@@ -9,5 +9,5 @@
 #import <Foundation/Foundation.h>
 
 @interface SFShopFoodCustomeViewModel : NSObject <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
-
+@property(nonatomic, strong) NSMutableArray *pics;
 @end

@@ -16,6 +16,8 @@
 + (instancetype)defaultImageManager;
 
 - (void)setImageView:(UIImageView *)imageView withUrl:(NSString *)url;
+- (void)setImageView:(UIImageView *)imageView withURL:(NSURL *)url;
+
 - (void)fetchImageWithURL:(NSString *)url finish:(void(^)(UIImage *))finishHandler;
 
 /*** RAC方法 ***/

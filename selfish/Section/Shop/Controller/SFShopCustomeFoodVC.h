@@ -10,4 +10,6 @@
 
 @interface SFShopCustomeFoodVC : UITableViewController
 
+    @property(nonatomic, strong) NSMutableArray *pics;
+
 @end

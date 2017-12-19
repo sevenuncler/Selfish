@@ -15,7 +15,7 @@
 @interface SFShopCustomeFoodVC ()
 @property(nonatomic,strong) SFShopFoodPicView *foodPicView;
 @property(nonatomic,strong) SFShopFoodCustomeViewModel *foodPicViewModel;
-@property(nonatomic, strong) UIButton             *submitButton;
+@property(nonatomic,strong) UIButton             *submitButton;
 @end
 
 
@@ -48,8 +48,10 @@ static NSString * const reuseTableViewCell = @"SUTableViewCell";
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if(0 == indexPath.section) {
         if(0 == indexPath.row) {
-            return 100;
+            return 44;
         }else if(1 == indexPath.row) {
+            return 100;
+        }else if(2 == indexPath.row) {
             return 250;
         }
     }else if(1 == indexPath.section) {
@@ -83,6 +85,9 @@ static NSString * const reuseTableViewCell = @"SUTableViewCell";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if(section == 0) {
+        return 3;
+    }
     return 2;
 }
 
@@ -91,12 +96,17 @@ static NSString * const reuseTableViewCell = @"SUTableViewCell";
     SUTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseTableViewCell forIndexPath:indexPath];
     
     // Configure the cell...
-    if(0 == indexPath.section) {
+    if(0 == indexPath.section) { // 标题
         if(0 == indexPath.row) {
+            UITextField *titleTF = [[UITextField alloc] initWithFrame:cell.bounds];
+            cell.myContentView = titleTF;
+            titleTF.placeholder = @"  标题";
+        }
+        if(1 == indexPath.row) { // 描述
             UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 88)];
             textField.placeholder = @"  简单描述食物";
             cell.myContentView = textField;
-        }else if(1 == indexPath.row) {
+        }else if(2 == indexPath.row) {
             cell.myContentView = self.foodPicView;
         }
     }else if(1 == indexPath.section) {
@@ -130,49 +140,5 @@ static NSString * const reuseTableViewCell = @"SUTableViewCell";
     }
     return _submitButton;
 }
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
