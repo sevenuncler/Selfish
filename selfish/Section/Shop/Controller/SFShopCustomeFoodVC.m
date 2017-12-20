@@ -11,7 +11,6 @@
 #import "SFShopFoodCustomeViewModel.h"
 #import "SFShopCustomeFoodRowView.h"
 #import <HCSStarRatingView/HCSStarRatingView.h>
-#import <SVProgressHUD/SVProgressHUD.h>
 
 @interface SFShopCustomeFoodVC ()
 @property(nonatomic,strong) SFShopFoodPicView *foodPicView;
@@ -138,37 +137,23 @@ static NSString * const reuseTableViewCell = @"SUTableViewCell";
         [request addValue:@"application/json;charset=utf-8" forHTTPHeaderField:@"content-type"];
         request.HTTPMethod = @"POST";
         request.HTTPBody   = [NSJSONSerialization dataWithJSONObject:form options:NSJSONWritingPrettyPrinted error:nil];
-        __weak typeof(self) weakSelf = self;
+        
         NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
             if(error) {
                 NSLog(@"添加菜品出错: %@", error);
-                [SVProgressHUD showErrorWithStatus:@"请求失败"];
-                [SVProgressHUD dismissWithDelay:0.25];
                 return;
             }
             NSError *jsonError;
             NSDictionary *result = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&jsonError];
             if(jsonError) {
                 NSLog(@"结果解析错误:%@", jsonError);
-                [SVProgressHUD showErrorWithStatus:@"解析失败"];
-                [SVProgressHUD dismissWithDelay:0.25];
                 return;
             }
             
             if([result[@"success"] isEqualToString:@"true"]) {
                 NSLog(@"商品创建或修改成功%@", result);
-                [SVProgressHUD showSuccessWithStatus:@"提交成功"];
-                [SVProgressHUD dismissWithDelay:0.25];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    if(weakSelf.navigationController) {
-                        [weakSelf.navigationController popViewControllerAnimated:YES];
-                    }else {
-                        [weakSelf dismissViewControllerAnimated:YES completion:nil];
-                    }
-                });
             }
         }];
-        [SVProgressHUD showWithStatus:@"提交"];
         [dataTask resume];
     }
 }

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4ABAFCF80B53792B92DC492E /* Pods_selfish.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F814782EE40278912260C417 /* Pods_selfish.framework */; };
+		4ACC3E511FE9F40600ABE49D /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ACC3E501FE9F40600ABE49D /* libsqlite3.0.tbd */; };
 		87702E541FC9B737006F410D /* SFShopTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 87702E531FC9B737006F410D /* SFShopTableVC.m */; };
 		87702E571FC9B780006F410D /* SFShopTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 87702E561FC9B780006F410D /* SFShopTableViewCell.m */; };
 		87702E5A1FCA9DE9006F410D /* SFShopDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 87702E591FCA9DE9006F410D /* SFShopDetailVC.m */; };
@@ -285,12 +286,9 @@
 		877631FF1FE8908B009EA696 /* SUTopBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 877631FC1FE8908B009EA696 /* SUTopBarView.xib */; };
 		877632001FE8908B009EA696 /* SUTopBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 877631FE1FE8908B009EA696 /* SUTopBarView.m */; };
 		877632021FE8989E009EA696 /* SUAlbumsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 877632011FE8989E009EA696 /* SUAlbumsTableViewCell.xib */; };
-		877632081FEAA3AF009EA696 /* SFShopFoodListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 877632071FEAA3AF009EA696 /* SFShopFoodListVC.m */; };
 		87ACCDEC1FC4F85C0008F7BA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 87ACCDEB1FC4F85C0008F7BA /* AppDelegate.m */; };
 		87ACCDEF1FC4F85C0008F7BA /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87ACCDEE1FC4F85C0008F7BA /* ViewController.m */; };
-		87ACCDF21FC4F85C0008F7BA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87ACCDF01FC4F85C0008F7BA /* Main.storyboard */; };
 		87ACCDF41FC4F85C0008F7BA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 87ACCDF31FC4F85C0008F7BA /* Assets.xcassets */; };
-		87ACCDF71FC4F85C0008F7BA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87ACCDF51FC4F85C0008F7BA /* LaunchScreen.storyboard */; };
 		87ACCDFA1FC4F85C0008F7BA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 87ACCDF91FC4F85C0008F7BA /* main.m */; };
 		87ACCE041FC4F85C0008F7BA /* selfishTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 87ACCE031FC4F85C0008F7BA /* selfishTests.m */; };
 		87ACCE0F1FC4F85C0008F7BA /* selfishUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 87ACCE0E1FC4F85C0008F7BA /* selfishUITests.m */; };
@@ -325,6 +323,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4ACC3E501FE9F40600ABE49D /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		71E838DD0DEEB7533B44F0DE /* Pods-selfish.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-selfish.release.xcconfig"; path = "Pods/Target Support Files/Pods-selfish/Pods-selfish.release.xcconfig"; sourceTree = "<group>"; };
 		788519F427174B6659B77C89 /* Pods-selfish.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-selfish.debug.xcconfig"; path = "Pods/Target Support Files/Pods-selfish/Pods-selfish.debug.xcconfig"; sourceTree = "<group>"; };
 		87702E521FC9B737006F410D /* SFShopTableVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFShopTableVC.h; sourceTree = "<group>"; };
@@ -652,16 +651,12 @@
 		877631FD1FE8908B009EA696 /* SUTopBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUTopBarView.h; sourceTree = "<group>"; };
 		877631FE1FE8908B009EA696 /* SUTopBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SUTopBarView.m; sourceTree = "<group>"; };
 		877632011FE8989E009EA696 /* SUAlbumsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SUAlbumsTableViewCell.xib; sourceTree = "<group>"; };
-		877632061FEAA3AF009EA696 /* SFShopFoodListVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFShopFoodListVC.h; sourceTree = "<group>"; };
-		877632071FEAA3AF009EA696 /* SFShopFoodListVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFShopFoodListVC.m; sourceTree = "<group>"; };
 		87ACCDE71FC4F85C0008F7BA /* selfish.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = selfish.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		87ACCDEA1FC4F85C0008F7BA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		87ACCDEB1FC4F85C0008F7BA /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		87ACCDED1FC4F85C0008F7BA /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		87ACCDEE1FC4F85C0008F7BA /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		87ACCDF11FC4F85C0008F7BA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		87ACCDF31FC4F85C0008F7BA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		87ACCDF61FC4F85C0008F7BA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		87ACCDF81FC4F85C0008F7BA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		87ACCDF91FC4F85C0008F7BA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		87ACCDFF1FC4F85C0008F7BA /* selfishTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = selfishTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -700,6 +695,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4ACC3E511FE9F40600ABE49D /* libsqlite3.0.tbd in Frameworks */,
 				4ABAFCF80B53792B92DC492E /* Pods_selfish.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -831,8 +827,6 @@
 				877030661FD2EAA0006F410D /* SFShopCustomeFoodVC.m */,
 				877030781FD4439D006F410D /* SFShopFoodRandomVC.h */,
 				877030791FD4439D006F410D /* SFShopFoodRandomVC.m */,
-				877632061FEAA3AF009EA696 /* SFShopFoodListVC.h */,
-				877632071FEAA3AF009EA696 /* SFShopFoodListVC.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1316,12 +1310,10 @@
 		87ACCE1D1FC4F95B0008F7BA /* supporting */ = {
 			isa = PBXGroup;
 			children = (
-				8770305E1FD2DDB9006F410D /* SFGlobalHeader.pch */,
 				87ACCE281FC4FF940008F7BA /* source */,
-				87ACCDF01FC4F85C0008F7BA /* Main.storyboard */,
 				87ACCDF31FC4F85C0008F7BA /* Assets.xcassets */,
-				87ACCDF51FC4F85C0008F7BA /* LaunchScreen.storyboard */,
 				87ACCDF91FC4F85C0008F7BA /* main.m */,
+				8770305E1FD2DDB9006F410D /* SFGlobalHeader.pch */,
 				87ACCDEA1FC4F85C0008F7BA /* AppDelegate.h */,
 				87ACCDEB1FC4F85C0008F7BA /* AppDelegate.m */,
 			);
@@ -1450,6 +1442,7 @@
 		B5F79913E1CABDDFDEA59921 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4ACC3E501FE9F40600ABE49D /* libsqlite3.0.tbd */,
 				F814782EE40278912260C417 /* Pods_selfish.framework */,
 			);
 			name = Frameworks;
@@ -1583,7 +1576,6 @@
 				8770301F1FCAF030006F410D /* cm2_icn_shuffle_prs.png in Resources */,
 				87702FEF1FCAF030006F410D /* cm2_runfm_btn_play_prs@2x.png in Resources */,
 				87702FD81FCAF030006F410D /* cm4_my_icn_recent.png in Resources */,
-				87ACCDF71FC4F85C0008F7BA /* LaunchScreen.storyboard in Resources */,
 				87702FD31FCAF030006F410D /* cm4_my_icn_recent@3x.png in Resources */,
 				87702FBC1FCAF030006F410D /* cm2_topbar_icn_playing_prs@2x.png in Resources */,
 				87702F661FCAF030006F410D /* cm4_my_icn_fav@2x.png in Resources */,
@@ -1630,7 +1622,6 @@
 				877030311FCAF030006F410D /* 1242_2208.jpg in Resources */,
 				877030061FCAF030006F410D /* cm2_play_btn_pause@2x.png in Resources */,
 				87702FFA1FCAF030006F410D /* cm2_runfm_btn_next_prs.png in Resources */,
-				87ACCDF21FC4F85C0008F7BA /* Main.storyboard in Resources */,
 				87702F681FCAF030006F410D /* cm4_disc_topbtn_daily@2x.png in Resources */,
 				87702FD61FCAF030006F410D /* cm2_topbar_icn_playing5.png in Resources */,
 				87702F6D1FCAF030006F410D /* cm2_topbar_icn_back@3x.png in Resources */,
@@ -1824,9 +1815,26 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-selfish/Pods-selfish-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/FLAnimatedImage/FLAnimatedImage.framework",
+				"${BUILT_PRODUCTS_DIR}/HCSStarRatingView/HCSStarRatingView.framework",
+				"${BUILT_PRODUCTS_DIR}/JLRoutes/JLRoutes.framework",
+				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/MJExtension/MJExtension.framework",
+				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
+				"${BUILT_PRODUCTS_DIR}/ReactiveCocoa/ReactiveCocoa.framework",
+				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLAnimatedImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HCSStarRatingView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JLRoutes.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJExtension.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveCocoa.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1854,13 +1862,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-selfish-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1925,7 +1936,6 @@
 				87702E811FCAEBE5006F410D /* SFTabBarController.m in Sources */,
 				877631FA1FE8902F009EA696 /* SUImagePickerCollectionViewCell.m in Sources */,
 				8770305D1FD2DA8F006F410D /* SFShopCustomeRowView.m in Sources */,
-				877632081FEAA3AF009EA696 /* SFShopFoodListVC.m in Sources */,
 				87ACCDEC1FC4F85C0008F7BA /* AppDelegate.m in Sources */,
 				877632001FE8908B009EA696 /* SUTopBarView.m in Sources */,
 				87702E871FCAEEB3006F410D /* SUSettingItem.m in Sources */,
@@ -1964,25 +1974,6 @@
 			targetProxy = 87ACCE0B1FC4F85C0008F7BA /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		87ACCDF01FC4F85C0008F7BA /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				87ACCDF11FC4F85C0008F7BA /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		87ACCDF51FC4F85C0008F7BA /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				87ACCDF61FC4F85C0008F7BA /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		87ACCE111FC4F85C0008F7BA /* Debug */ = {
@@ -2099,6 +2090,7 @@
 				DEVELOPMENT_TEAM = 569GNZ5392;
 				GCC_PREFIX_HEADER = "$(SCRROOT)selfish/supporting/SFGlobalHeader.pch";
 				INFOPLIST_FILE = selfish/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.netease.NRTC.demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2119,6 +2111,7 @@
 				DEVELOPMENT_TEAM = 569GNZ5392;
 				GCC_PREFIX_HEADER = "$(SCRROOT)selfish/supporting/SFGlobalHeader.pch";
 				INFOPLIST_FILE = selfish/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.netease.NRTC.demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";

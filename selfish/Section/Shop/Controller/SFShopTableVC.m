@@ -57,15 +57,11 @@ static NSString * const reuseIdentifier = @"商家表单元";
 - (void)setUpNavigator {
     self.title = @"商铺";
     
-    UIBarButtonItem *leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"定位" style:UIBarButtonItemStylePlain target:self action:@selector(handleLocateAction:)];
+    UIBarButtonItem *leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"定位" style:UIBarButtonItemStylePlain target:self action:@selector(handleBackAction:)];
     self.navigationItem.leftBarButtonItem = leftBarButtonItem;
     
     UIBarButtonItem *rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"随便" style:UIBarButtonItemStylePlain target:self action:@selector(handleRandomAction:)];
     self.navigationItem.rightBarButtonItem = rightBarButtonItem;
-}
-
-- (void)handleLocateAction:(id)sender {
-        
 }
 
 - (void)handleRandomAction:(id)sender {
