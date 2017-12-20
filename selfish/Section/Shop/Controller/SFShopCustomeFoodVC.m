@@ -16,6 +16,8 @@
 @property(nonatomic,strong) SFShopFoodPicView *foodPicView;
 @property(nonatomic,strong) SFShopFoodCustomeViewModel *foodPicViewModel;
 @property(nonatomic,strong) UIButton             *submitButton;
+    @property(nonatomic,strong) UITextField      *titleTF;
+    @property(nonatomic,strong) UITextField      *descTF;
 @end
 
 
@@ -101,10 +103,12 @@ static NSString * const reuseTableViewCell = @"SUTableViewCell";
             UITextField *titleTF = [[UITextField alloc] initWithFrame:cell.bounds];
             cell.myContentView = titleTF;
             titleTF.placeholder = @"  标题";
+            self.titleTF = titleTF;
         }
         if(1 == indexPath.row) { // 描述
             UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 88)];
             textField.placeholder = @"  简单描述食物";
+            self.descTF = textField;
             cell.myContentView = textField;
         }else if(2 == indexPath.row) {
             cell.myContentView = self.foodPicView;
@@ -121,6 +125,49 @@ static NSString * const reuseTableViewCell = @"SUTableViewCell";
     
     return cell;
 }
+    
+#pragma mark - Action
+
+- (void)handleSubmitAction:(id)sender {
+    NSDictionary *form = [self generateForm];
+    if(form) {
+        NSURLSession *session = [NSURLSession sharedSession];
+        NSString *url = [NSString stringWithFormat:@"%@/food", SELFISH_HOST];
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
+        [request addValue:@"application/json;charset=utf-8" forHTTPHeaderField:@"content-type"];
+        request.HTTPMethod = @"POST";
+        request.HTTPBody   = [NSJSONSerialization dataWithJSONObject:form options:NSJSONWritingPrettyPrinted error:nil];
+        
+        NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+            if(error) {
+                NSLog(@"添加菜品出错: %@", error);
+                return;
+            }
+            NSError *jsonError;
+            NSDictionary *result = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&jsonError];
+            if(jsonError) {
+                NSLog(@"结果解析错误:%@", jsonError);
+                return;
+            }
+            
+            if([result[@"success"] isEqualToString:@"true"]) {
+                NSLog(@"商品创建或修改成功%@", result);
+            }
+        }];
+        [dataTask resume];
+    }
+}
+
+- (NSDictionary *)generateForm {
+    id sid = [[NSUserDefaults standardUserDefaults] valueForKey:@"sid"];
+    NSDictionary *json = @{
+                           @"shop_sid" : sid,
+                           @"name"     : self.titleTF.text,
+                           @"tags"     : self.descTF.text,
+//                           @"pics"     : self.foodPicViewModel.pics
+                           };
+    return json;
+}
 
 - (SFShopFoodPicView *)foodPicView {
     if(!_foodPicView) {
@@ -136,7 +183,8 @@ static NSString * const reuseTableViewCell = @"SUTableViewCell";
         [_submitButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         _submitButton.size = CGSizeMake(self.view.size.width, 44);
         _submitButton.left = 0;
-        _submitButton.botton = self.view.size.height;
+        _submitButton.botton = self.view.size.height- 100;
+        [_submitButton addTarget:self action:@selector(handleSubmitAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _submitButton;
 }

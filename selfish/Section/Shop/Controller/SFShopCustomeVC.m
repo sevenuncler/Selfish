@@ -70,7 +70,7 @@
     if(!_menuAddButton) {
         _menuAddButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_menuAddButton setImage:[UIImage imageNamed:@"image"] forState:UIControlStateNormal];
-        [_menuAddButton addTarget:self action:@selector(handleShopAction:) forControlEvents:UIControlEventTouchUpInside];
+        [_menuAddButton addTarget:self action:@selector(handleFoodAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _menuAddButton;
 }
@@ -87,12 +87,16 @@
     if(!_shopDetailAddButton) {
         _shopDetailAddButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_shopDetailAddButton setImage:[UIImage imageNamed:@"image"] forState:UIControlStateNormal];
-        [_shopDetailAddButton addTarget:self action:@selector(handleFoodAction:) forControlEvents:UIControlEventTouchUpInside];
+        [_shopDetailAddButton addTarget:self action:@selector(handleShopAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _shopDetailAddButton;
 }
 
     - (void)handleFoodAction:(id)sender {
+        // 1. 获取有所菜单列表
+        // 2. 获取制定菜品的详细信息
+        // 3. 展示、修改
+        
         NSString *url = @"Selfish://push/SFShopCustomeFoodVC";
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url] options:@{} completionHandler:nil];
     }
