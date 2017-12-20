@@ -92,19 +92,18 @@
     return _shopDetailAddButton;
 }
 
-    - (void)handleFoodAction:(id)sender {
+- (void)handleFoodAction:(id)sender {
         // 1. 获取有所菜单列表
+    NSString *openUrl = @"Selfish://push/SFShopFoodListVC";
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:openUrl] options:@{} completionHandler:nil];
         // 2. 获取制定菜品的详细信息
         // 3. 展示、修改
-        
-        NSString *url = @"Selfish://push/SFShopCustomeFoodVC";
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url] options:@{} completionHandler:nil];
-    }
+}
     
-    - (void)handleShopAction:(id)sender {
+- (void)handleShopAction:(id)sender {
         NSString *url = @"Selfish://push/SFShopCustomeDecorationVC";
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url] options:@{} completionHandler:nil];
-    }
+}
     
 
 @end

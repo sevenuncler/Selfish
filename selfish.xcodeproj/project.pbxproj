@@ -285,6 +285,7 @@
 		877631FF1FE8908B009EA696 /* SUTopBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 877631FC1FE8908B009EA696 /* SUTopBarView.xib */; };
 		877632001FE8908B009EA696 /* SUTopBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 877631FE1FE8908B009EA696 /* SUTopBarView.m */; };
 		877632021FE8989E009EA696 /* SUAlbumsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 877632011FE8989E009EA696 /* SUAlbumsTableViewCell.xib */; };
+		877632081FEAA3AF009EA696 /* SFShopFoodListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 877632071FEAA3AF009EA696 /* SFShopFoodListVC.m */; };
 		87ACCDEC1FC4F85C0008F7BA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 87ACCDEB1FC4F85C0008F7BA /* AppDelegate.m */; };
 		87ACCDEF1FC4F85C0008F7BA /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87ACCDEE1FC4F85C0008F7BA /* ViewController.m */; };
 		87ACCDF21FC4F85C0008F7BA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87ACCDF01FC4F85C0008F7BA /* Main.storyboard */; };
@@ -651,6 +652,8 @@
 		877631FD1FE8908B009EA696 /* SUTopBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUTopBarView.h; sourceTree = "<group>"; };
 		877631FE1FE8908B009EA696 /* SUTopBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SUTopBarView.m; sourceTree = "<group>"; };
 		877632011FE8989E009EA696 /* SUAlbumsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SUAlbumsTableViewCell.xib; sourceTree = "<group>"; };
+		877632061FEAA3AF009EA696 /* SFShopFoodListVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFShopFoodListVC.h; sourceTree = "<group>"; };
+		877632071FEAA3AF009EA696 /* SFShopFoodListVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFShopFoodListVC.m; sourceTree = "<group>"; };
 		87ACCDE71FC4F85C0008F7BA /* selfish.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = selfish.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		87ACCDEA1FC4F85C0008F7BA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		87ACCDEB1FC4F85C0008F7BA /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -828,6 +831,8 @@
 				877030661FD2EAA0006F410D /* SFShopCustomeFoodVC.m */,
 				877030781FD4439D006F410D /* SFShopFoodRandomVC.h */,
 				877030791FD4439D006F410D /* SFShopFoodRandomVC.m */,
+				877632061FEAA3AF009EA696 /* SFShopFoodListVC.h */,
+				877632071FEAA3AF009EA696 /* SFShopFoodListVC.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1920,6 +1925,7 @@
 				87702E811FCAEBE5006F410D /* SFTabBarController.m in Sources */,
 				877631FA1FE8902F009EA696 /* SUImagePickerCollectionViewCell.m in Sources */,
 				8770305D1FD2DA8F006F410D /* SFShopCustomeRowView.m in Sources */,
+				877632081FEAA3AF009EA696 /* SFShopFoodListVC.m in Sources */,
 				87ACCDEC1FC4F85C0008F7BA /* AppDelegate.m in Sources */,
 				877632001FE8908B009EA696 /* SUTopBarView.m in Sources */,
 				87702E871FCAEEB3006F410D /* SUSettingItem.m in Sources */,
