@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		4ABAFCF80B53792B92DC492E /* Pods_selfish.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F814782EE40278912260C417 /* Pods_selfish.framework */; };
 		4ACC3E511FE9F40600ABE49D /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ACC3E501FE9F40600ABE49D /* libsqlite3.0.tbd */; };
+		4ACC3E5B1FEA524F00ABE49D /* UIViewController+Routes.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ACC3E5A1FEA524F00ABE49D /* UIViewController+Routes.m */; };
+		4ACC3E5E1FEA535900ABE49D /* SFLifeDiaryCreateVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ACC3E5D1FEA535900ABE49D /* SFLifeDiaryCreateVC.m */; };
+		4ACC3E611FEA689A00ABE49D /* UITextView+Editor.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ACC3E601FEA689A00ABE49D /* UITextView+Editor.m */; };
 		87702E541FC9B737006F410D /* SFShopTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 87702E531FC9B737006F410D /* SFShopTableVC.m */; };
 		87702E571FC9B780006F410D /* SFShopTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 87702E561FC9B780006F410D /* SFShopTableViewCell.m */; };
 		87702E5A1FCA9DE9006F410D /* SFShopDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 87702E591FCA9DE9006F410D /* SFShopDetailVC.m */; };
@@ -324,6 +327,12 @@
 
 /* Begin PBXFileReference section */
 		4ACC3E501FE9F40600ABE49D /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		4ACC3E591FEA524F00ABE49D /* UIViewController+Routes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Routes.h"; sourceTree = "<group>"; };
+		4ACC3E5A1FEA524F00ABE49D /* UIViewController+Routes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Routes.m"; sourceTree = "<group>"; };
+		4ACC3E5C1FEA535900ABE49D /* SFLifeDiaryCreateVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SFLifeDiaryCreateVC.h; path = selfish/Section/Common/Controller/SFLifeDiaryCreateVC.h; sourceTree = SOURCE_ROOT; };
+		4ACC3E5D1FEA535900ABE49D /* SFLifeDiaryCreateVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SFLifeDiaryCreateVC.m; path = selfish/Section/Common/Controller/SFLifeDiaryCreateVC.m; sourceTree = SOURCE_ROOT; };
+		4ACC3E5F1FEA689A00ABE49D /* UITextView+Editor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UITextView+Editor.h"; path = "../Helper/UITextView+Editor.h"; sourceTree = "<group>"; };
+		4ACC3E601FEA689A00ABE49D /* UITextView+Editor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UITextView+Editor.m"; path = "../Helper/UITextView+Editor.m"; sourceTree = "<group>"; };
 		71E838DD0DEEB7533B44F0DE /* Pods-selfish.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-selfish.release.xcconfig"; path = "Pods/Target Support Files/Pods-selfish/Pods-selfish.release.xcconfig"; sourceTree = "<group>"; };
 		788519F427174B6659B77C89 /* Pods-selfish.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-selfish.debug.xcconfig"; path = "Pods/Target Support Files/Pods-selfish/Pods-selfish.debug.xcconfig"; sourceTree = "<group>"; };
 		87702E521FC9B737006F410D /* SFShopTableVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFShopTableVC.h; sourceTree = "<group>"; };
@@ -889,8 +898,8 @@
 		87702E461FC9B121006F410D /* LifeDiary */ = {
 			isa = PBXGroup;
 			children = (
-				87702E471FC9B121006F410D /* ViewModel */,
 				87702E481FC9B121006F410D /* Controller */,
+				87702E471FC9B121006F410D /* ViewModel */,
 				87702E491FC9B121006F410D /* Model */,
 				87702E4A1FC9B121006F410D /* View */,
 				87702E4B1FC9B121006F410D /* Helper */,
@@ -908,6 +917,8 @@
 		87702E481FC9B121006F410D /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				4ACC3E5C1FEA535900ABE49D /* SFLifeDiaryCreateVC.h */,
+				4ACC3E5D1FEA535900ABE49D /* SFLifeDiaryCreateVC.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -936,6 +947,7 @@
 		87702E4C1FC9B1E2006F410D /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				87702E4F1FC9B1E2006F410D /* Model */,
 				87702E4D1FC9B1E2006F410D /* ViewModel */,
 				87702E4E1FC9B1E2006F410D /* Controller */,
 				87702E501FC9B1E2006F410D /* View */,
@@ -958,9 +970,10 @@
 				877631F41FE88F3C009EA696 /* SUImagePickerViewController.m */,
 				87702E7F1FCAEBE5006F410D /* SFTabBarController.h */,
 				87702E801FCAEBE5006F410D /* SFTabBarController.m */,
-				87702E4F1FC9B1E2006F410D /* Model */,
 				8770303A1FCAFD27006F410D /* SFNavigationController.h */,
 				8770303B1FCAFD27006F410D /* SFNavigationController.m */,
+				4ACC3E591FEA524F00ABE49D /* UIViewController+Routes.h */,
+				4ACC3E5A1FEA524F00ABE49D /* UIViewController+Routes.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -975,7 +988,8 @@
 				87702E761FCAB6A9006F410D /* SUTableViewItem.h */,
 				87702E771FCAB6A9006F410D /* SUTableViewItem.m */,
 			);
-			path = Model;
+			name = Model;
+			path = Controller/Model;
 			sourceTree = "<group>";
 		};
 		87702E501FC9B1E2006F410D /* View */ = {
@@ -991,6 +1005,8 @@
 				877631FC1FE8908B009EA696 /* SUTopBarView.xib */,
 				87702E711FCAB4D7006F410D /* SUTableViewCell.h */,
 				87702E701FCAB4D6006F410D /* SUTableViewCell.m */,
+				4ACC3E5F1FEA689A00ABE49D /* UITextView+Editor.h */,
+				4ACC3E601FEA689A00ABE49D /* UITextView+Editor.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1518,7 +1534,8 @@
 				TargetAttributes = {
 					87ACCDE61FC4F85C0008F7BA = {
 						CreatedOnToolsVersion = 9.1;
-						ProvisioningStyle = Manual;
+						LastSwiftMigration = 0820;
+						ProvisioningStyle = Automatic;
 					};
 					87ACCDFE1FC4F85C0008F7BA = {
 						CreatedOnToolsVersion = 9.1;
@@ -1821,7 +1838,9 @@
 				"${BUILT_PRODUCTS_DIR}/JLRoutes/JLRoutes.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/MJExtension/MJExtension.framework",
+				"${BUILT_PRODUCTS_DIR}/MMMarkdown/MMMarkdown.framework",
 				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
+				"${BUILT_PRODUCTS_DIR}/Notepad/Notepad.framework",
 				"${BUILT_PRODUCTS_DIR}/ReactiveCocoa/ReactiveCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 			);
@@ -1832,7 +1851,9 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JLRoutes.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJExtension.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MMMarkdown.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Notepad.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 			);
@@ -1892,6 +1913,7 @@
 				87702E841FCAEEA8006F410D /* AccountVC.m in Sources */,
 				87702E781FCAB6A9006F410D /* SUTableViewItem.m in Sources */,
 				877631F51FE88F3C009EA696 /* SUImagePickerViewController.m in Sources */,
+				4ACC3E5E1FEA535900ABE49D /* SFLifeDiaryCreateVC.m in Sources */,
 				87702E5D1FCA9E92006F410D /* SFShopDetailCoverCell.m in Sources */,
 				877631EA1FE16E63009EA696 /* SUNetworkManager.m in Sources */,
 				877030611FD2E435006F410D /* SFShopCustomeRowViewModel.m in Sources */,
@@ -1903,6 +1925,7 @@
 				87ACCE341FC5AF4C0008F7BA /* SUImageManager.m in Sources */,
 				877030741FD3DC81006F410D /* SFAccountRegisterVC.m in Sources */,
 				87702E7E1FCAC113006F410D /* SFShopDetailCoverItem.m in Sources */,
+				4ACC3E611FEA689A00ABE49D /* UITextView+Editor.m in Sources */,
 				8770305A1FD2DA4A006F410D /* SFShopCustomeDecorationVC.m in Sources */,
 				87ACCE321FC5AF4C0008F7BA /* UIImage+Size.m in Sources */,
 				87ACCE371FC5B1EF0008F7BA /* HomeVC.m in Sources */,
@@ -1917,6 +1940,7 @@
 				8770304E1FCD9182006F410D /* SFShopCreateVC.m in Sources */,
 				87ACCE491FC91E4F0008F7BA /* HomeInteractiveAnimator.m in Sources */,
 				87702E721FCAB4D7006F410D /* SUTableViewCell.m in Sources */,
+				4ACC3E5B1FEA524F00ABE49D /* UIViewController+Routes.m in Sources */,
 				87702E5A1FCA9DE9006F410D /* SFShopDetailVC.m in Sources */,
 				877030671FD2EAA0006F410D /* SFShopCustomeFoodVC.m in Sources */,
 				87702E6E1FCAB416006F410D /* StatusCell.m in Sources */,
@@ -2085,7 +2109,7 @@
 			baseConfigurationReference = 788519F427174B6659B77C89 /* Pods-selfish.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 569GNZ5392;
 				GCC_PREFIX_HEADER = "$(SCRROOT)selfish/supporting/SFGlobalHeader.pch";
@@ -2094,9 +2118,10 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.netease.NRTC.demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "8c791842-6629-4d9e-be46-1c7163b06259";
-				PROVISIONING_PROFILE_SPECIFIER = "NRTC Demo";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SHARED_PRECOMPS_DIR = "$(OBJROOT)/SharedPrecompiledHeaders";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -2106,7 +2131,7 @@
 			baseConfigurationReference = 71E838DD0DEEB7533B44F0DE /* Pods-selfish.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 569GNZ5392;
 				GCC_PREFIX_HEADER = "$(SCRROOT)selfish/supporting/SFGlobalHeader.pch";
@@ -2115,9 +2140,10 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.netease.NRTC.demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "8c791842-6629-4d9e-be46-1c7163b06259";
-				PROVISIONING_PROFILE_SPECIFIER = "NRTC Demo";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SHARED_PRECOMPS_DIR = "$(OBJROOT)/SharedPrecompiledHeaders";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

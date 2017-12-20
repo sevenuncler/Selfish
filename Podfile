@@ -9,4 +9,6 @@ target 'selfish' do
     pod 'SVProgressHUD', '~> 2.2.2'
     pod 'JLRoutes', '~> 2.0.5'
     pod 'Masonry', '~> 1.1.0'
+    pod 'MMMarkdown', '~> 0.5.5'
+    pod 'Notepad', '~> 0.2.4'
 end

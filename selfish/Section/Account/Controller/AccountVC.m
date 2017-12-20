@@ -93,9 +93,14 @@ static NSString * const reuseCell2= @"reuseAccountCell2";
             {
                 SUSettingItem *settingItem = [SUSettingItem new];
                 settingItem.leftImage = @"cm2_set_icn_vip";
-                settingItem.title     = @"创建店铺";
+                settingItem.title     = @"创建动态";
                 settingItem.style     = 1;
                 settingItem.itemFrame = CGRectMake(0, 0, 0, 40);
+                settingItem.hander    = ^{
+                    NSString *url = @"Selfish://push/SFLifeDiaryCreateVC?titleText=fromFirst";
+                    NSDictionary *dict = @{@"navi": self.navigationController};
+                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url] options:dict completionHandler:nil];
+                };
                 [generalItem.contentItems addObject:settingItem];
             }
             {
@@ -104,6 +109,7 @@ static NSString * const reuseCell2= @"reuseAccountCell2";
                 settingItem.title     = @"商城";
                 settingItem.style     = 1;
                 settingItem.itemFrame = CGRectMake(0, 0, 0, 40);
+
                 [generalItem.contentItems addObject:settingItem];
             }
             {
@@ -294,7 +300,7 @@ static NSString * const reuseCell2= @"reuseAccountCell2";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if(![self validateUser]) {
+    if(NO && ![self validateUser]) {
         UIViewController *vc = [SFAcountLoginVC new];
         UINavigationController *naviVC = [[UINavigationController alloc] initWithRootViewController:vc];
         [self presentViewController:naviVC animated:YES completion:nil];

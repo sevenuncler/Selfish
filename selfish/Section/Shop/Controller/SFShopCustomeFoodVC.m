@@ -13,11 +13,11 @@
 #import <HCSStarRatingView/HCSStarRatingView.h>
 
 @interface SFShopCustomeFoodVC ()
-@property(nonatomic,strong) SFShopFoodPicView *foodPicView;
-@property(nonatomic,strong) SFShopFoodCustomeViewModel *foodPicViewModel;
-@property(nonatomic,strong) UIButton             *submitButton;
-    @property(nonatomic,strong) UITextField      *titleTF;
-    @property(nonatomic,strong) UITextField      *descTF;
+@property(nonatomic,strong) SFShopFoodPicView           *foodPicView;
+@property(nonatomic,strong) SFShopFoodCustomeViewModel  *foodPicViewModel;
+@property(nonatomic,strong) UIButton                    *submitButton;
+@property(nonatomic,strong) UITextField                 *titleTF;
+@property(nonatomic,strong) UITextField                 *descTF;
 @end
 
 
@@ -143,6 +143,7 @@ static NSString * const reuseTableViewCell = @"SUTableViewCell";
                 NSLog(@"添加菜品出错: %@", error);
                 return;
             }
+            
             NSError *jsonError;
             NSDictionary *result = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&jsonError];
             if(jsonError) {
@@ -151,7 +152,9 @@ static NSString * const reuseTableViewCell = @"SUTableViewCell";
             }
             
             if([result[@"success"] isEqualToString:@"true"]) {
-                NSLog(@"商品创建或修改成功%@", result);
+                NSLog(@"商品创建或修改成功:%@", result);
+            }else {
+                NSLog(@"请求失败:%@", result);
             }
         }];
         [dataTask resume];
