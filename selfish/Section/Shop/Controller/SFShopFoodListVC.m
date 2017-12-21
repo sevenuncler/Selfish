@@ -26,6 +26,7 @@ static NSString * const reuseID = @"reuseID";
 
 - (void)setDataBinding {
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:reuseID];
+    
 }
 
 - (void)loadData {
@@ -57,7 +58,7 @@ static NSString * const reuseID = @"reuseID";
     }];
     [SVProgressHUD showWithStatus:@"加载数据中..."];
     [dataTask resume];
-    if(dispatch_semaphore_wait(semaphore, dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC * 15)) == 0) {
+    if(dispatch_semaphore_wait(semaphore, dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC * 2)) == 0) {
         [SVProgressHUD showSuccessWithStatus:@"加载成功"];
         [self.items addObject:@""];
         [self.items addObject:@""];
@@ -69,6 +70,14 @@ static NSString * const reuseID = @"reuseID";
         });
     }else {
         [SVProgressHUD showSuccessWithStatus:@"加载失败"];
+        [self.items addObject:@""];
+        [self.items addObject:@""];
+        
+        [self.items addObject:@""];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+        });
     }
     [SVProgressHUD dismissWithDelay:0.25];
 
@@ -142,5 +151,12 @@ static NSString * const reuseID = @"reuseID";
     // Pass the selected object to the new view controller.
 }
 */
+
+- (NSMutableArray *)items {
+    if(!_items) {
+        _items = [NSMutableArray array];
+    }
+    return _items;
+}
 
 @end
