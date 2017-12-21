@@ -97,7 +97,7 @@
         // 2. 获取制定菜品的详细信息
         // 3. 展示、修改
         
-        NSString *url = @"Selfish://push/SFShopCustomeFoodVC";
+        NSString *url = @"Selfish://push/SFShopFoodListVC";
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url] options:@{} completionHandler:nil];
     }
     

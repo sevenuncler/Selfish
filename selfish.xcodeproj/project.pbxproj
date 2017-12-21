@@ -286,6 +286,8 @@
 		877631FF1FE8908B009EA696 /* SUTopBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 877631FC1FE8908B009EA696 /* SUTopBarView.xib */; };
 		877632001FE8908B009EA696 /* SUTopBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 877631FE1FE8908B009EA696 /* SUTopBarView.m */; };
 		877632021FE8989E009EA696 /* SUAlbumsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 877632011FE8989E009EA696 /* SUAlbumsTableViewCell.xib */; };
+		877C83F91FEB321C00882C64 /* SFShopFoodListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 877C83F81FEB321C00882C64 /* SFShopFoodListVC.m */; };
+		877C83FC1FEB38A100882C64 /* SFFoodItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 877C83FB1FEB38A100882C64 /* SFFoodItem.m */; };
 		87ACCDEC1FC4F85C0008F7BA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 87ACCDEB1FC4F85C0008F7BA /* AppDelegate.m */; };
 		87ACCDEF1FC4F85C0008F7BA /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87ACCDEE1FC4F85C0008F7BA /* ViewController.m */; };
 		87ACCDF41FC4F85C0008F7BA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 87ACCDF31FC4F85C0008F7BA /* Assets.xcassets */; };
@@ -651,6 +653,10 @@
 		877631FD1FE8908B009EA696 /* SUTopBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUTopBarView.h; sourceTree = "<group>"; };
 		877631FE1FE8908B009EA696 /* SUTopBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SUTopBarView.m; sourceTree = "<group>"; };
 		877632011FE8989E009EA696 /* SUAlbumsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SUAlbumsTableViewCell.xib; sourceTree = "<group>"; };
+		877C83F71FEB321C00882C64 /* SFShopFoodListVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFShopFoodListVC.h; sourceTree = "<group>"; };
+		877C83F81FEB321C00882C64 /* SFShopFoodListVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFShopFoodListVC.m; sourceTree = "<group>"; };
+		877C83FA1FEB38A100882C64 /* SFFoodItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFFoodItem.h; sourceTree = "<group>"; };
+		877C83FB1FEB38A100882C64 /* SFFoodItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFFoodItem.m; sourceTree = "<group>"; };
 		87ACCDE71FC4F85C0008F7BA /* selfish.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = selfish.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		87ACCDEA1FC4F85C0008F7BA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		87ACCDEB1FC4F85C0008F7BA /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -827,6 +833,8 @@
 				877030661FD2EAA0006F410D /* SFShopCustomeFoodVC.m */,
 				877030781FD4439D006F410D /* SFShopFoodRandomVC.h */,
 				877030791FD4439D006F410D /* SFShopFoodRandomVC.m */,
+				877C83F71FEB321C00882C64 /* SFShopFoodListVC.h */,
+				877C83F81FEB321C00882C64 /* SFShopFoodListVC.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -840,6 +848,8 @@
 				87702E7D1FCAC113006F410D /* SFShopDetailCoverItem.m */,
 				877030431FCB8E55006F410D /* SFCatagoryItem.h */,
 				877030441FCB8E55006F410D /* SFCatagoryItem.m */,
+				877C83FA1FEB38A100882C64 /* SFFoodItem.h */,
+				877C83FB1FEB38A100882C64 /* SFFoodItem.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1871,7 +1881,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1898,6 +1908,7 @@
 				87ACCDFA1FC4F85C0008F7BA /* main.m in Sources */,
 				877030451FCB8E55006F410D /* SFCatagoryItem.m in Sources */,
 				877030421FCB8D63006F410D /* SFShopCatagoryViewModel.m in Sources */,
+				877C83FC1FEB38A100882C64 /* SFFoodItem.m in Sources */,
 				87702E691FCAB19E006F410D /* SFCommentCell.m in Sources */,
 				87ACCE331FC5AF4C0008F7BA /* UIView+Layout.m in Sources */,
 				87ACCE341FC5AF4C0008F7BA /* SUImageManager.m in Sources */,
@@ -1936,6 +1947,7 @@
 				87702E811FCAEBE5006F410D /* SFTabBarController.m in Sources */,
 				877631FA1FE8902F009EA696 /* SUImagePickerCollectionViewCell.m in Sources */,
 				8770305D1FD2DA8F006F410D /* SFShopCustomeRowView.m in Sources */,
+				877C83F91FEB321C00882C64 /* SFShopFoodListVC.m in Sources */,
 				87ACCDEC1FC4F85C0008F7BA /* AppDelegate.m in Sources */,
 				877632001FE8908B009EA696 /* SUTopBarView.m in Sources */,
 				87702E871FCAEEB3006F410D /* SUSettingItem.m in Sources */,
@@ -2090,7 +2102,7 @@
 				DEVELOPMENT_TEAM = 569GNZ5392;
 				GCC_PREFIX_HEADER = "$(SCRROOT)selfish/supporting/SFGlobalHeader.pch";
 				INFOPLIST_FILE = selfish/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.netease.NRTC.demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2111,7 +2123,7 @@
 				DEVELOPMENT_TEAM = 569GNZ5392;
 				GCC_PREFIX_HEADER = "$(SCRROOT)selfish/supporting/SFGlobalHeader.pch";
 				INFOPLIST_FILE = selfish/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.netease.NRTC.demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
