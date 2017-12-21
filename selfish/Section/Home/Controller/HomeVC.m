@@ -10,7 +10,6 @@
 #import <ReactiveCocoa/ReactiveCocoa.h>
 #import "Macros.h"
 #import "UIView+Layout.h"
-#import "ViewController.h"
 #import "HomeAnimator.h"
 #import "HomeViewModel.h"
 #import "DetailVC.h"

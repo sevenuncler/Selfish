@@ -289,7 +289,6 @@
 		877C83F91FEB321C00882C64 /* SFShopFoodListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 877C83F81FEB321C00882C64 /* SFShopFoodListVC.m */; };
 		877C83FC1FEB38A100882C64 /* SFFoodItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 877C83FB1FEB38A100882C64 /* SFFoodItem.m */; };
 		87ACCDEC1FC4F85C0008F7BA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 87ACCDEB1FC4F85C0008F7BA /* AppDelegate.m */; };
-		87ACCDEF1FC4F85C0008F7BA /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87ACCDEE1FC4F85C0008F7BA /* ViewController.m */; };
 		87ACCDF41FC4F85C0008F7BA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 87ACCDF31FC4F85C0008F7BA /* Assets.xcassets */; };
 		87ACCDFA1FC4F85C0008F7BA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 87ACCDF91FC4F85C0008F7BA /* main.m */; };
 		87ACCE041FC4F85C0008F7BA /* selfishTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 87ACCE031FC4F85C0008F7BA /* selfishTests.m */; };
@@ -660,8 +659,6 @@
 		87ACCDE71FC4F85C0008F7BA /* selfish.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = selfish.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		87ACCDEA1FC4F85C0008F7BA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		87ACCDEB1FC4F85C0008F7BA /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		87ACCDED1FC4F85C0008F7BA /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		87ACCDEE1FC4F85C0008F7BA /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		87ACCDF31FC4F85C0008F7BA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		87ACCDF81FC4F85C0008F7BA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		87ACCDF91FC4F85C0008F7BA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -1278,8 +1275,6 @@
 				87ACCE1F1FC4F95B0008F7BA /* Section */,
 				87ACCE1C1FC4F95B0008F7BA /* Service */,
 				87ACCE1D1FC4F95B0008F7BA /* supporting */,
-				87ACCDED1FC4F85C0008F7BA /* ViewController.h */,
-				87ACCDEE1FC4F85C0008F7BA /* ViewController.m */,
 				877030551FD2AA85006F410D /* Model.xcdatamodeld */,
 			);
 			path = selfish;
@@ -1894,7 +1889,6 @@
 				8770306A1FD2EB15006F410D /* SFShopFoodPicView.m in Sources */,
 				87702E601FCAACAF006F410D /* SFShopDetailTitleCell.m in Sources */,
 				8770303C1FCAFD27006F410D /* SFNavigationController.m in Sources */,
-				87ACCDEF1FC4F85C0008F7BA /* ViewController.m in Sources */,
 				877631F21FE40EBA009EA696 /* SFAccount.m in Sources */,
 				87702E631FCAAF36006F410D /* SFShopDetailMenuCell.m in Sources */,
 				877030771FD3DCBC006F410D /* SFAcountLoginVC.m in Sources */,

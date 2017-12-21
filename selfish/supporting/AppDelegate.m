@@ -36,8 +36,6 @@
     [self.window makeKeyAndVisible];
     [RoutesConfig setUpRoutes:@"Selfish"];
     window.tintColor = SELFISH_MAJRO_COLOR;
-    NSString *url = @"Selfish://push/SFShopCustomeVC";
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url] options:@{} completionHandler:nil];
     return YES;
 }
     

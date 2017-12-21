@@ -9,7 +9,6 @@
 #import "SFTabBarController.h"
 #import "SFShopTableVC.h"
 #import "HomeVC.h"
-#import "ViewController.h"
 #import "UIImage+Size.h"
 #import "AccountVC.h"
 #import "SFNavigationController.h"
