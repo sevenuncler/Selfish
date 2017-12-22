@@ -7,6 +7,6 @@ target 'selfish' do
     pod 'HCSStarRatingView', '~> 1.4.5'
     pod 'MBProgressHUD', '~> 1.0.0'
     pod 'SVProgressHUD', '~> 2.2.2'
-    pod 'JLRoutes', '~> 2.0.5'
-    pod 'Masonry', '~> 1.1.0'
+    pod 'JLRoutes', '~> 2.0.5',:inhibit_warnings => true
+    pod 'Masonry', '~> 1.1.0',:inhibit_warnings => true
 end

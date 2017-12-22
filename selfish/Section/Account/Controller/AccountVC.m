@@ -15,6 +15,7 @@
 #import "SFShopItem.h"
 #import <MJExtension/MJExtension.h>
 #import "SFAccount.h"
+#import <SVProgressHUD/SVProgressHUD.h>
 
 @interface AccountVC ()
     
@@ -226,7 +227,15 @@ static NSString * const reuseCell2= @"reuseAccountCell2";
                 SUSettingItem *settingItem = [SUSettingItem new];
                 settingItem.title     = @"退出登录";
                 settingItem.itemFrame = CGRectMake(0, 0, 0, 40);
+                settingItem.hander = ^{
+                    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                    [defaults removeObjectForKey:@"username"];
+                    [defaults removeObjectForKey:@"aid"];
+                    [SVProgressHUD showWithStatus:@"注销成功"];
+                    [SVProgressHUD dismissWithDelay:0.25];
+                };
                 [generalItem.contentItems addObject:settingItem];
+                
             }
         }
         [self.items addObject:generalItem];

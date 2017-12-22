@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11759" systemVersion="15F34" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13533" systemVersion="17B48" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
     <entity name="SFShopModel" representedClassName="SFShopModel" syncable="YES" codeGenerationType="class">
         <attribute name="location" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="pics" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="sid" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="tags" optional="YES" attributeType="Transformable" syncable="YES"/>
-        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SFUserModel" syncable="YES"/>
     </entity>
     <entity name="SFUserModel" representedClassName="SFUserModel" syncable="YES" codeGenerationType="class">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="uid" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="SFShopModel" positionX="-63" positionY="-18" width="128" height="135"/>
+        <element name="SFShopModel" positionX="-63" positionY="-18" width="128" height="120"/>
         <element name="SFUserModel" positionX="-54" positionY="27" width="128" height="75"/>
     </elements>
 </model>
