@@ -37,9 +37,6 @@
     [self.view addSubview:self.shopTypeTF];
     [self.view addSubview:self.submitButton];
 
-    
-    SFShopItem *item = [SFShopItem new];
-    [item createTable];
 }
 
 - (void)didReceiveMemoryWarning {

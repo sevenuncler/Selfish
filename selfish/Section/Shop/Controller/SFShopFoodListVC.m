@@ -19,7 +19,7 @@ static NSString * const reuseID = @"reuseID";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.title = @"菜目列表";
     [self setDataBinding];
     
 }
@@ -27,6 +27,7 @@ static NSString * const reuseID = @"reuseID";
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.items removeAllObjects];
+    [self.items addObject:@"添加"];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [self loadData];
     });
@@ -40,7 +41,7 @@ static NSString * const reuseID = @"reuseID";
     dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
     
     NSURLSession *session = [NSURLSession sharedSession];
-    NSString *url = [NSString stringWithFormat:@"%@/shop/foods?sid=4", SELFISH_HOST];
+    NSString *url = [NSString stringWithFormat:@"%@/shop/foods?sid=%@", SELFISH_HOST, [[NSUserDefaults standardUserDefaults] valueForKey:@"sid"]];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
     [request addValue:@"application/json;charset=utf-8" forHTTPHeaderField:@"content-type"];
     request.HTTPMethod = @"GET";
@@ -63,7 +64,9 @@ static NSString * const reuseID = @"reuseID";
             NSArray *content = result[@"content"];
             [content enumerateObjectsUsingBlock:^(NSDictionary *obj, NSUInteger idx, BOOL * _Nonnull stop) {
                 SFFoodItem *foodItem = [SFFoodItem mj_objectWithKeyValues:obj];
-                [self.items addObject:foodItem];
+                if(self.items.count != 0) {
+                    [self.items insertObject:foodItem atIndex:self.items.count-1];
+                }
             }];
             dispatch_semaphore_signal(semaphore);
         }
@@ -76,7 +79,7 @@ static NSString * const reuseID = @"reuseID";
             [self.tableView reloadData];
         });
     }else {
-        [SVProgressHUD showSuccessWithStatus:@"加载失败"];        
+        [SVProgressHUD showErrorWithStatus:@"加载失败"];
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
         });
@@ -98,8 +101,11 @@ static NSString * const reuseID = @"reuseID";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseID forIndexPath:indexPath];
-    
-    // Configure the cell...
+    if(indexPath.row == self.items.count-1) {
+        cell.textLabel.text = @"添加";
+        cell.imageView.image = [UIImage imageNamed:@"image"];
+        return cell;
+    }
     SFFoodItem *foodItem = [self.items objectAtIndex:indexPath.row];
     cell.textLabel.text = foodItem.name;
     return cell;
@@ -114,8 +120,19 @@ static NSString * const reuseID = @"reuseID";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *url = @"Selfish://push/SFShopCustomeFoodVC";
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url] options:@{} completionHandler:nil];
+    SFFoodItem *foodItem = [self.items objectAtIndex:indexPath.row];
+    if([foodItem isKindOfClass:[NSString class]]) {
+        NSString *url = @"Selfish://push/SFShopCustomeFoodVC";
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url] options:@{} completionHandler:nil];
+        return;
+    }
+    
+    if([foodItem isKindOfClass:[SFFoodItem class]]) {
+        NSString *url = [NSString stringWithFormat:@"Selfish://push/SFShopCustomeFoodVC?fid=%@", foodItem.fid];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url] options:@{} completionHandler:nil];
+    }
+    
+    
 }
 
 
@@ -158,6 +175,7 @@ static NSString * const reuseID = @"reuseID";
 - (NSMutableArray *)items {
     if(!_items) {
         _items = [NSMutableArray array];
+        [_items addObject:@"添加"];
     }
     return _items;
 }

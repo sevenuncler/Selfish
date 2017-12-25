@@ -9,5 +9,8 @@
 #import "SUItem.h"
 
 @implementation SUItem
-
++ (NSArray *)ignoredCodingPropertyNames {
+    
+    return @[@"itemFrame"];
+}
 @end

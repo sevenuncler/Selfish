@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+@class SFShopItem;
 @interface SFShopCustomeVC : UIViewController
-
+@property(nonatomic,strong) SFShopItem *shopItem;
 @end

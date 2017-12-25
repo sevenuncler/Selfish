@@ -11,21 +11,30 @@
 
 @class SUSQLManager;
 
+typedef NS_ENUM(NSInteger, SFShopType) {
+    SFShopTypeDefault    = 0,
+    SFShopTypeFood       = 1,
+    SFShopTypeEnternment = 2
+};
+
 @interface SFShopItem : SUItem
 @property(nonatomic,copy)   NSString        *sid;
 @property(nonatomic,copy)   NSArray         *pics;
 @property(nonatomic,copy)   NSString        *name;
-@property(nonatomic,strong) CLLocation      *location;
+@property(nonatomic,strong) NSString        *announcement;
+@property(nonatomic,assign) CGFloat         longtitude;
+@property(nonatomic,assign) CGFloat         latitude;
 @property(nonatomic,strong) NSString        *locationName;
 @property(nonatomic,copy)   NSArray         *tags;
 @property(nonatomic,copy)   NSString        *commentsID;
-
+@property(nonatomic,copy)   NSString        *accout_aid;
+@property(nonatomic,assign) CGFloat         averageCost;
+@property(nonatomic,assign) CGFloat         starLevel;
+@property(nonatomic,assign) SFShopType      type;
 
 + (void)createItemWithDictionary:(NSDictionary *)json;
-- (void)createTable;
-
 + (void)queryByAccountID:(NSString *)sid complection:(Handler)handler;
+- (void)createTable;
+- (NSString *)stringOfTag;
 
-    
-    
 @end

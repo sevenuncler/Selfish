@@ -13,13 +13,23 @@
 
 @implementation SFShopItem
 
-    - (void)add {
+
+- (NSString *)stringOfTag {
+    NSMutableString *string = [NSMutableString string];
+    [self.tags enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [string appendString:obj];
+        [string appendString:@","];
+    }];
+    return string.copy;
+}
+
+- (void)add {
         
-    }
+}
     
-    - (void)delete {
+- (void)delete {
         
-    }
+}
     
     - (void)update {
         

@@ -11,13 +11,17 @@
 #import "SFShopFoodCustomeViewModel.h"
 #import "SFShopCustomeFoodRowView.h"
 #import <HCSStarRatingView/HCSStarRatingView.h>
+#import <SVProgressHUD/SVProgressHUD.h>
 
 @interface SFShopCustomeFoodVC ()
 @property(nonatomic,strong) SFShopFoodPicView *foodPicView;
 @property(nonatomic,strong) SFShopFoodCustomeViewModel *foodPicViewModel;
 @property(nonatomic,strong) UIButton             *submitButton;
-    @property(nonatomic,strong) UITextField      *titleTF;
-    @property(nonatomic,strong) UITextField      *descTF;
+@property(nonatomic,strong) UITextField      *titleTF;
+@property(nonatomic,strong) UITextField      *descTF;
+@property(nonatomic,strong) dispatch_group_t group;
+@property(nonatomic,strong) dispatch_queue_t queue;
+@property(atomic,strong)    NSMutableArray   *formPics;
 @end
 
 
@@ -130,6 +134,9 @@ static NSString * const reuseTableViewCell = @"SUTableViewCell";
 
 - (void)handleSubmitAction:(id)sender {
     NSDictionary *form = [self generateForm];
+    // 1. 获取需要上传的图片上传
+    // 2. 根据上传的图片地址重新赋值表单中URL
+    // 3. 表单提交
     if(form) {
         NSURLSession *session = [NSURLSession sharedSession];
         NSString *url = [NSString stringWithFormat:@"%@/food", SELFISH_HOST];
@@ -159,14 +166,76 @@ static NSString * const reuseTableViewCell = @"SUTableViewCell";
 }
 
 - (NSDictionary *)generateForm {
-    id sid = [[NSUserDefaults standardUserDefaults] valueForKey:@"sid"];
-    NSDictionary *json = @{
-                           @"shop_sid" : sid,
-                           @"name"     : self.titleTF.text,
-                           @"tags"     : self.descTF.text,
-//                           @"pics"     : self.foodPicViewModel.pics
-                           };
-    return json;
+    NSMutableArray *imageDatas = @[].mutableCopy;
+    __weak typeof(self) weakSelf = self;
+    [self.foodPicViewModel.pics enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if([obj isKindOfClass:[UIImage class]]) {
+            UIImage *image = obj;
+            NSData *data = UIImagePNGRepresentation(image);
+            [imageDatas addObject:data];
+            *stop = YES;
+            [weakSelf uploadImage:data];
+        }else if([obj isKindOfClass:[NSString class]]) {
+            [weakSelf.formPics addObject:obj];
+        }
+    }];
+    
+    if( dispatch_group_wait(self.group, dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC*60)) == 0 ) {
+        id sid = [[NSUserDefaults standardUserDefaults] valueForKey:@"sid"];
+        NSDictionary *json = @{
+                               @"shop_sid" : sid,
+                               @"name"     : self.titleTF.text,
+                               @"tags"     : self.descTF.text,
+                               @"pics"     : self.formPics
+                               };
+        return json;
+    }else {
+        [SVProgressHUD showErrorWithStatus:@"上传超时了"];
+        [SVProgressHUD dismissWithDelay:0.25];
+    }
+    
+    return nil;
+}
+
+- (void)uploadImage:(NSData *)data {
+    self.group = dispatch_group_create();
+    __weak typeof(self) weakSelf = self;
+    dispatch_group_async(self.group, self.queue, ^{
+        NSURLSession *session = [NSURLSession sharedSession];
+        NSString *url = [NSString stringWithFormat:@"%@/food/upload", SELFISH_HOST];
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
+        [request addValue:@"multipart/from-data" forHTTPHeaderField:@"content-type"];
+        request.HTTPMethod = @"POST";
+        NSDictionary *form = @{
+                               @"image":data
+                               };
+        request.HTTPBody   = [NSJSONSerialization dataWithJSONObject:form options:NSJSONWritingPrettyPrinted error:nil];
+        NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+            if(error) {
+                NSLog(@"请求出错: %@", error);
+                return;
+            }
+            NSError *jsonError;
+            NSDictionary *result = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&jsonError];
+            if(jsonError) {
+                NSLog(@"结果解析错误:%@", jsonError);
+                return;
+            }
+            
+            if([result[@"success"] isEqualToString:@"true"]) {
+                NSDictionary *content = result[@"content"];
+                NSString *url = content[@"fileUrl"];
+                if(url) {
+                    [weakSelf.formPics addObject:url];
+                }
+                NSLog(@"商品创建或修改成功%@", result);
+                [SVProgressHUD showSuccessWithStatus:@"上传成功了"];
+                [SVProgressHUD dismissWithDelay:0.25];
+            }
+        }];
+        [dataTask resume];
+
+    });
 }
 
 - (SFShopFoodPicView *)foodPicView {
@@ -187,6 +256,27 @@ static NSString * const reuseTableViewCell = @"SUTableViewCell";
         [_submitButton addTarget:self action:@selector(handleSubmitAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _submitButton;
+}
+
+- (dispatch_queue_t)queue {
+    if(!_queue) {
+        _queue = dispatch_queue_create("com.sevenuncle.upload", DISPATCH_QUEUE_CONCURRENT);
+    }
+    return _queue;
+}
+
+- (dispatch_group_t)group {
+    if(!_group) {
+        _group = dispatch_group_create();
+    }
+    return _group;
+}
+
+- (NSMutableArray *)formPics {
+    if(!_formPics) {
+        _formPics = [NSMutableArray array];
+    }
+    return _formPics;
 }
 
 @end

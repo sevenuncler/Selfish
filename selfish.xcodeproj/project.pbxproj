@@ -288,6 +288,9 @@
 		877632021FE8989E009EA696 /* SUAlbumsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 877632011FE8989E009EA696 /* SUAlbumsTableViewCell.xib */; };
 		877C83F91FEB321C00882C64 /* SFShopFoodListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 877C83F81FEB321C00882C64 /* SFShopFoodListVC.m */; };
 		877C83FC1FEB38A100882C64 /* SFFoodItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 877C83FB1FEB38A100882C64 /* SFFoodItem.m */; };
+		877C84011FED395D00882C64 /* SFShopEditTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 877C84001FED395D00882C64 /* SFShopEditTextView.m */; };
+		877C84041FED450F00882C64 /* UITextField+Insect.m in Sources */ = {isa = PBXBuildFile; fileRef = 877C84031FED450F00882C64 /* UITextField+Insect.m */; };
+		877C84071FED45FC00882C64 /* SUTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 877C84061FED45FC00882C64 /* SUTextField.m */; };
 		87ACCDEC1FC4F85C0008F7BA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 87ACCDEB1FC4F85C0008F7BA /* AppDelegate.m */; };
 		87ACCDF41FC4F85C0008F7BA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 87ACCDF31FC4F85C0008F7BA /* Assets.xcassets */; };
 		87ACCDFA1FC4F85C0008F7BA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 87ACCDF91FC4F85C0008F7BA /* main.m */; };
@@ -656,6 +659,12 @@
 		877C83F81FEB321C00882C64 /* SFShopFoodListVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFShopFoodListVC.m; sourceTree = "<group>"; };
 		877C83FA1FEB38A100882C64 /* SFFoodItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFFoodItem.h; sourceTree = "<group>"; };
 		877C83FB1FEB38A100882C64 /* SFFoodItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFFoodItem.m; sourceTree = "<group>"; };
+		877C83FF1FED395D00882C64 /* SFShopEditTextView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFShopEditTextView.h; sourceTree = "<group>"; };
+		877C84001FED395D00882C64 /* SFShopEditTextView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFShopEditTextView.m; sourceTree = "<group>"; };
+		877C84021FED450F00882C64 /* UITextField+Insect.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UITextField+Insect.h"; sourceTree = "<group>"; };
+		877C84031FED450F00882C64 /* UITextField+Insect.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UITextField+Insect.m"; sourceTree = "<group>"; };
+		877C84051FED45FC00882C64 /* SUTextField.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SUTextField.h; sourceTree = "<group>"; };
+		877C84061FED45FC00882C64 /* SUTextField.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SUTextField.m; sourceTree = "<group>"; };
 		87ACCDE71FC4F85C0008F7BA /* selfish.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = selfish.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		87ACCDEA1FC4F85C0008F7BA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		87ACCDEB1FC4F85C0008F7BA /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -882,6 +891,8 @@
 				877030691FD2EB15006F410D /* SFShopFoodPicView.m */,
 				8770306F1FD2F35D006F410D /* SFShopCustomeFoodRowView.h */,
 				877030701FD2F35D006F410D /* SFShopCustomeFoodRowView.m */,
+				877C83FF1FED395D00882C64 /* SFShopEditTextView.h */,
+				877C84001FED395D00882C64 /* SFShopEditTextView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1010,6 +1021,10 @@
 				8770306B1FD2EBAB006F410D /* SUHeader.h */,
 				877631EB1FE2B882009EA696 /* RoutesConfig.h */,
 				877631EC1FE2B882009EA696 /* RoutesConfig.m */,
+				877C84021FED450F00882C64 /* UITextField+Insect.h */,
+				877C84031FED450F00882C64 /* UITextField+Insect.m */,
+				877C84051FED45FC00882C64 /* SUTextField.h */,
+				877C84061FED45FC00882C64 /* SUTextField.m */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -1911,6 +1926,7 @@
 				8770305A1FD2DA4A006F410D /* SFShopCustomeDecorationVC.m in Sources */,
 				87ACCE321FC5AF4C0008F7BA /* UIImage+Size.m in Sources */,
 				87ACCE371FC5B1EF0008F7BA /* HomeVC.m in Sources */,
+				877C84071FED45FC00882C64 /* SUTextField.m in Sources */,
 				877030571FD2AA85006F410D /* Model.xcdatamodeld in Sources */,
 				8770303F1FCB8A84006F410D /* SFShopCatagoryView.m in Sources */,
 				877631FB1FE8902F009EA696 /* SUAlbumsTableViewCell.m in Sources */,
@@ -1922,8 +1938,10 @@
 				8770304E1FCD9182006F410D /* SFShopCreateVC.m in Sources */,
 				87ACCE491FC91E4F0008F7BA /* HomeInteractiveAnimator.m in Sources */,
 				87702E721FCAB4D7006F410D /* SUTableViewCell.m in Sources */,
+				877C84011FED395D00882C64 /* SFShopEditTextView.m in Sources */,
 				87702E5A1FCA9DE9006F410D /* SFShopDetailVC.m in Sources */,
 				877030671FD2EAA0006F410D /* SFShopCustomeFoodVC.m in Sources */,
+				877C84041FED450F00882C64 /* UITextField+Insect.m in Sources */,
 				87702E6E1FCAB416006F410D /* StatusCell.m in Sources */,
 				87702E661FCAB11A006F410D /* SFShopDetailTagCell.m in Sources */,
 				87702E571FC9B780006F410D /* SFShopTableViewCell.m in Sources */,
