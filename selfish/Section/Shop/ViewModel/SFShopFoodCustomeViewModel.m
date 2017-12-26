@@ -65,7 +65,7 @@ static NSString * const reuseID = @"SFShopCustomeRowPic";
 - (NSMutableArray *)pics {
     if(nil == _pics) {
         _pics = [NSMutableArray array];
-        [_pics addObject:[UIImage imageNamed:@"image"]];
+        [_pics addObject:[[NSBundle mainBundle] pathForResource:@"image" ofType:@"png"] ];
     }
     return _pics;
 }

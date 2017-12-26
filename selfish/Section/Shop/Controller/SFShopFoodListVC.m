@@ -10,6 +10,7 @@
 #import <SVProgressHUD/SVProgressHUD.h>
 #import "SFFoodItem.h"
 #import <MJExtension/MJExtension.h>
+#import "SUImageManager.h"
 
 @interface SFShopFoodListVC ()
 
@@ -60,7 +61,7 @@ static NSString * const reuseID = @"reuseID";
         }
         
         if([result[@"success"] isEqualToString:@"true"]) {
-            NSLog(@"商品创建或修改成功%@", result);
+            NSLog(@"菜单获取成功%@", result);
             NSArray *content = result[@"content"];
             [content enumerateObjectsUsingBlock:^(NSDictionary *obj, NSUInteger idx, BOOL * _Nonnull stop) {
                 SFFoodItem *foodItem = [SFFoodItem mj_objectWithKeyValues:obj];
@@ -108,6 +109,14 @@ static NSString * const reuseID = @"reuseID";
     }
     SFFoodItem *foodItem = [self.items objectAtIndex:indexPath.row];
     cell.textLabel.text = foodItem.name;
+    if(foodItem.pics.count>0) {
+        NSString *src = foodItem.pics[0];
+        src = [src substringFromIndex:8];
+        NSString *Url = [NSString stringWithFormat:@"%@/images",SELFISH_HOST];
+        
+        SUImageManager *imageManager = [SUImageManager defaultImageManager];
+        [imageManager setImageView:cell.imageView withURL:[NSURL URLWithString:Url]];
+    }
     return cell;
 }
 

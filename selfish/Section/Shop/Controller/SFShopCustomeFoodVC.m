@@ -12,6 +12,7 @@
 #import "SFShopCustomeFoodRowView.h"
 #import <HCSStarRatingView/HCSStarRatingView.h>
 #import <SVProgressHUD/SVProgressHUD.h>
+#define boundary  @"comsevenunclerselfishxxx"
 
 @interface SFShopCustomeFoodVC ()
 @property(nonatomic,strong) SFShopFoodPicView *foodPicView;
@@ -133,6 +134,11 @@ static NSString * const reuseTableViewCell = @"SUTableViewCell";
 #pragma mark - Action
 
 - (void)handleSubmitAction:(id)sender {
+    if(self.formPics == nil) {
+        self.formPics = [NSMutableArray array];
+    }else {
+        [self.formPics removeAllObjects];
+    }
     NSDictionary *form = [self generateForm];
     // 1. 获取需要上传的图片上传
     // 2. 根据上传的图片地址重新赋值表单中URL
@@ -162,25 +168,36 @@ static NSString * const reuseTableViewCell = @"SUTableViewCell";
             }
         }];
         [dataTask resume];
+    }else {
+        [SVProgressHUD showErrorWithStatus:@"创建失败，请检查网络"];
+        [SVProgressHUD dismissWithDelay:0.5];
     }
 }
 
 - (NSDictionary *)generateForm {
     NSMutableArray *imageDatas = @[].mutableCopy;
     __weak typeof(self) weakSelf = self;
+    
+
+ 
+
     [self.foodPicViewModel.pics enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if([obj isKindOfClass:[UIImage class]]) {
             UIImage *image = obj;
             NSData *data = UIImagePNGRepresentation(image);
-            [imageDatas addObject:data];
-            *stop = YES;
+//            [imageDatas addObject:data];
+//            *stop = YES;
             [weakSelf uploadImage:data];
         }else if([obj isKindOfClass:[NSString class]]) {
+            
             [weakSelf.formPics addObject:obj];
+        }
+        if(idx == self.foodPicViewModel.pics.count - 2) {
+            *stop = YES;
         }
     }];
     
-    if( dispatch_group_wait(self.group, dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC*60)) == 0 ) {
+    if( dispatch_group_wait(self.group, dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC*5)) == 0 ) {
         id sid = [[NSUserDefaults standardUserDefaults] valueForKey:@"sid"];
         NSDictionary *json = @{
                                @"shop_sid" : sid,
@@ -191,26 +208,29 @@ static NSString * const reuseTableViewCell = @"SUTableViewCell";
         return json;
     }else {
         [SVProgressHUD showErrorWithStatus:@"上传超时了"];
-        [SVProgressHUD dismissWithDelay:0.25];
+        [SVProgressHUD dismissWithDelay:0.5];
     }
     
     return nil;
 }
 
 - (void)uploadImage:(NSData *)data {
-    self.group = dispatch_group_create();
+//    NSData *bodyData = [self generateBody:data];
     __weak typeof(self) weakSelf = self;
-    dispatch_group_async(self.group, self.queue, ^{
         NSURLSession *session = [NSURLSession sharedSession];
         NSString *url = [NSString stringWithFormat:@"%@/food/upload", SELFISH_HOST];
         NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
-        [request addValue:@"multipart/from-data" forHTTPHeaderField:@"content-type"];
+//    [request addValue:[NSString stringWithFormat:@"multipart/from-data;boundary=%@", boundary] forHTTPHeaderField:@"content-type"];
+    [request addValue:@"image/png" forHTTPHeaderField:@"Content-Type"];
         request.HTTPMethod = @"POST";
-        NSDictionary *form = @{
-                               @"image":data
-                               };
-        request.HTTPBody   = [NSJSONSerialization dataWithJSONObject:form options:NSJSONWritingPrettyPrinted error:nil];
-        NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+//        NSDictionary *form = @{
+//                               @"image":data
+//                               };
+//        request.HTTPBody   = bodyData;
+
+        dispatch_group_enter(self.group);
+
+        NSURLSessionUploadTask *uploadTask = [session uploadTaskWithRequest:request fromData:data completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
             if(error) {
                 NSLog(@"请求出错: %@", error);
                 return;
@@ -224,19 +244,66 @@ static NSString * const reuseTableViewCell = @"SUTableViewCell";
             
             if([result[@"success"] isEqualToString:@"true"]) {
                 NSDictionary *content = result[@"content"];
-                NSString *url = content[@"fileUrl"];
+                NSString *url = content[@"url"];
                 if(url) {
                     [weakSelf.formPics addObject:url];
                 }
                 NSLog(@"商品创建或修改成功%@", result);
                 [SVProgressHUD showSuccessWithStatus:@"上传成功了"];
                 [SVProgressHUD dismissWithDelay:0.25];
+                dispatch_group_leave(self.group);
             }
-        }];
-        [dataTask resume];
 
-    });
+        }];
+        [uploadTask resume];
+
 }
+
+- (NSData *)generateBody:(NSData *)imageData {
+    //创建可变字符串
+    NSMutableString *bodyStr = [NSMutableString string];
+
+    
+    //2 stutas
+    [bodyStr appendFormat:@"--%@\r\n",boundary];//\n:换行 \n:切换到行首
+    [bodyStr appendFormat:@"Content-Disposition: form-data; name=\"name\""];
+    [bodyStr appendFormat:@"\r\n\r\n"];
+    [bodyStr appendFormat:@"%@\r\n",@"xxx"];
+    
+    //3 pic
+    /*
+     --AaB03x
+     Content-disposition: form-data; name="pic"; filename="file"
+     Content-Type: application/octet-stream
+     */
+    [bodyStr appendFormat:@"--%@\r\n",boundary];
+    [bodyStr appendFormat:@"Content-disposition: form-data; name=\"image\"; filename=\"filename\""];
+    [bodyStr appendFormat:@"\r\n"];
+    [bodyStr appendFormat:@"Content-Type: Multipart/form-data"];
+    [bodyStr appendFormat:@"\r\n\r\n"];
+    
+    
+    NSMutableData *bodyData = [NSMutableData data];
+    
+    //(1)startData
+    NSData *startData = [bodyStr dataUsingEncoding:NSUTF8StringEncoding];
+    [bodyData appendData:startData];
+    
+    //(2)pic
+
+    [bodyData appendData:imageData];
+    
+    //(3)--Str--
+    NSString *endStr = [NSString stringWithFormat:@"\r\n--%@--\r\n",boundary];
+    NSData *endData = [endStr dataUsingEncoding:NSUTF8StringEncoding];
+    [bodyData appendData:endData];
+    
+    
+    return bodyData;
+
+}
+
+#pragma mark - Getter & Setter
 
 - (SFShopFoodPicView *)foodPicView {
     if(!_foodPicView) {
@@ -272,11 +339,6 @@ static NSString * const reuseTableViewCell = @"SUTableViewCell";
     return _group;
 }
 
-- (NSMutableArray *)formPics {
-    if(!_formPics) {
-        _formPics = [NSMutableArray array];
-    }
-    return _formPics;
-}
+
 
 @end
