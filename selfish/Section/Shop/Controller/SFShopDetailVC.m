@@ -75,9 +75,15 @@
     if(0 == indexPath.section) {
         if(0 == indexPath.row) {
             SFShopDetailCoverCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SFShopDetailCoverCell" forIndexPath:indexPath];
+            if(self.shopItem.pics.count>0) {
+                
+            }
+            [cell.picNumberButton setTitle:[NSString stringWithFormat:@"图片(%ld)", self.shopItem.pics.count] forState:UIControlStateNormal];
             return cell;
         }else if(1 == indexPath.row) {
             SFShopDetailTitleCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SFShopDetailTitleCell" forIndexPath:indexPath];
+            cell.shopNameLabel.text = self.shopItem.name;
+            cell.shopAverageCostLabel.text = [NSString stringWithFormat:@"人均:%.2lf", self.shopItem.averageCost];
             return cell;
         }
     }else if(1 == indexPath.section) {

@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface SFShopCustomeFoodVC : UITableViewController
-
-    @property(nonatomic, strong) NSMutableArray *pics;
-
+@property(nonatomic, strong) NSMutableArray *pics;
+@property(nonatomic, copy)   NSString       *fid;
 @end

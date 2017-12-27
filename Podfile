@@ -9,4 +9,5 @@ target 'selfish' do
     pod 'SVProgressHUD', '~> 2.2.2'
     pod 'JLRoutes', '~> 2.0.5',:inhibit_warnings => true
     pod 'Masonry', '~> 1.1.0',:inhibit_warnings => true
+    pod 'SDWebImage', '~> 4.1.2'
 end

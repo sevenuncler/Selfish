@@ -31,10 +31,12 @@ typedef NS_ENUM(NSInteger, SFShopType) {
 @property(nonatomic,assign) CGFloat         averageCost;
 @property(nonatomic,assign) CGFloat         starLevel;
 @property(nonatomic,assign) SFShopType      type;
+@property(nonatomic,copy)   NSArray         *foods;
 
 + (void)createItemWithDictionary:(NSDictionary *)json;
 + (void)queryByAccountID:(NSString *)sid complection:(Handler)handler;
 - (void)createTable;
 - (NSString *)stringOfTag;
+- (NSString *)stringOfFoodWithSpace;
 
 @end

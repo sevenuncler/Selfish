@@ -10,19 +10,24 @@
 #import "SFShopFoodPicView.h"
 #import "SFShopFoodCustomeViewModel.h"
 #import "SFShopCustomeFoodRowView.h"
+#import "SFFoodItem.h"
 #import <HCSStarRatingView/HCSStarRatingView.h>
 #import <SVProgressHUD/SVProgressHUD.h>
+#import <MJExtension/MJExtension.h>
+
+
 #define boundary  @"comsevenunclerselfishxxx"
 
 @interface SFShopCustomeFoodVC ()
-@property(nonatomic,strong) SFShopFoodPicView *foodPicView;
-@property(nonatomic,strong) SFShopFoodCustomeViewModel *foodPicViewModel;
-@property(nonatomic,strong) UIButton             *submitButton;
-@property(nonatomic,strong) UITextField      *titleTF;
-@property(nonatomic,strong) UITextField      *descTF;
-@property(nonatomic,strong) dispatch_group_t group;
-@property(nonatomic,strong) dispatch_queue_t queue;
-@property(atomic,strong)    NSMutableArray   *formPics;
+@property(nonatomic,strong) SFShopFoodPicView           *foodPicView;
+@property(nonatomic,strong) SFShopFoodCustomeViewModel  *foodPicViewModel;
+@property(nonatomic,strong) UIButton                    *submitButton;
+@property(nonatomic,strong) UITextField                 *titleTF;
+@property(nonatomic,strong) UITextField                 *descTF;
+@property(nonatomic,strong) dispatch_group_t            group;
+@property(nonatomic,strong) dispatch_queue_t            queue;
+@property(atomic,strong)    NSMutableArray              *formPics;
+@property(nonatomic,strong) SFFoodItem                  *foodItem;
 @end
 
 
@@ -36,6 +41,64 @@ static NSString * const reuseTableViewCell = @"SUTableViewCell";
     
     [self.tableView addSubview:self.submitButton];
     [self setUpDataBinding];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [self loadFood];
+    });
+}
+
+- (void)loadFood {
+    if(self.fid) {
+        dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+        NSURLSession *session = [NSURLSession sharedSession];
+        NSString *url = [NSString stringWithFormat:@"%@/food/query?fid=%@", SELFISH_HOST, self.fid];
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
+        [request addValue:@"application/json;charset=utf-8" forHTTPHeaderField:@"content-type"];
+        request.HTTPMethod = @"GET";
+        
+        __weak typeof(self) weakSelf = self;
+        NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+            if(error) {
+                NSLog(@"请求出错: %@", error);
+                return;
+            }
+            NSError *jsonError;
+            NSDictionary *result = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&jsonError];
+            if(jsonError) {
+                NSLog(@"结果解析错误:%@", jsonError);
+                return;
+            }
+            
+            if([result[@"success"] isEqualToString:@"true"]) {
+                NSLog(@"获取成功%@", result);
+                NSArray *content = result[@"content"];
+                if(content.count>0) {
+                    SFFoodItem *foodItem = [SFFoodItem mj_objectWithKeyValues:content[0]];
+                    weakSelf.foodItem = foodItem;
+                    dispatch_semaphore_signal(semaphore);
+                }
+            }
+        }];
+        [SVProgressHUD showWithStatus:@"加载数据中..."];
+        [dataTask resume];
+        if(dispatch_semaphore_wait(semaphore, dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC * 5)) == 0) {
+            [SVProgressHUD showSuccessWithStatus:@"加载成功"];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                //填充表单
+                [self.foodPicViewModel addImages:self.foodItem.pics.mutableCopy];
+                self.titleTF.text = self.foodItem.name;
+                self.descTF.text  = self.foodItem.desc;
+                [self.tableView reloadData];
+                [self.foodPicView.picsCollectionView reloadData];
+            });
+        }else {
+            [SVProgressHUD showErrorWithStatus:@"加载失败"];
+            
+            [self dismissViewControllerAnimated:YES completion:nil];
+
+        }
+        [SVProgressHUD dismissWithDelay:0.25];
+    }
 }
 
 
@@ -105,10 +168,9 @@ static NSString * const reuseTableViewCell = @"SUTableViewCell";
     // Configure the cell...
     if(0 == indexPath.section) { // 标题
         if(0 == indexPath.row) {
-            UITextField *titleTF = [[UITextField alloc] initWithFrame:cell.bounds];
-            cell.myContentView = titleTF;
-            titleTF.placeholder = @"  标题";
-            self.titleTF = titleTF;
+            
+            cell.myContentView = self.titleTF;
+            
         }
         if(1 == indexPath.row) { // 描述
             UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 88)];
@@ -175,7 +237,7 @@ static NSString * const reuseTableViewCell = @"SUTableViewCell";
 }
 
 - (NSDictionary *)generateForm {
-    NSMutableArray *imageDatas = @[].mutableCopy;
+//    NSMutableArray *imageDatas = @[].mutableCopy;
     __weak typeof(self) weakSelf = self;
     
 
@@ -337,6 +399,15 @@ static NSString * const reuseTableViewCell = @"SUTableViewCell";
         _group = dispatch_group_create();
     }
     return _group;
+}
+
+- (UITextField *)titleTF {
+    if(!_titleTF) {
+        UITextField *titleTF = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44)];
+        titleTF.placeholder = @"  标题";
+        self.titleTF = titleTF;
+    }
+    return _titleTF;
 }
 
 

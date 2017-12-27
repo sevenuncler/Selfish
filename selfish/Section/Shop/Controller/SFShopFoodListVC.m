@@ -11,6 +11,7 @@
 #import "SFFoodItem.h"
 #import <MJExtension/MJExtension.h>
 #import "SUImageManager.h"
+#import "SFShopCustomeFoodVC.h"
 
 @interface SFShopFoodListVC ()
 
@@ -21,6 +22,7 @@ static NSString * const reuseID = @"reuseID";
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"菜目列表";
+    self.tableView.tableFooterView = [UIView new];
     [self setDataBinding];
     
 }
@@ -29,7 +31,8 @@ static NSString * const reuseID = @"reuseID";
     [super viewWillAppear:animated];
     [self.items removeAllObjects];
     [self.items addObject:@"添加"];
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    dispatch_async(
+                   dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0), ^{
         [self loadData];
     });
 }
@@ -40,7 +43,6 @@ static NSString * const reuseID = @"reuseID";
 
 - (void)loadData {
     dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
-    
     NSURLSession *session = [NSURLSession sharedSession];
     NSString *url = [NSString stringWithFormat:@"%@/shop/foods?sid=%@", SELFISH_HOST, [[NSUserDefaults standardUserDefaults] valueForKey:@"sid"]];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
@@ -79,6 +81,9 @@ static NSString * const reuseID = @"reuseID";
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
         });
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+        });
     }else {
         [SVProgressHUD showErrorWithStatus:@"加载失败"];
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -107,15 +112,16 @@ static NSString * const reuseID = @"reuseID";
         cell.imageView.image = [UIImage imageNamed:@"image"];
         return cell;
     }
+    if(indexPath.row >= self.items.count) {
+        return cell;
+    }
     SFFoodItem *foodItem = [self.items objectAtIndex:indexPath.row];
     cell.textLabel.text = foodItem.name;
     if(foodItem.pics.count>0) {
         NSString *src = foodItem.pics[0];
-        src = [src substringFromIndex:8];
-        NSString *Url = [NSString stringWithFormat:@"%@/images",SELFISH_HOST];
         
         SUImageManager *imageManager = [SUImageManager defaultImageManager];
-        [imageManager setImageView:cell.imageView withURL:[NSURL URLWithString:Url]];
+        [imageManager setImageView:cell.imageView withURL:[NSURL URLWithString:src]];
     }
     return cell;
 }
@@ -137,8 +143,12 @@ static NSString * const reuseID = @"reuseID";
     }
     
     if([foodItem isKindOfClass:[SFFoodItem class]]) {
-        NSString *url = [NSString stringWithFormat:@"Selfish://push/SFShopCustomeFoodVC?fid=%@", foodItem.fid];
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url] options:@{} completionHandler:nil];
+//        NSString *url = [NSString stringWithFormat:@"Selfish://push/SFShopCustomeFoodVC?fid=%@", foodItem.fid];
+//        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url] options:@{} completionHandler:nil];
+        SFShopCustomeFoodVC *vc = [SFShopCustomeFoodVC new];
+        vc.fid = foodItem.fid;
+        [self.navigationController pushViewController:vc animated:YES];
+//        [self presentViewController:vc animated:YES completion:nil];
     }
     
     

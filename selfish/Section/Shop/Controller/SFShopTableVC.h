@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface SFShopTableVC : UIViewController
-@property(nonatomic,strong) UITableView *tableView;
+@property(nonatomic,strong) UITableView    *tableView;
+@property(nonatomic,strong) NSMutableArray *items;
 @end

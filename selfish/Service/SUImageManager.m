@@ -7,6 +7,8 @@
 //
 
 #import "SUImageManager.h"
+#import <SDWebImage/SDWebImageManager.h>
+#import "UIImageView+WebCache.h"
 
 @implementation SUImageManager
 
@@ -21,10 +23,27 @@
 
 - (void)setImageView:(UIImageView *)imageView withUrl:(NSString *)url {
     if([self objectForKey:url]) {
-        imageView.image = [self objectForKey:url];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            imageView.image = [self objectForKey:url];
+        });
     }else {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL fileURLWithPath:url]]];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        NSURL *URL;
+        if(![url containsString:@"http:"]){
+            URL = [NSURL fileURLWithPath:url];
+        }else {
+            URL = [NSURL URLWithString:url];
+        }
+        UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:URL]];
+        if(image == nil) {
+            NSLog(@"重新加载图片%@\n", url);
+//            SDWebImageManager *imageManager = [SDWebImageManager sharedManager];
+            [imageView sd_setImageWithURL:URL];
+        }
+            if(image == nil) {
+                NSLog(@"图片加载失败%@\n", url);
+                return;
+            }
             [self setObject:image forKey:url];
             dispatch_async(dispatch_get_main_queue(), ^{
                 imageView.image = image;
@@ -36,13 +55,19 @@
 
 - (void)setImageView:(UIImageView *)imageView withURL:(NSURL *)url {
     if([self objectForKey:url]) {
-        imageView.image = [self objectForKey:url];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            imageView.image = [self objectForKey:url];
+        });
     }else {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
             UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
+            if(image == nil) {
+                [imageView sd_setImageWithURL:url];
+                return;
+            }
             [self setObject:image forKey:url];
             dispatch_async(dispatch_get_main_queue(), ^{
-                imageView.image = image;
+                [imageView sd_setImageWithURL:url];
             });
         });
         

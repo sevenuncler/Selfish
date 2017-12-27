@@ -17,6 +17,38 @@ static NSString * const reuseID = @"SFShopCustomeRowPic";
     __weak UICollectionView *_internalCollection;
 }
 
+- (void)addImage:(id)image {
+    if(self.pics.count>0) {
+        [self.pics insertObject:image atIndex:self.pics.count-1];
+    }
+}
+
+- (void)addImages:(NSArray *)images {
+    if(self.pics.count<=0) {
+        [self clearImages];
+    }
+    NSMutableArray *mutableArray = images.mutableCopy;
+    [mutableArray addObjectsFromArray:self.pics];
+    self.pics = mutableArray;
+}
+
+- (NSArray *)getImages {
+    if(self.pics.count>1) {
+        NSArray *result = [self.pics subarrayWithRange:NSMakeRange(0, self.pics.count-1)];
+        return result;
+    }else {
+        return @[];
+    }
+}
+
+- (void)clearImages {
+    if(!self.pics) {
+        self.pics = [NSMutableArray array];
+    }
+    [self.pics removeAllObjects];
+    [self.pics addObject:[[NSBundle mainBundle] pathForResource:@"image" ofType:@"png"] ];
+}
+
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     _internalCollection = collectionView;
     return self.pics.count;
