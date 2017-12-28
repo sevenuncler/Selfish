@@ -125,7 +125,7 @@ static NSString * const reuseCell2= @"reuseAccountCell2";
                         NSError *jsonError = nil;
                         NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&jsonError];
                         NSArray *shops = json[@"content"];
-                        if(shops && shops.count>0) {
+                        if([shops isKindOfClass:[NSArray class]] && shops && shops.count>0) {
                             shopItem = [SFShopItem mj_objectWithKeyValues:shops[0]];
                         }
                         dispatch_semaphore_signal(semaphore);

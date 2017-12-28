@@ -291,6 +291,8 @@
 		877C84011FED395D00882C64 /* SFShopEditTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 877C84001FED395D00882C64 /* SFShopEditTextView.m */; };
 		877C84041FED450F00882C64 /* UITextField+Insect.m in Sources */ = {isa = PBXBuildFile; fileRef = 877C84031FED450F00882C64 /* UITextField+Insect.m */; };
 		877C84071FED45FC00882C64 /* SUTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 877C84061FED45FC00882C64 /* SUTextField.m */; };
+		877C840E1FF3DE7D00882C64 /* SFCommentItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 877C840D1FF3DE7D00882C64 /* SFCommentItem.m */; };
+		877C84231FF4777A00882C64 /* SFCommentListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 877C84221FF4777A00882C64 /* SFCommentListVC.m */; };
 		87ACCDEC1FC4F85C0008F7BA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 87ACCDEB1FC4F85C0008F7BA /* AppDelegate.m */; };
 		87ACCDF41FC4F85C0008F7BA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 87ACCDF31FC4F85C0008F7BA /* Assets.xcassets */; };
 		87ACCDFA1FC4F85C0008F7BA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 87ACCDF91FC4F85C0008F7BA /* main.m */; };
@@ -665,6 +667,10 @@
 		877C84031FED450F00882C64 /* UITextField+Insect.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UITextField+Insect.m"; sourceTree = "<group>"; };
 		877C84051FED45FC00882C64 /* SUTextField.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SUTextField.h; sourceTree = "<group>"; };
 		877C84061FED45FC00882C64 /* SUTextField.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SUTextField.m; sourceTree = "<group>"; };
+		877C840C1FF3DE7D00882C64 /* SFCommentItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFCommentItem.h; sourceTree = "<group>"; };
+		877C840D1FF3DE7D00882C64 /* SFCommentItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFCommentItem.m; sourceTree = "<group>"; };
+		877C84211FF4777A00882C64 /* SFCommentListVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFCommentListVC.h; sourceTree = "<group>"; };
+		877C84221FF4777A00882C64 /* SFCommentListVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFCommentListVC.m; sourceTree = "<group>"; };
 		87ACCDE71FC4F85C0008F7BA /* selfish.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = selfish.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		87ACCDEA1FC4F85C0008F7BA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		87ACCDEB1FC4F85C0008F7BA /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -1260,6 +1266,49 @@
 			path = food;
 			sourceTree = "<group>";
 		};
+		877C840A1FF3DE1A00882C64 /* Comment */ = {
+			isa = PBXGroup;
+			children = (
+				877C84201FF4771A00882C64 /* ViewModel */,
+				877C841F1FF4770E00882C64 /* View */,
+				877C841E1FF476F700882C64 /* Controller */,
+				877C840B1FF3DE3A00882C64 /* Model */,
+			);
+			path = Comment;
+			sourceTree = "<group>";
+		};
+		877C840B1FF3DE3A00882C64 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				877C840C1FF3DE7D00882C64 /* SFCommentItem.h */,
+				877C840D1FF3DE7D00882C64 /* SFCommentItem.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		877C841E1FF476F700882C64 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				877C84211FF4777A00882C64 /* SFCommentListVC.h */,
+				877C84221FF4777A00882C64 /* SFCommentListVC.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		877C841F1FF4770E00882C64 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		877C84201FF4771A00882C64 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		87ACCDDE1FC4F85C0008F7BA = {
 			isa = PBXGroup;
 			children = (
@@ -1352,6 +1401,7 @@
 		87ACCE1F1FC4F95B0008F7BA /* Section */ = {
 			isa = PBXGroup;
 			children = (
+				877C840A1FF3DE1A00882C64 /* Comment */,
 				87702E4C1FC9B1E2006F410D /* Common */,
 				87ACCE201FC4F95B0008F7BA /* Home */,
 				87702E3A1FC9B121006F410D /* Account */,
@@ -1933,6 +1983,7 @@
 				87702E6F1FCAB416006F410D /* StatusView.m in Sources */,
 				87ACCE3F1FC5BDA10008F7BA /* HomeViewHeader.m in Sources */,
 				877030511FCE3580006F410D /* SUSQLManager.m in Sources */,
+				877C840E1FF3DE7D00882C64 /* SFCommentItem.m in Sources */,
 				87702E7B1FCAB884006F410D /* SFShopItem.m in Sources */,
 				87702E541FC9B737006F410D /* SFShopTableVC.m in Sources */,
 				8770304E1FCD9182006F410D /* SFShopCreateVC.m in Sources */,
@@ -1941,6 +1992,7 @@
 				877C84011FED395D00882C64 /* SFShopEditTextView.m in Sources */,
 				87702E5A1FCA9DE9006F410D /* SFShopDetailVC.m in Sources */,
 				877030671FD2EAA0006F410D /* SFShopCustomeFoodVC.m in Sources */,
+				877C84231FF4777A00882C64 /* SFCommentListVC.m in Sources */,
 				877C84041FED450F00882C64 /* UITextField+Insect.m in Sources */,
 				87702E6E1FCAB416006F410D /* StatusCell.m in Sources */,
 				87702E661FCAB11A006F410D /* SFShopDetailTagCell.m in Sources */,
