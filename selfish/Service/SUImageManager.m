@@ -111,6 +111,9 @@
                     return;
                 }
                 UIImage *image = [UIImage imageWithData:data];
+                if(!image) {
+                    
+                }
                 if(image) {
                     [self setObject:image forKey:url];
                 }

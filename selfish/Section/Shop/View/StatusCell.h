@@ -15,6 +15,7 @@
 
 @interface SongViewCell : StatusCell
 @property(nonatomic, strong) SongStatusView *songStatusView;
+- (CGFloat)heightForCell;
 @end
 
 @interface VideoViewCell : StatusCell

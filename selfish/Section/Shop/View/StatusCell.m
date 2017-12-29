@@ -32,6 +32,12 @@
     return self;
 }
 
+- (CGFloat)heightForCell {
+    CGFloat height = 0;
+    height = [self.songStatusView heightForView];
+    return height;
+}
+
 - (SongStatusView *)songStatusView {
     if(!_songStatusView) {
         _songStatusView = [[SongStatusView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 0)];

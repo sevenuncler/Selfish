@@ -30,16 +30,16 @@
 @end
 
 @interface StatusView : UIView
-@property(nonatomic, strong, readonly) UIButton *avatorButton;
-@property(nonatomic, strong, readonly) UILabel  *nameLabel;
-@property(nonatomic, strong, readonly) UILabel  *dateLabel;
-@property(nonatomic, strong, readonly) UILabel  *contentLabel;
-@property(nonatomic, strong, readonly) UILabel  *tagLabel;
+@property(nonatomic, strong) UIButton *avatorButton;
+@property(nonatomic, strong) UILabel  *nameLabel;
+@property(nonatomic, strong) UILabel  *dateLabel;
+@property(nonatomic, strong) UILabel  *contentLabel;
+@property(nonatomic, strong) UILabel  *tagLabel;
 @property(nonatomic, strong)           UIView   *contentView;
-@property(nonatomic, strong, readonly) MenuView *likeButton;
-@property(nonatomic, strong, readonly) MenuView *commentButton;
-@property(nonatomic, strong, readonly) MenuView *repeatButton;
-@property(nonatomic, strong, readonly) UIButton *optionButton;
+@property(nonatomic, strong) MenuView *likeButton;
+@property(nonatomic, strong) MenuView *commentButton;
+@property(nonatomic, strong) MenuView *repeatButton;
+@property(nonatomic, strong) UIButton *optionButton;
 @end
 
 //视频分享视图
@@ -67,6 +67,7 @@
 @interface SongStatusView : StatusView
 @property(nonatomic, strong) NSMutableArray *images;
 @property(nonatomic, strong) SongView       *songView;
+- (CGFloat)heightForView;
 @end
 
 

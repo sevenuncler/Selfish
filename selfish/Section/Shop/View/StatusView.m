@@ -345,11 +345,10 @@
         iv.top  = row * (IMAGE_WIDTH + IMAGE_SPACE);
         iv.hidden = NO;
         SUImageManager *imageManager = [SUImageManager defaultImageManager];
-        @weakify(iv);
-        [[imageManager imageWithUrl:obj] subscribeNext:^(UIImage *x) {
-            @strongify(iv);
-            iv.image = x;
-        }];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [imageManager setImageView:iv withUrl:obj];
+            });
+
     }];
 
     if(self.images.count>0) {
@@ -361,33 +360,41 @@
         self.songView.top  = self.containerView.size.height;
         self.containerView.size = CGSizeMake(self.containerView.size.width, self.songView.botton + PADDING);
     }
+//    self.size = CGSizeMake(self.size.width, self.contentView.botton + PADDING);
     [super layoutSubviews];
+}
+
+- (CGFloat)heightForView {
+    CGFloat height = 0;
+    [self layoutSubviews];
+    height = self.size.height;
+    return height;
 }
 
 - (NSMutableArray *)images {
     if(!_images) {
         _images = [NSMutableArray arrayWithCapacity:9];
-        {
-            [_images addObject:@"https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=756514221,687352746&fm=27&gp=0.jpg"];
-        }
-        {
-            [_images addObject:@"https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=756514221,687352746&fm=27&gp=0.jpg"];
-        }
-        {
-            [_images addObject:@"https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=756514221,687352746&fm=27&gp=0.jpg"];
-        }
-        {
-            [_images addObject:@"https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=756514221,687352746&fm=27&gp=0.jpg"];
-        }
-        {
-            [_images addObject:@"https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=756514221,687352746&fm=27&gp=0.jpg"];
-        }
-        {
-            [_images addObject:@"https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=756514221,687352746&fm=27&gp=0.jpg"];
-        }
-        {
-            [_images addObject:@"https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=756514221,687352746&fm=27&gp=0.jpg"];
-        }
+//        {
+//            [_images addObject:@"https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=756514221,687352746&fm=27&gp=0.jpg"];
+//        }
+//        {
+//            [_images addObject:@"https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=756514221,687352746&fm=27&gp=0.jpg"];
+//        }
+//        {
+//            [_images addObject:@"https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=756514221,687352746&fm=27&gp=0.jpg"];
+//        }
+//        {
+//            [_images addObject:@"https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=756514221,687352746&fm=27&gp=0.jpg"];
+//        }
+//        {
+//            [_images addObject:@"https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=756514221,687352746&fm=27&gp=0.jpg"];
+//        }
+//        {
+//            [_images addObject:@"https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=756514221,687352746&fm=27&gp=0.jpg"];
+//        }
+//        {
+//            [_images addObject:@"https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=756514221,687352746&fm=27&gp=0.jpg"];
+//        }
     }
     return _images;
 }

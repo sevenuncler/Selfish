@@ -7,15 +7,16 @@
 //
 
 #import "SFShopDetailVC.h"
+#import "UIView+Layout.h"
 #import "SUTableViewItem.h"
 #import "SFShopDetailCoverItem.h"
-#import "UIView+Layout.h"
 #import "SFShopDetailTagCell.h"
 #import "SFShopDetailMenuCell.h"
 #import "SFShopDetailTitleCell.h"
 #import "SFShopDetailCoverCell.h"
 #import "SFCommentCell.h"
 #import "StatusCell.h"
+#import "SFCommentListVC.h"
 
 @interface SFShopDetailVC ()
 
@@ -51,6 +52,19 @@
 //        coverItem.itemFrame = CGRectMake(0, 0, self.view.size.width, self.view.size.width*0.618);
 //
 //    }
+}
+
+#pragma mark - UITableViewDelegate
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if(indexPath.section == 2 && indexPath.row == 0) {
+        SFCommentListVC *vc = [SFCommentListVC new];
+        vc.sid = @"1";
+        if(self.navigationController) {
+            [self.navigationController pushViewController:vc animated:YES];
+        }else {
+            [self presentViewController:vc animated:YES completion:nil];
+        }
+    }
 }
 
 #pragma mark - Table view data source
@@ -97,7 +111,6 @@
             return cell;
         }
     }
-    
     return nil;
 }
 

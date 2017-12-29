@@ -10,5 +10,6 @@
 
 
 @interface SFCommentListVC : UITableViewController
-@property(nonatomic,copy) NSString *sid;
+@property(nonatomic,copy)   NSString *sid;
+@property(nonatomic,strong) NSMutableArray *items;
 @end
