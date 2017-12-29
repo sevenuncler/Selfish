@@ -15,6 +15,7 @@
 #import "SFShopCatagoryViewModel2.h"
 #import "SFShopFoodRandomVC.h"
 #import "SFShopItem.h"
+#import "SULocationManager.h"
 
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <MJExtension/MJExtension.h>
@@ -60,7 +61,7 @@ static NSString * const reuseIdentifier = @"商家表单元";
 - (void)setUpNavigator {
     self.title = @"商铺";
     
-    UIBarButtonItem *leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"定位" style:UIBarButtonItemStylePlain target:self action:nil];
+    UIBarButtonItem *leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"定位" style:UIBarButtonItemStylePlain target:self action:@selector(handleLocationAction:)];
     self.navigationItem.leftBarButtonItem = leftBarButtonItem;
     
     UIBarButtonItem *rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"随便" style:UIBarButtonItemStylePlain target:self action:@selector(handleRandomAction:)];
@@ -145,6 +146,11 @@ static NSString * const reuseIdentifier = @"商家表单元";
     SFShopFoodRandomVC *vc = [SFShopFoodRandomVC new];
     UINavigationController *navi = [[UINavigationController alloc] initWithRootViewController: vc];
     [self presentViewController:navi animated:YES completion:nil];
+}
+
+- (void)handleLocationAction:(id)sender {
+    SULocationManager *manager = [SULocationManager defaultManager];
+    [manager startLocation];
 }
 
 - (void)onLeftButtonAction:(id)sender {

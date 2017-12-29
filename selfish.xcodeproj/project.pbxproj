@@ -293,6 +293,7 @@
 		877C84071FED45FC00882C64 /* SUTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 877C84061FED45FC00882C64 /* SUTextField.m */; };
 		877C840E1FF3DE7D00882C64 /* SFCommentItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 877C840D1FF3DE7D00882C64 /* SFCommentItem.m */; };
 		877C84231FF4777A00882C64 /* SFCommentListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 877C84221FF4777A00882C64 /* SFCommentListVC.m */; };
+		877C84261FF6854000882C64 /* SULocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 877C84251FF6854000882C64 /* SULocationManager.m */; };
 		87ACCDEC1FC4F85C0008F7BA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 87ACCDEB1FC4F85C0008F7BA /* AppDelegate.m */; };
 		87ACCDF41FC4F85C0008F7BA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 87ACCDF31FC4F85C0008F7BA /* Assets.xcassets */; };
 		87ACCDFA1FC4F85C0008F7BA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 87ACCDF91FC4F85C0008F7BA /* main.m */; };
@@ -671,6 +672,8 @@
 		877C840D1FF3DE7D00882C64 /* SFCommentItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFCommentItem.m; sourceTree = "<group>"; };
 		877C84211FF4777A00882C64 /* SFCommentListVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFCommentListVC.h; sourceTree = "<group>"; };
 		877C84221FF4777A00882C64 /* SFCommentListVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFCommentListVC.m; sourceTree = "<group>"; };
+		877C84241FF6854000882C64 /* SULocationManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SULocationManager.h; sourceTree = "<group>"; };
+		877C84251FF6854000882C64 /* SULocationManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SULocationManager.m; sourceTree = "<group>"; };
 		87ACCDE71FC4F85C0008F7BA /* selfish.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = selfish.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		87ACCDEA1FC4F85C0008F7BA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		87ACCDEB1FC4F85C0008F7BA /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -1372,6 +1375,8 @@
 				87ACCE2C1FC5AF4C0008F7BA /* UIImage+Size.m */,
 				87ACCE2F1FC5AF4C0008F7BA /* UIView+Layout.h */,
 				87ACCE2E1FC5AF4C0008F7BA /* UIView+Layout.m */,
+				877C84241FF6854000882C64 /* SULocationManager.h */,
+				877C84251FF6854000882C64 /* SULocationManager.m */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -1588,7 +1593,7 @@
 				TargetAttributes = {
 					87ACCDE61FC4F85C0008F7BA = {
 						CreatedOnToolsVersion = 9.1;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 					};
 					87ACCDFE1FC4F85C0008F7BA = {
 						CreatedOnToolsVersion = 9.1;
@@ -1969,6 +1974,7 @@
 				877030421FCB8D63006F410D /* SFShopCatagoryViewModel.m in Sources */,
 				877C83FC1FEB38A100882C64 /* SFFoodItem.m in Sources */,
 				87702E691FCAB19E006F410D /* SFCommentCell.m in Sources */,
+				877C84261FF6854000882C64 /* SULocationManager.m in Sources */,
 				87ACCE331FC5AF4C0008F7BA /* UIView+Layout.m in Sources */,
 				87ACCE341FC5AF4C0008F7BA /* SUImageManager.m in Sources */,
 				877030741FD3DC81006F410D /* SFAccountRegisterVC.m in Sources */,
@@ -2161,17 +2167,17 @@
 			baseConfigurationReference = 788519F427174B6659B77C89 /* Pods-selfish.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 569GNZ5392;
 				GCC_PREFIX_HEADER = "$(SCRROOT)selfish/supporting/SFGlobalHeader.pch";
 				INFOPLIST_FILE = selfish/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.netease.NRTC.demo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.netease.NIM.demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "8c791842-6629-4d9e-be46-1c7163b06259";
-				PROVISIONING_PROFILE_SPECIFIER = "NRTC Demo";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SHARED_PRECOMPS_DIR = "$(OBJROOT)/SharedPrecompiledHeaders";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -2182,17 +2188,17 @@
 			baseConfigurationReference = 71E838DD0DEEB7533B44F0DE /* Pods-selfish.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 569GNZ5392;
 				GCC_PREFIX_HEADER = "$(SCRROOT)selfish/supporting/SFGlobalHeader.pch";
 				INFOPLIST_FILE = selfish/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.netease.NRTC.demo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.netease.NIM.demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "8c791842-6629-4d9e-be46-1c7163b06259";
-				PROVISIONING_PROFILE_SPECIFIER = "NRTC Demo";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SHARED_PRECOMPS_DIR = "$(OBJROOT)/SharedPrecompiledHeaders";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
