@@ -17,6 +17,7 @@
 #import "SFShopItem.h"
 #import "SULocationManager.h"
 
+#import <CoreLocation/CoreLocation.h>
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <MJExtension/MJExtension.h>
 #import <SVProgressHUD/SVProgressHUD.h>
@@ -150,7 +151,13 @@ static NSString * const reuseIdentifier = @"商家表单元";
 
 - (void)handleLocationAction:(id)sender {
     SULocationManager *manager = [SULocationManager defaultManager];
-    [manager startLocation];
+    CLLocation *curLocation = [[CLLocation alloc] initWithLatitude:29.110009 longitude:119.691259];
+    [manager locationWithHandler:^(CLLocation *location) {
+        double  distance  = [curLocation distanceFromLocation:location];
+        NSLog(@"距离%lf",distance);
+    }];
+    
+
 }
 
 - (void)onLeftButtonAction:(id)sender {
