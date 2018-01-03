@@ -68,7 +68,8 @@
     vc.modalPresentationStyle = UIModalPresentationCustom;
     vc.transitioningDelegate  = self;
     self.homeInteractiveAnimator = [HomeInteractiveAnimator interactiveAnimatorWithVC:vc];
-    [self presentViewController:vc animated:YES completion:nil];
+//    [self presentViewController:vc animated:YES completion:nil];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - UIViewControllerTransitioningDelegate

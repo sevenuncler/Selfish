@@ -17,8 +17,8 @@
 
 + (instancetype)interactiveAnimatorWithVC:(UIViewController *)vc {
     HomeInteractiveAnimator *animator = [[self alloc] init];
-    UIPanGestureRecognizer *panGR = [[UIPanGestureRecognizer alloc] initWithTarget:animator action:@selector(handlePanGesture:)];
-    [vc.view addGestureRecognizer:panGR];
+//    UIPanGestureRecognizer *panGR = [[UIPanGestureRecognizer alloc] initWithTarget:animator action:@selector(handlePanGesture:)];
+//    [vc.view addGestureRecognizer:panGR];
     animator.targetVC = vc;
     return animator;
 }

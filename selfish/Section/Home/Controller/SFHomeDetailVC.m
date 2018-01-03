@@ -1,49 +1,45 @@
 //
-//  DetailVC.m
+//  SFHomeDetailVC.m
 //  selfish
 //
-//  Created by He on 2017/11/24.
-//  Copyright © 2017年 He. All rights reserved.
+//  Created by He on 2018/1/1.
+//  Copyright © 2018年 He. All rights reserved.
 //
 
-#import "DetailVC.h"
-#import "Macros.h"
+#import "SFHomeDetailVC.h"
 #import <WebKit/WebKit.h>
 #import <MMMarkdown/MMMarkdown.h>
+#import "SUAdvancedScrollView.h"
 
-@interface DetailVC ()
-@property(nonatomic,strong) UIView          *coverView;
-@property(nonatomic,strong) WKWebView       *webView;
-@property(nonatomic,strong) UIScrollView    *scrollView;
+@interface SFHomeDetailVC ()
+@property(nonatomic,strong) UIView    *coverView;
+@property(nonatomic,strong) WKWebView *webView;
+@property(nonatomic,strong) UIScrollView   *scrollView;
+@property(nonatomic,strong) SUAdvancedScrollView *advancedScrollView;
 @end
 
-@implementation DetailVC
+@implementation SFHomeDetailVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.scrollView];
-    [self.scrollView addSubview:self.topImageView];
+    [self.scrollView addSubview:self.coverView];
     [self.scrollView addSubview:self.webView];
     [self loadWebView];
 }
 
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-//    [self dismissViewControllerAnimated:YES completion:nil];
-    
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
-- (void)viewWillLayoutSubviews {
+- (void)viewWillLayoutSubviews{
     [super viewWillLayoutSubviews];
-    self.webView.top = self.topImageView.botton;
-    self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH, self.webView.scrollView.size.height + self.topImageView.size.height);
-}
-
-- (UIImageView *)topImageView {
-    if(!_topImageView) {
-        _topImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_WIDTH/0.8)];
-        _topImageView.image = [UIImage imageNamed:@"image"];
-    }
-    return _topImageView;
+    self.webView.top = self.coverView.botton;
+//    self.webView.size = self.webView.scrollView.contentSize;
+    self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH, self.webView.size.height + self.coverView.size.height);
+//    self.advancedScrollView.contentSize = self.view.bounds.size;
 }
 
 - (void)loadWebView {
@@ -80,8 +76,15 @@
     return _scrollView;
 }
 
-
-- (void)dealloc {
+- (SUAdvancedScrollView *)advancedScrollView {
+    if(!_advancedScrollView) {
+        _advancedScrollView = [[SUAdvancedScrollView alloc] initWithFrame:self.view.bounds];
+        _advancedScrollView.thresholdOffset = 300;
+        _advancedScrollView.targetView = self.view;
+        _advancedScrollView.sourceView = self.webView;
+        _advancedScrollView.backgroundColor = [UIColor yellowColor];
+    }
+    return _advancedScrollView;
 }
 
 @end
