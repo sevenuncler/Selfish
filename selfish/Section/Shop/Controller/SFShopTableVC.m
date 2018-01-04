@@ -21,22 +21,28 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <MJExtension/MJExtension.h>
 #import <SVProgressHUD/SVProgressHUD.h>
+#import <ReactiveCocoa/ReactiveCocoa.h>
 #import "UIView+Layout.h"
 #import "Macros.h"
+#import "SULocationManager.h"
 
 static NSString * const reuseIdentifier = @"商家表单元";
+dispatch_semaphore_t semaphore ;
 
 @interface SFShopTableVC ()<UITableViewDataSource, UITableViewDelegate>
 @property(nonatomic,strong) SFShopCatagoryToolBarView *catagorySegment;
 @property(nonatomic,strong) SFShopCatagoryView        *shopCatagoryView;
 @property(nonatomic,strong) SFShopCatagoryViewModel   *shopCatagoryViewModel;
 @property(nonatomic,strong) SFShopCatagoryViewModel2  *shopCatagoryViewModel2;
+@property(nonatomic,strong) CLLocation                *userLocation;
+@property(nonatomic,strong) SULocation                *detailLocation;
 @end
 
 @implementation SFShopTableVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    semaphore = dispatch_semaphore_create(0);
     //vc.view往下移动，不让其被导航栏遮挡，与automaticalAjustScrollViewInsect差不多（略微差别）
     self.edgesForExtendedLayout  = UIRectEdgeNone;
     self.navigationController.navigationBar.translucent = NO;
@@ -96,7 +102,6 @@ static NSString * const reuseIdentifier = @"商家表单元";
     //TableView
     self.tableView.dataSource = self;
     self.tableView.delegate   = self;
-
 }
 
 - (void)loadShops {
@@ -150,14 +155,8 @@ static NSString * const reuseIdentifier = @"商家表单元";
 }
 
 - (void)handleLocationAction:(id)sender {
-    SULocationManager *manager = [SULocationManager defaultManager];
-    CLLocation *curLocation = [[CLLocation alloc] initWithLatitude:29.110009 longitude:119.691259];
-    [manager locationWithHandler:^(CLLocation *location) {
-        double  distance  = [curLocation distanceFromLocation:location];
-        NSLog(@"距离%lf",distance);
-    }];
+    NSLog(@"城市:%@",self.detailLocation.city);
     
-
 }
 
 - (void)onLeftButtonAction:(id)sender {
@@ -260,6 +259,38 @@ static NSString * const reuseIdentifier = @"商家表单元";
         _items = [NSMutableArray array];
     }
     return _items;
+}
+
+//TODO 这里的位置获取逻辑需要改进
+- (SULocation *)detailLocation {
+    if(_detailLocation) {
+        return _detailLocation;
+    }
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        __weak typeof(SULocationManager*) weakLocationManager = [SULocationManager defaultManager];
+        [[SULocationManager defaultManager] locationWithHandler:^(SULocation *location) {
+                [weakLocationManager reverseLocation:&location complectionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
+                    for(CLPlacemark *placemark in placemarks) {
+                        NSDictionary *dict = placemark.addressDictionary;
+                        NSString *country = dict[@"Country"];
+                        NSString *province = placemark.administrativeArea;
+                        NSString *city    = dict[@"City"];
+                        NSString *street  = dict[@"Street"];
+                        location.country  = country;
+                        location.province = province;
+                        location.city     = city;
+                        location.street   = street;
+                        _detailLocation = location;
+                        NSLog(@">>>>> 城市%@", city);
+                    }
+                    [weakLocationManager stopUpdate];
+                    dispatch_semaphore_signal(semaphore);
+                }];
+        }];
+    });
+
+    return _detailLocation;
 }
 
 

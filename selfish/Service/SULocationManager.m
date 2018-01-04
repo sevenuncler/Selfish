@@ -8,6 +8,10 @@
 
 #import "SULocationManager.h"
 
+@implementation SULocation
+
+@end
+
 @interface SULocationManager()
 @property(nonatomic,copy)   LocationHandler   locationHandler;
 @end
@@ -37,13 +41,18 @@ static BOOL isUpdateLocation = NO;
     [self requestAuth];
     [self mapView];
     [self.mapView setShowsUserLocation:YES];
+    
+}
+
+- (void)stopUpdate {
+    self.locationHandler = nil;
+    self.mapView = nil;
 }
 
 - (void)locationWithHandler:(LocationHandler)handler {
     self.locationHandler = handler;
     [self requestAuth];
     [self mapView];
-    [self.mapView setShowsUserLocation:YES];
 }
 
 - (CLLocation *)location {
@@ -54,6 +63,12 @@ static BOOL isUpdateLocation = NO;
     CLLocationCoordinate2D coord = [userLocation coordinate];
     CLLocation *location = [[CLLocation alloc] initWithLatitude:coord.latitude longitude:coord.longitude];
     return location;
+}
+
+- (void)reverseLocation:(SULocation * __autoreleasing *)location  complectionHandler:(CLGeocodeCompletionHandler)handler {
+    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+    [geocoder reverseGeocodeLocation:(*location).location completionHandler:handler];
+    
 }
 
 -(double)distanceBetweenOrderBy:(double) lat1 :(double) lat2 :(double) lng1 :(double) lng2 {
@@ -100,7 +115,10 @@ static BOOL isUpdateLocation = NO;
     CLLocationCoordinate2D coord = [userLocation coordinate];
     if(self.locationHandler) {
         CLLocation *curLocation = [[CLLocation alloc] initWithLatitude:coord.latitude longitude:coord.longitude];
-        self.locationHandler(curLocation);
+        SULocation *sulocation = [SULocation new];
+        sulocation.location = curLocation;
+//        [self reverseLocation:&sulocation];
+        self.locationHandler(sulocation);
     }
     isUpdateLocation = YES;
 }
@@ -124,11 +142,11 @@ static BOOL isUpdateLocation = NO;
 - (MKMapView *)mapView {
     if(!_mapView) {
         _mapView = [[MKMapView alloc] init];
-        _mapView.delegate = self;
-        _mapView.hidden = YES;
-        _mapView.userTrackingMode = MKUserTrackingModeFollow;
-        [_mapView setShowsUserLocation:YES];
-        [_mapView setMapType:MKMapTypeStandard];
+            _mapView.delegate = self;
+            _mapView.hidden = YES;
+            _mapView.userTrackingMode = MKUserTrackingModeFollow;
+            [_mapView setShowsUserLocation:YES];
+            [_mapView setMapType:MKMapTypeStandard];
     }
     return _mapView;
 }

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4ABAFCF80B53792B92DC492E /* Pods_selfish.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F814782EE40278912260C417 /* Pods_selfish.framework */; };
 		4ACC3E511FE9F40600ABE49D /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ACC3E501FE9F40600ABE49D /* libsqlite3.0.tbd */; };
+		87089B0F1FFD130800FE7629 /* SFAritcleItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 87089B0E1FFD130800FE7629 /* SFAritcleItem.m */; };
 		87702E541FC9B737006F410D /* SFShopTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 87702E531FC9B737006F410D /* SFShopTableVC.m */; };
 		87702E571FC9B780006F410D /* SFShopTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 87702E561FC9B780006F410D /* SFShopTableViewCell.m */; };
 		87702E5A1FCA9DE9006F410D /* SFShopDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 87702E591FCA9DE9006F410D /* SFShopDetailVC.m */; };
@@ -335,6 +336,8 @@
 		4ACC3E501FE9F40600ABE49D /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		71E838DD0DEEB7533B44F0DE /* Pods-selfish.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-selfish.release.xcconfig"; path = "Pods/Target Support Files/Pods-selfish/Pods-selfish.release.xcconfig"; sourceTree = "<group>"; };
 		788519F427174B6659B77C89 /* Pods-selfish.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-selfish.debug.xcconfig"; path = "Pods/Target Support Files/Pods-selfish/Pods-selfish.debug.xcconfig"; sourceTree = "<group>"; };
+		87089B0D1FFD130800FE7629 /* SFAritcleItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFAritcleItem.h; sourceTree = "<group>"; };
+		87089B0E1FFD130800FE7629 /* SFAritcleItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFAritcleItem.m; sourceTree = "<group>"; };
 		87702E521FC9B737006F410D /* SFShopTableVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFShopTableVC.h; sourceTree = "<group>"; };
 		87702E531FC9B737006F410D /* SFShopTableVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFShopTableVC.m; sourceTree = "<group>"; };
 		87702E551FC9B780006F410D /* SFShopTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFShopTableViewCell.h; sourceTree = "<group>"; };
@@ -1459,6 +1462,8 @@
 		87ACCE231FC4F95B0008F7BA /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				87089B0D1FFD130800FE7629 /* SFAritcleItem.h */,
+				87089B0E1FFD130800FE7629 /* SFAritcleItem.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2008,6 +2013,7 @@
 				877C84011FED395D00882C64 /* SFShopEditTextView.m in Sources */,
 				87702E5A1FCA9DE9006F410D /* SFShopDetailVC.m in Sources */,
 				877030671FD2EAA0006F410D /* SFShopCustomeFoodVC.m in Sources */,
+				87089B0F1FFD130800FE7629 /* SFAritcleItem.m in Sources */,
 				877C84231FF4777A00882C64 /* SFCommentListVC.m in Sources */,
 				877C84041FED450F00882C64 /* UITextField+Insect.m in Sources */,
 				87702E6E1FCAB416006F410D /* StatusCell.m in Sources */,
