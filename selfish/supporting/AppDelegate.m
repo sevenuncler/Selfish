@@ -20,6 +20,8 @@
 //#import <MagicalRecord/MagicalRecord.h>
 #import <JLRoutes/JLRoutes.h>
 #import "RoutesConfig.h"
+#import <AMapFoundationKit/AMapFoundationKit.h>
+#import <AMapLocationKit/AMapLocationKit.h>
 
 @interface AppDelegate ()
 
@@ -36,6 +38,7 @@
     [self.window makeKeyAndVisible];
     [RoutesConfig setUpRoutes:@"Selfish"];
     window.tintColor = SELFISH_MAJRO_COLOR;
+    [AMapServices sharedServices].apiKey =@"1406a9037028798d4f810fd69062d175";
     return YES;
 }
     

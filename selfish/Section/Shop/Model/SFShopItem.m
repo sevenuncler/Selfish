@@ -11,6 +11,9 @@
 #import "SUSQLManager.h"
 #import <objc/runtime.h>
 
+@implementation SFShopQueryItem
+@end
+
 @implementation SFShopItem
 
 

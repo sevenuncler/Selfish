@@ -40,7 +40,7 @@ static NSString * const reuseID = @"reuseID";
     if(self.sid == nil) {
         return;
     }
-    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+//    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
     NSURLSession *session = [NSURLSession sharedSession];
     NSString *url = [NSString stringWithFormat:@"%@/shop/comments?sid=%@", SELFISH_HOST, self.sid];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];

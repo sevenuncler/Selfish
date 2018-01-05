@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
 #import <MapKit/MapKit.h>
+#import <AMapFoundationKit/AMapFoundationKit.h>
+#import <AMapLocationKit/AMapLocationKit.h>
 
 @interface SULocation : SUItem
 @property(nonatomic,copy) NSString *country;
@@ -17,6 +19,7 @@
 @property(nonatomic,copy) NSString *area;
 @property(nonatomic,copy) NSString *street;
 @property(nonatomic,strong) CLLocation *location;
+@property(nonatomic,strong) AMapLocationReGeocode *reGeocode;
 @end
 
 typedef void(^LocationHandler)(SULocation *location);
@@ -31,4 +34,6 @@ typedef void(^LocationHandler)(SULocation *location);
 - (void)reverseLocation:(SULocation * __autoreleasing *)location complectionHandler:(CLGeocodeCompletionHandler)handler;
 - (float)getDistance:(float)lat1 lng1:(float)lng1 lat2:(float)lat2 lng2:(float)lng2;
 
+//利用高德地图SDK
+- (void)getLocation:(void(^)(CLLocation *location, AMapLocationReGeocode *regeocode, NSError *error))complectionHandler;
 @end

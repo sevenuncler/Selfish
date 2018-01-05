@@ -14,6 +14,7 @@
 
 @interface SULocationManager()
 @property(nonatomic,copy)   LocationHandler   locationHandler;
+@property(nonatomic,strong) AMapLocationManager *amapLocationManager;
 @end
 
 static BOOL isUpdateLocation = NO;
@@ -53,6 +54,17 @@ static BOOL isUpdateLocation = NO;
     self.locationHandler = handler;
     [self requestAuth];
     [self mapView];
+}
+
+- (void)getLocation:(void(^)(CLLocation *location, AMapLocationReGeocode *regeocode, NSError *error))complectionHandler{
+    [self requestAuth];
+    // 带逆地理信息的一次定位（返回坐标和地址信息）
+    [self.amapLocationManager setDesiredAccuracy:kCLLocationAccuracyBest];
+    //   定位超时时间，最低2s，此处设置为2s
+    self.amapLocationManager.locationTimeout =2;
+    //   逆地理请求超时时间，最低2s，此处设置为2s
+    self.amapLocationManager.reGeocodeTimeout = 2;
+    [self.amapLocationManager requestLocationWithReGeocode:YES completionBlock:complectionHandler];
 }
 
 - (CLLocation *)location {
@@ -149,5 +161,12 @@ static BOOL isUpdateLocation = NO;
             [_mapView setMapType:MKMapTypeStandard];
     }
     return _mapView;
+}
+
+- (AMapLocationManager *)amapLocationManager {
+    if(!_amapLocationManager) {
+        _amapLocationManager = [[AMapLocationManager alloc] init];
+    }
+    return _amapLocationManager;
 }
 @end

@@ -34,8 +34,17 @@ dispatch_semaphore_t semaphore ;
 @property(nonatomic,strong) SFShopCatagoryView        *shopCatagoryView;
 @property(nonatomic,strong) SFShopCatagoryViewModel   *shopCatagoryViewModel;
 @property(nonatomic,strong) SFShopCatagoryViewModel2  *shopCatagoryViewModel2;
+@property(nonatomic,strong) SFShopCatagoryView        *shopAreaView;
+@property(nonatomic,strong) SFShopCatagoryViewModel   *shopAreaViewModel;
+@property(nonatomic,strong) SFShopCatagoryViewModel2  *shopAreaViewModel2;
+@property(nonatomic,strong) UITableView               *shopSortView;
+@property(nonatomic,strong) SFShopCatagoryViewModel2  *shopSortViewModel2;
+@property(nonatomic,strong) SFCatagoryItem            *catagoryItemSelected;
+@property(nonatomic,strong) SFCatagoryItem            *areaItemSelected;
+@property(nonatomic,strong) SFCatagoryItem            *sortItemSelected;
 @property(nonatomic,strong) CLLocation                *userLocation;
 @property(nonatomic,strong) SULocation                *detailLocation;
+@property(nonatomic,copy)   NSString                  *queryCondiction;
 @end
 
 @implementation SFShopTableVC
@@ -49,6 +58,8 @@ dispatch_semaphore_t semaphore ;
     [self.view addSubview:self.catagorySegment];
     [self.view addSubview:self.tableView];
     [self.view addSubview:self.shopCatagoryView];
+    [self.view addSubview:self.shopAreaView];
+    [self.view addSubview:self.shopSortView];
     
     [self.tableView registerClass:[SFShopTableViewCell class] forCellReuseIdentifier:reuseIdentifier];
 
@@ -89,24 +100,56 @@ dispatch_semaphore_t semaphore ;
     };
     ComplectionHandler complectionHander = ^void(SFCatagoryItem *item, NSInteger idx) {
         NSLog(@"%@ %ld", item, idx);
-        [weakSelf.shopCatagoryView refresh];
         weakSelf.shopCatagoryView.hidden = YES;
+        self.catagoryItemSelected = item;
     };
     self.shopCatagoryViewModel.complectionHandler = complectionHander;
     self.shopCatagoryViewModel2.complectionHandler = complectionHander;
     
+    //区域位置选择
+    self.shopAreaView.menuTableView.dataSource = self.shopAreaViewModel;
+    self.shopAreaView.menuTableView.delegate = self.shopAreaViewModel;
+    self.shopAreaView.contentTableView.dataSource = self.shopAreaViewModel2;
+    self.shopAreaView.contentTableView.delegate = self.shopAreaViewModel2;
+    self.shopAreaViewModel.handler = ^void(NSIndexPath *indexPath, SFCatagoryItem *item) {
+        weakSelf.shopAreaViewModel2.item = item;
+        weakSelf.shopSortViewModel2.item = item;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [weakSelf.shopAreaView.contentTableView reloadData];
+            [weakSelf.shopSortView reloadData];
+        });
+    };
+    ComplectionHandler complectionHander2 = ^void(SFCatagoryItem *item, NSInteger idx) {
+        NSLog(@"%@ %ld", item, idx);
+        weakSelf.areaItemSelected = item;
+        weakSelf.shopAreaView.hidden = YES;
+    };
+    self.shopAreaViewModel.complectionHandler = complectionHander2;
+    self.shopAreaViewModel2.complectionHandler = complectionHander2;
+    
+    ComplectionHandler complectionHander3 = ^void(SFCatagoryItem *item, NSInteger idx) {
+        NSLog(@"%@ %ld", item, idx);
+        weakSelf.sortItemSelected = item;
+        weakSelf.shopSortView.hidden = YES;
+    };
+    self.shopSortView.delegate   = self.shopSortViewModel2;
+    self.shopSortView.dataSource = self.shopSortViewModel2;
+    self.shopSortViewModel2.complectionHandler = complectionHander3;
+    
+    //按钮绑定
     [self.catagorySegment.leftButton addTarget:self action:@selector(onLeftButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-    [self.catagorySegment.centerButton addTarget:self action:@selector(onLeftButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-    [self.catagorySegment.rightButton addTarget:self action:@selector(onLeftButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    [self.catagorySegment.centerButton addTarget:self action:@selector(onCenterButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    [self.catagorySegment.rightButton addTarget:self action:@selector(onRightButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     
     //TableView
     self.tableView.dataSource = self;
     self.tableView.delegate   = self;
 }
 
+
 - (void)loadShops {
     NSURLSession *session = [NSURLSession sharedSession];
-    NSString *url = [NSString stringWithFormat:@"%@/shop", SELFISH_HOST];
+    NSString *url = [NSString stringWithFormat:@"%@/shop%@", SELFISH_HOST, self.queryCondiction?self.queryCondiction:@""];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
     [request addValue:@"application/json;charset=utf-8" forHTTPHeaderField:@"content-type"];
     request.HTTPMethod = @"GET";
@@ -155,12 +198,44 @@ dispatch_semaphore_t semaphore ;
 }
 
 - (void)handleLocationAction:(id)sender {
-    NSLog(@"城市:%@",self.detailLocation.city);
-    
+    __weak typeof(self) weakSelf = self;
+    [[SULocationManager defaultManager] getLocation:^(CLLocation *location, AMapLocationReGeocode *regeocode, NSError *error) {
+        if (error)
+        {
+            NSLog(@"locError:{%ld - %@};", (long)error.code, error.localizedDescription);
+            
+            if (error.code == AMapLocationErrorLocateFailed)
+            {
+                return;
+            }
+        }
+        NSLog(@"location:%@", location);
+        
+        if (regeocode)
+        {
+            NSLog(@"reGeocode:%@", regeocode);
+        }
+        weakSelf.detailLocation.location  = location;
+        weakSelf.detailLocation.reGeocode = regeocode;
+    }];
 }
 
 - (void)onLeftButtonAction:(id)sender {
+    self.shopSortView.hidden = YES;
+    self.shopAreaView.hidden = YES;
     self.shopCatagoryView.hidden = !self.shopCatagoryView.hidden;
+}
+
+- (void)onCenterButtonAction:(id)sender {
+    self.shopSortView.hidden = YES;
+    self.shopAreaView.hidden = !self.shopAreaView.isHidden;
+    self.shopCatagoryView.hidden = YES;
+}
+
+- (void)onRightButtonAction:(id)sender {
+    self.shopSortView.hidden = !self.shopSortView.isHidden;
+    self.shopAreaView.hidden = YES;
+    self.shopCatagoryView.hidden = YES;
 }
 
 #pragma mark - Private
@@ -254,6 +329,27 @@ dispatch_semaphore_t semaphore ;
     return _shopCatagoryViewModel2;
 }
 
+- (SFShopCatagoryViewModel *)shopAreaViewModel {
+    if(!_shopAreaViewModel) {
+        _shopAreaViewModel = [SFShopCatagoryViewModel new];
+    }
+    return _shopAreaViewModel;
+}
+
+- (SFShopCatagoryViewModel2 *)shopAreaViewModel2 {
+    if(!_shopAreaViewModel2) {
+        _shopAreaViewModel2 = [SFShopCatagoryViewModel2 new];
+    }
+    return _shopAreaViewModel2;
+}
+
+- (SFShopCatagoryViewModel2 *)shopSortViewModel2 {
+    if(!_shopSortViewModel2) {
+        _shopSortViewModel2 = [SFShopCatagoryViewModel2 new];
+    }
+    return _shopSortViewModel2;
+}
+
 - (NSMutableArray *)items {
     if(!_items) {
         _items = [NSMutableArray array];
@@ -263,35 +359,65 @@ dispatch_semaphore_t semaphore ;
 
 //TODO 这里的位置获取逻辑需要改进
 - (SULocation *)detailLocation {
-    if(_detailLocation) {
-        return _detailLocation;
-    }
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        __weak typeof(SULocationManager*) weakLocationManager = [SULocationManager defaultManager];
-        [[SULocationManager defaultManager] locationWithHandler:^(SULocation *location) {
-                [weakLocationManager reverseLocation:&location complectionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
-                    for(CLPlacemark *placemark in placemarks) {
-                        NSDictionary *dict = placemark.addressDictionary;
-                        NSString *country = dict[@"Country"];
-                        NSString *province = placemark.administrativeArea;
-                        NSString *city    = dict[@"City"];
-                        NSString *street  = dict[@"Street"];
-                        location.country  = country;
-                        location.province = province;
-                        location.city     = city;
-                        location.street   = street;
-                        _detailLocation = location;
-                        NSLog(@">>>>> 城市%@", city);
-                    }
-                    [weakLocationManager stopUpdate];
-                    dispatch_semaphore_signal(semaphore);
-                }];
+    if(_detailLocation == nil) {
+        _detailLocation = [SULocation new];
+        [[SULocationManager defaultManager] getLocation:^(CLLocation *location, AMapLocationReGeocode *regeocode, NSError *error) {
+            if (error)
+            {
+                NSLog(@"locError:{%ld - %@};", (long)error.code, error.localizedDescription);
+                
+                if (error.code == AMapLocationErrorLocateFailed)
+                {
+                    return;
+                }
+            }
+            NSLog(@"location:%@", location);
+            
+            if (regeocode)
+            {
+                NSLog(@"reGeocode:%@", regeocode);
+            }
+            _detailLocation.location  = location;
+            _detailLocation.reGeocode = regeocode;
         }];
-    });
-
+    }
     return _detailLocation;
 }
 
+
+- (SFShopCatagoryView *)shopAreaView {
+    if(!_shopAreaView) {
+        _shopAreaView = [[SFShopCatagoryView alloc] initWithFrame:CGRectMake(0, self.catagorySegment.botton, SCREEN_WIDTH, SCREEN_WIDTH/0.85)];
+        _shopAreaView.hidden = YES;
+    }
+    return _shopAreaView;
+}
+
+- (UITableView *)shopSortView {
+    if(!_shopSortView) {
+        _shopSortView = [[UITableView alloc] initWithFrame:CGRectMake(0, self.catagorySegment.botton, SCREEN_WIDTH, SCREEN_WIDTH/0.85) style:UITableViewStyleGrouped];
+        _shopSortView.hidden = YES;
+    }
+    return _shopSortView;
+}
+
+- (NSString *)queryCondiction {
+    NSMutableString *mutString = [NSMutableString string];
+    [mutString appendString:@"?"];
+    if(self.catagoryItemSelected) {
+        NSLog(@"%@",self.catagoryItemSelected.name);
+        [mutString appendString:[NSString stringWithFormat:@"type=%@&", self.catagoryItemSelected.name]];
+    }
+    if(self.areaItemSelected) {
+        NSLog(@"%@",self.areaItemSelected.name);
+        [mutString appendString:[NSString stringWithFormat:@"area=%@&", self.areaItemSelected.name]];
+    }
+    if(self.sortItemSelected) {
+        NSLog(@"%@",self.sortItemSelected.name);
+        [mutString appendString:[NSString stringWithFormat:@"sort=%@&", self.sortItemSelected.name]];
+    }
+    _queryCondiction = mutString;
+    return _queryCondiction;
+}
 
 @end

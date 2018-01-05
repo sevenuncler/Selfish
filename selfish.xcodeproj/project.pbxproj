@@ -10,6 +10,16 @@
 		4ABAFCF80B53792B92DC492E /* Pods_selfish.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F814782EE40278912260C417 /* Pods_selfish.framework */; };
 		4ACC3E511FE9F40600ABE49D /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ACC3E501FE9F40600ABE49D /* libsqlite3.0.tbd */; };
 		87089B0F1FFD130800FE7629 /* SFAritcleItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 87089B0E1FFD130800FE7629 /* SFAritcleItem.m */; };
+		87089B121FFE5BC400FE7629 /* AMapFoundationKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87089B101FFE5BC400FE7629 /* AMapFoundationKit.framework */; };
+		87089B131FFE5BC400FE7629 /* AMapLocationKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87089B111FFE5BC400FE7629 /* AMapLocationKit.framework */; };
+		87089B151FFE603B00FE7629 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87089B141FFE601B00FE7629 /* CoreTelephony.framework */; };
+		87089B171FFE604E00FE7629 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87089B161FFE604600FE7629 /* CoreLocation.framework */; };
+		87089B191FFE606B00FE7629 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87089B181FFE606300FE7629 /* SystemConfiguration.framework */; };
+		87089B1B1FFE607800FE7629 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 87089B1A1FFE607700FE7629 /* libz.tbd */; };
+		87089B1D1FFE608400FE7629 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 87089B1C1FFE608300FE7629 /* libc++.tbd */; };
+		87089B1F1FFE60A200FE7629 /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 87089B1E1FFE60A200FE7629 /* libstdc++.6.0.9.tbd */; };
+		87089B221FFE695A00FE7629 /* SFShopQreaViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 87089B211FFE695A00FE7629 /* SFShopQreaViewModel.m */; };
+		87089B251FFE697000FE7629 /* SFShopSortViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 87089B241FFE697000FE7629 /* SFShopSortViewModel.m */; };
 		87702E541FC9B737006F410D /* SFShopTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 87702E531FC9B737006F410D /* SFShopTableVC.m */; };
 		87702E571FC9B780006F410D /* SFShopTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 87702E561FC9B780006F410D /* SFShopTableViewCell.m */; };
 		87702E5A1FCA9DE9006F410D /* SFShopDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 87702E591FCA9DE9006F410D /* SFShopDetailVC.m */; };
@@ -297,6 +307,7 @@
 		877C84261FF6854000882C64 /* SULocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 877C84251FF6854000882C64 /* SULocationManager.m */; };
 		877C84291FFA71AD00882C64 /* SFHomeDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 877C84281FFA71AD00882C64 /* SFHomeDetailVC.m */; };
 		877C842C1FFBDF8400882C64 /* SUAdvancedScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 877C842B1FFBDF8400882C64 /* SUAdvancedScrollView.m */; };
+		8789C5E91FFEF67B0089D4DA /* SFShopSelectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8789C5E81FFEF67B0089D4DA /* SFShopSelectionCell.m */; };
 		87ACCDEC1FC4F85C0008F7BA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 87ACCDEB1FC4F85C0008F7BA /* AppDelegate.m */; };
 		87ACCDF41FC4F85C0008F7BA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 87ACCDF31FC4F85C0008F7BA /* Assets.xcassets */; };
 		87ACCDFA1FC4F85C0008F7BA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 87ACCDF91FC4F85C0008F7BA /* main.m */; };
@@ -338,6 +349,18 @@
 		788519F427174B6659B77C89 /* Pods-selfish.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-selfish.debug.xcconfig"; path = "Pods/Target Support Files/Pods-selfish/Pods-selfish.debug.xcconfig"; sourceTree = "<group>"; };
 		87089B0D1FFD130800FE7629 /* SFAritcleItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFAritcleItem.h; sourceTree = "<group>"; };
 		87089B0E1FFD130800FE7629 /* SFAritcleItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFAritcleItem.m; sourceTree = "<group>"; };
+		87089B101FFE5BC400FE7629 /* AMapFoundationKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AMapFoundationKit.framework; sourceTree = "<group>"; };
+		87089B111FFE5BC400FE7629 /* AMapLocationKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AMapLocationKit.framework; sourceTree = "<group>"; };
+		87089B141FFE601B00FE7629 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		87089B161FFE604600FE7629 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		87089B181FFE606300FE7629 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		87089B1A1FFE607700FE7629 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		87089B1C1FFE608300FE7629 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		87089B1E1FFE60A200FE7629 /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "usr/lib/libstdc++.6.0.9.tbd"; sourceTree = SDKROOT; };
+		87089B201FFE695A00FE7629 /* SFShopQreaViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFShopQreaViewModel.h; sourceTree = "<group>"; };
+		87089B211FFE695A00FE7629 /* SFShopQreaViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFShopQreaViewModel.m; sourceTree = "<group>"; };
+		87089B231FFE697000FE7629 /* SFShopSortViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFShopSortViewModel.h; sourceTree = "<group>"; };
+		87089B241FFE697000FE7629 /* SFShopSortViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFShopSortViewModel.m; sourceTree = "<group>"; };
 		87702E521FC9B737006F410D /* SFShopTableVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFShopTableVC.h; sourceTree = "<group>"; };
 		87702E531FC9B737006F410D /* SFShopTableVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFShopTableVC.m; sourceTree = "<group>"; };
 		87702E551FC9B780006F410D /* SFShopTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFShopTableViewCell.h; sourceTree = "<group>"; };
@@ -683,6 +706,8 @@
 		877C84281FFA71AD00882C64 /* SFHomeDetailVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFHomeDetailVC.m; sourceTree = "<group>"; };
 		877C842A1FFBDF8400882C64 /* SUAdvancedScrollView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SUAdvancedScrollView.h; sourceTree = "<group>"; };
 		877C842B1FFBDF8400882C64 /* SUAdvancedScrollView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SUAdvancedScrollView.m; sourceTree = "<group>"; };
+		8789C5E71FFEF67B0089D4DA /* SFShopSelectionCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFShopSelectionCell.h; sourceTree = "<group>"; };
+		8789C5E81FFEF67B0089D4DA /* SFShopSelectionCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFShopSelectionCell.m; sourceTree = "<group>"; };
 		87ACCDE71FC4F85C0008F7BA /* selfish.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = selfish.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		87ACCDEA1FC4F85C0008F7BA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		87ACCDEB1FC4F85C0008F7BA /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -725,7 +750,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				87089B191FFE606B00FE7629 /* SystemConfiguration.framework in Frameworks */,
+				87089B1B1FFE607800FE7629 /* libz.tbd in Frameworks */,
+				87089B171FFE604E00FE7629 /* CoreLocation.framework in Frameworks */,
+				87089B151FFE603B00FE7629 /* CoreTelephony.framework in Frameworks */,
 				4ACC3E511FE9F40600ABE49D /* libsqlite3.0.tbd in Frameworks */,
+				87089B1F1FFE60A200FE7629 /* libstdc++.6.0.9.tbd in Frameworks */,
+				87089B131FFE5BC400FE7629 /* AMapLocationKit.framework in Frameworks */,
+				87089B1D1FFE608400FE7629 /* libc++.tbd in Frameworks */,
+				87089B121FFE5BC400FE7629 /* AMapFoundationKit.framework in Frameworks */,
 				4ABAFCF80B53792B92DC492E /* Pods_selfish.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -832,6 +865,10 @@
 				877030411FCB8D63006F410D /* SFShopCatagoryViewModel.m */,
 				877030491FCC4276006F410D /* SFShopCatagoryViewModel2.h */,
 				8770304A1FCC4276006F410D /* SFShopCatagoryViewModel2.m */,
+				87089B201FFE695A00FE7629 /* SFShopQreaViewModel.h */,
+				87089B211FFE695A00FE7629 /* SFShopQreaViewModel.m */,
+				87089B231FFE697000FE7629 /* SFShopSortViewModel.h */,
+				87089B241FFE697000FE7629 /* SFShopSortViewModel.m */,
 				8770305F1FD2E435006F410D /* SFShopCustomeRowViewModel.h */,
 				877030601FD2E435006F410D /* SFShopCustomeRowViewModel.m */,
 				8770306C1FD2EFC2006F410D /* SFShopFoodCustomeViewModel.h */,
@@ -911,6 +948,8 @@
 				877030701FD2F35D006F410D /* SFShopCustomeFoodRowView.m */,
 				877C83FF1FED395D00882C64 /* SFShopEditTextView.h */,
 				877C84001FED395D00882C64 /* SFShopEditTextView.m */,
+				8789C5E71FFEF67B0089D4DA /* SFShopSelectionCell.h */,
+				8789C5E81FFEF67B0089D4DA /* SFShopSelectionCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1532,6 +1571,14 @@
 		B5F79913E1CABDDFDEA59921 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				87089B1E1FFE60A200FE7629 /* libstdc++.6.0.9.tbd */,
+				87089B1C1FFE608300FE7629 /* libc++.tbd */,
+				87089B1A1FFE607700FE7629 /* libz.tbd */,
+				87089B181FFE606300FE7629 /* SystemConfiguration.framework */,
+				87089B161FFE604600FE7629 /* CoreLocation.framework */,
+				87089B141FFE601B00FE7629 /* CoreTelephony.framework */,
+				87089B101FFE5BC400FE7629 /* AMapFoundationKit.framework */,
+				87089B111FFE5BC400FE7629 /* AMapLocationKit.framework */,
 				4ACC3E501FE9F40600ABE49D /* libsqlite3.0.tbd */,
 				F814782EE40278912260C417 /* Pods_selfish.framework */,
 			);
@@ -2021,12 +2068,14 @@
 				87702E571FC9B780006F410D /* SFShopTableViewCell.m in Sources */,
 				8770307A1FD4439D006F410D /* SFShopFoodRandomVC.m in Sources */,
 				87ACCE3C1FC5BA7F0008F7BA /* HomeViewModel.m in Sources */,
+				87089B221FFE695A00FE7629 /* SFShopQreaViewModel.m in Sources */,
 				8770306E1FD2EFC2006F410D /* SFShopFoodCustomeViewModel.m in Sources */,
 				877030711FD2F35D006F410D /* SFShopCustomeFoodRowView.m in Sources */,
 				877030541FD0D6DD006F410D /* SFShopCustomeVC.m in Sources */,
 				87ACCE451FC860CB0008F7BA /* DetailVC.m in Sources */,
 				877C842C1FFBDF8400882C64 /* SUAdvancedScrollView.m in Sources */,
 				8770304B1FCC4276006F410D /* SFShopCatagoryViewModel2.m in Sources */,
+				8789C5E91FFEF67B0089D4DA /* SFShopSelectionCell.m in Sources */,
 				877030641FD2E511006F410D /* SFShopCustomeRowPic.m in Sources */,
 				877030481FCB9349006F410D /* SFShopCatagoryToolBarView.m in Sources */,
 				87ACCE271FC4FA5A0008F7BA /* HomeTableViewCell.m in Sources */,
@@ -2041,6 +2090,7 @@
 				877C84291FFA71AD00882C64 /* SFHomeDetailVC.m in Sources */,
 				87702E751FCAB634006F410D /* SUItem.m in Sources */,
 				87702E8A1FCAEF6E006F410D /* SUGeneralItem.m in Sources */,
+				87089B251FFE697000FE7629 /* SFShopSortViewModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2188,6 +2238,10 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 569GNZ5392;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PREFIX_HEADER = "$(SCRROOT)selfish/supporting/SFGlobalHeader.pch";
 				INFOPLIST_FILE = selfish/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -2209,6 +2263,10 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 569GNZ5392;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PREFIX_HEADER = "$(SCRROOT)selfish/supporting/SFGlobalHeader.pch";
 				INFOPLIST_FILE = selfish/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;

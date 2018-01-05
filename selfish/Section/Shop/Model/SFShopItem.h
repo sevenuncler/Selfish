@@ -17,6 +17,16 @@ typedef NS_ENUM(NSInteger, SFShopType) {
     SFShopTypeEnternment = 2
 };
 
+@interface SFShopQueryItem : NSObject
+@property(nonatomic,assign) SFShopType *type;     //种类
+@property(nonatomic,strong) CLLocation *location; //区域
+@property(nonatomic,assign) NSInteger  distance;
+@property(nonatomic,copy)   NSString   *sortName; //排序类型，（综合类型、好评优先、离我最近、人均最低）
+@property(nonatomic,copy)   NSString   *keyWords;
+@property(nonatomic,assign) NSInteger  page;
+@property(nonatomic,assign) NSInteger  offset;
+@end
+
 @interface SFShopItem : SUItem
 @property(nonatomic,copy)   NSString        *sid;
 @property(nonatomic,copy)   NSArray         *pics;
@@ -37,6 +47,6 @@ typedef NS_ENUM(NSInteger, SFShopType) {
 + (void)queryByAccountID:(NSString *)sid complection:(Handler)handler;
 - (void)createTable;
 - (NSString *)stringOfTag;
-- (NSString *)stringOfFoodWithSpace;
+//- (NSString *)stringOfFoodWithSpace;
 
 @end

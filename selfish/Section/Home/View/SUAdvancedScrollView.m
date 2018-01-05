@@ -25,7 +25,6 @@
 //}
 
 - (BOOL)isOver {
-    return YES;
     if(self.targetView && self.sourceView) {
         CGRect rect = [self.sourceView convertRect:self.targetView.bounds toView:self.targetView];
         NSLog(@"%lf", rect.origin.y);
