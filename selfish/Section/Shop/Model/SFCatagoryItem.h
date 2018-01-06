@@ -11,12 +11,15 @@
 
 @class SFSubCatagory;
 
+@class SFSubCatagory;
+
 @interface SFCatagoryItem : SUItem
 @property(nonatomic,strong) NSString *name;
+
 @property(nonatomic,copy)   NSArray<SFSubCatagory *>  *subCatagories;
 @end
 
-@interface SFSubCatagory : SUItem
-@property(nonatomic,strong) NSString   *name;
+@interface SFSubCatagory : SFCatagoryItem
+@property(nonatomic,strong) NSString   *subName;
 @property(nonatomic,assign) NSInteger  count;
 @end

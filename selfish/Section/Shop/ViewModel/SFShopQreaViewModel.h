@@ -7,7 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "SFLocationItem.h"
+#import "SFAddressItem.h"
 
-@interface SFShopQreaViewModel : NSObject
-
+@interface SFShopQreaViewModel : NSObject<UITableViewDataSource, UITableViewDelegate>
+@property(nonatomic,strong) SFCityItem *item;
+@property(nonatomic,copy)   void(^handler)(NSIndexPath *index, SFDistrictItem *item);
+@property(nonatomic,copy)   void(^complectionHandler)(SFDistrictItem *item, NSInteger subCatagoryIdx);
 @end

@@ -13,41 +13,51 @@
 #import "SFShopCatagoryView.h"
 #import "SFShopCatagoryViewModel.h"
 #import "SFShopCatagoryViewModel2.h"
+#import "SFShopQreaViewModel.h"
+#import "SFShopAreaViewModel2.h"
 #import "SFShopFoodRandomVC.h"
 #import "SFShopItem.h"
 #import "SULocationManager.h"
+#import "SFLocationItem.h"
+#import "SULocationManager.h"
+#import "SUAddressItem.h"
+#import "UIView+Layout.h"
+#import "Macros.h"
 
 #import <CoreLocation/CoreLocation.h>
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <MJExtension/MJExtension.h>
 #import <SVProgressHUD/SVProgressHUD.h>
 #import <ReactiveCocoa/ReactiveCocoa.h>
-#import "UIView+Layout.h"
-#import "Macros.h"
-#import "SULocationManager.h"
+
 
 static NSString * const reuseIdentifier = @"商家表单元";
 dispatch_semaphore_t semaphore ;
-
+static BOOL isRefresh = YES;
 @interface SFShopTableVC ()<UITableViewDataSource, UITableViewDelegate>
 @property(nonatomic,strong) SFShopCatagoryToolBarView *catagorySegment;
 @property(nonatomic,strong) SFShopCatagoryView        *shopCatagoryView;
 @property(nonatomic,strong) SFShopCatagoryViewModel   *shopCatagoryViewModel;
 @property(nonatomic,strong) SFShopCatagoryViewModel2  *shopCatagoryViewModel2;
 @property(nonatomic,strong) SFShopCatagoryView        *shopAreaView;
-@property(nonatomic,strong) SFShopCatagoryViewModel   *shopAreaViewModel;
-@property(nonatomic,strong) SFShopCatagoryViewModel2  *shopAreaViewModel2;
+@property(nonatomic,strong) SFShopQreaViewModel       *shopAreaViewModel;
+@property(nonatomic,strong) SFShopAreaViewModel2      *shopAreaViewModel2;
 @property(nonatomic,strong) UITableView               *shopSortView;
 @property(nonatomic,strong) SFShopCatagoryViewModel2  *shopSortViewModel2;
-@property(nonatomic,strong) SFCatagoryItem            *catagoryItemSelected;
-@property(nonatomic,strong) SFCatagoryItem            *areaItemSelected;
-@property(nonatomic,strong) SFCatagoryItem            *sortItemSelected;
+@property(nonatomic,strong) SFSubCatagory             *catagoryItemSelected;
+@property(nonatomic,strong) SUNeigborhoodItem         *areaItemSelected;
+@property(nonatomic,strong) SFSubCatagory             *sortItemSelected;
 @property(nonatomic,strong) CLLocation                *userLocation;
 @property(nonatomic,strong) SULocation                *detailLocation;
 @property(nonatomic,copy)   NSString                  *queryCondiction;
+@property(nonatomic,strong) SFLocationItem            *locationItem;
+
 @end
 
 @implementation SFShopTableVC
+
+
+#pragma mark - Life Cycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -71,8 +81,9 @@ dispatch_semaphore_t semaphore ;
     [super viewWillAppear:animated];
     [self setUpNavigator];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-        [self.items removeAllObjects];
-        [self loadShops];
+        if(dispatch_semaphore_wait(semaphore, dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC * 3)) != 0) {
+            [self loadShops];
+        }
     });
 }
 
@@ -87,6 +98,7 @@ dispatch_semaphore_t semaphore ;
 }
 
 - (void)setUpBind {
+    // 类别
     self.shopCatagoryView.menuTableView.dataSource = self.shopCatagoryViewModel;
     self.shopCatagoryView.menuTableView.delegate = self.shopCatagoryViewModel;
     self.shopCatagoryView.contentTableView.dataSource = self.shopCatagoryViewModel2;
@@ -98,39 +110,70 @@ dispatch_semaphore_t semaphore ;
             [weakSelf.shopCatagoryView.contentTableView reloadData];
         });
     };
+    
     ComplectionHandler complectionHander = ^void(SFCatagoryItem *item, NSInteger idx) {
         NSLog(@"%@ %ld", item, idx);
         weakSelf.shopCatagoryView.hidden = YES;
-        self.catagoryItemSelected = item;
+        if(item && idx >= 0 && item.subCatagories.count>0 ) {
+            SFSubCatagory *subCatagory = [item.subCatagories objectAtIndex:idx];
+            weakSelf.catagoryItemSelected = subCatagory;
+        }
+        if(idx == -1) {
+            weakSelf.catagoryItemSelected.subName = nil;
+        }
+        weakSelf.catagoryItemSelected.name = item.name;
+        [weakSelf loadShops];
     };
     self.shopCatagoryViewModel.complectionHandler = complectionHander;
     self.shopCatagoryViewModel2.complectionHandler = complectionHander;
     
-    //区域位置选择
+    // 区域位置选择
     self.shopAreaView.menuTableView.dataSource = self.shopAreaViewModel;
     self.shopAreaView.menuTableView.delegate = self.shopAreaViewModel;
     self.shopAreaView.contentTableView.dataSource = self.shopAreaViewModel2;
     self.shopAreaView.contentTableView.delegate = self.shopAreaViewModel2;
-    self.shopAreaViewModel.handler = ^void(NSIndexPath *indexPath, SFCatagoryItem *item) {
+    self.shopAreaViewModel.handler = ^void(NSIndexPath *indexPath, SFDistrictItem *item) {
         weakSelf.shopAreaViewModel2.item = item;
-        weakSelf.shopSortViewModel2.item = item;
+        
+        weakSelf.areaItemSelected.country = @"中国";
+        weakSelf.areaItemSelected.province = @"浙江省";
+        weakSelf.areaItemSelected.city     = @"杭州";
         dispatch_async(dispatch_get_main_queue(), ^{
             [weakSelf.shopAreaView.contentTableView reloadData];
-            [weakSelf.shopSortView reloadData];
         });
     };
-    ComplectionHandler complectionHander2 = ^void(SFCatagoryItem *item, NSInteger idx) {
+    
+    void(^complectionHander2)(SFDistrictItem *item, NSInteger idx)  = ^void(SFDistrictItem *item, NSInteger idx) {
         NSLog(@"%@ %ld", item, idx);
-        weakSelf.areaItemSelected = item;
+        if(idx == -1) {
+            weakSelf.areaItemSelected.district = nil;
+        }else {
+            weakSelf.areaItemSelected.district = item.name;
+        }
+        weakSelf.areaItemSelected.country = @"中国";
+        weakSelf.areaItemSelected.province = @"浙江省";
+        weakSelf.areaItemSelected.city     = @"杭州";
+        
         weakSelf.shopAreaView.hidden = YES;
+        [weakSelf loadShops];
+    };
+    void(^complectionHander4)(SFDistrictItem *item, NSInteger idx)  = ^void(SFDistrictItem *item, NSInteger idx) {
+        if(item && idx >= 0 && item.subNeigborhoods) {
+            weakSelf.areaItemSelected.neigborhood = item.subNeigborhoods[idx].name;
+        }
+        weakSelf.shopAreaView.hidden = YES;
+        [weakSelf loadShops];
     };
     self.shopAreaViewModel.complectionHandler = complectionHander2;
-    self.shopAreaViewModel2.complectionHandler = complectionHander2;
+    self.shopAreaViewModel2.complectionHandler = complectionHander4;
     
+    // 排序
+
     ComplectionHandler complectionHander3 = ^void(SFCatagoryItem *item, NSInteger idx) {
         NSLog(@"%@ %ld", item, idx);
-        weakSelf.sortItemSelected = item;
+        weakSelf.sortItemSelected = item.subCatagories[idx];
         weakSelf.shopSortView.hidden = YES;
+        [weakSelf loadShops];
     };
     self.shopSortView.delegate   = self.shopSortViewModel2;
     self.shopSortView.dataSource = self.shopSortViewModel2;
@@ -148,8 +191,10 @@ dispatch_semaphore_t semaphore ;
 
 
 - (void)loadShops {
+    
     NSURLSession *session = [NSURLSession sharedSession];
-    NSString *url = [NSString stringWithFormat:@"%@/shop%@", SELFISH_HOST, self.queryCondiction?self.queryCondiction:@""];
+    NSString *queryParams = self.queryCondiction;
+    NSString *url = [NSString stringWithFormat:@"%@/shop%@", SELFISH_HOST, queryParams?queryParams:@""];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
     [request addValue:@"application/json;charset=utf-8" forHTTPHeaderField:@"content-type"];
     request.HTTPMethod = @"GET";
@@ -171,7 +216,9 @@ dispatch_semaphore_t semaphore ;
         }
         
         if([result[@"success"] isEqualToString:@"true"]) {
-            NSLog(@"菜单获取成功%@", result);
+            if(isRefresh) {
+                [self.items removeAllObjects];
+            }
             NSArray *content = result[@"content"];
             [content enumerateObjectsUsingBlock:^(NSDictionary *obj, NSUInteger idx, BOOL * _Nonnull stop) {
                 SFShopItem *item = [SFShopItem mj_objectWithKeyValues:obj];
@@ -217,6 +264,9 @@ dispatch_semaphore_t semaphore ;
         }
         weakSelf.detailLocation.location  = location;
         weakSelf.detailLocation.reGeocode = regeocode;
+        weakSelf.locationItem.reGecode = regeocode;
+        
+        [weakSelf loadShops];
     }];
 }
 
@@ -329,16 +379,16 @@ dispatch_semaphore_t semaphore ;
     return _shopCatagoryViewModel2;
 }
 
-- (SFShopCatagoryViewModel *)shopAreaViewModel {
+- (SFShopQreaViewModel *)shopAreaViewModel {
     if(!_shopAreaViewModel) {
-        _shopAreaViewModel = [SFShopCatagoryViewModel new];
+        _shopAreaViewModel = [SFShopQreaViewModel new];
     }
     return _shopAreaViewModel;
 }
 
-- (SFShopCatagoryViewModel2 *)shopAreaViewModel2 {
+- (SFShopAreaViewModel2 *)shopAreaViewModel2 {
     if(!_shopAreaViewModel2) {
-        _shopAreaViewModel2 = [SFShopCatagoryViewModel2 new];
+        _shopAreaViewModel2 = [SFShopAreaViewModel2 new];
     }
     return _shopAreaViewModel2;
 }
@@ -346,6 +396,28 @@ dispatch_semaphore_t semaphore ;
 - (SFShopCatagoryViewModel2 *)shopSortViewModel2 {
     if(!_shopSortViewModel2) {
         _shopSortViewModel2 = [SFShopCatagoryViewModel2 new];
+        NSMutableArray *array = [NSMutableArray array];
+        {
+            SFSubCatagory *item = [SFSubCatagory new];
+            item.subName = @"综合排序";
+            [array addObject:item];
+        }
+        {
+            SFSubCatagory *item = [SFSubCatagory new];
+            item.subName = @"距离最近";
+            [array addObject:item];
+        }{
+            SFSubCatagory *item = [SFSubCatagory new];
+            item.subName = @"好评优先";
+            [array addObject:item];
+        }{
+            SFSubCatagory *item = [SFSubCatagory new];
+            item.subName = @"价格最低";
+            [array addObject:item];
+        }
+        SFCatagoryItem *item = [SFCatagoryItem new];
+        item.subCatagories = array.copy;
+        _shopSortViewModel2.item = item;
     }
     return _shopSortViewModel2;
 }
@@ -361,6 +433,7 @@ dispatch_semaphore_t semaphore ;
 - (SULocation *)detailLocation {
     if(_detailLocation == nil) {
         _detailLocation = [SULocation new];
+        __weak typeof(self) weakSelf = self;
         [[SULocationManager defaultManager] getLocation:^(CLLocation *location, AMapLocationReGeocode *regeocode, NSError *error) {
             if (error)
             {
@@ -379,6 +452,11 @@ dispatch_semaphore_t semaphore ;
             }
             _detailLocation.location  = location;
             _detailLocation.reGeocode = regeocode;
+            weakSelf.areaItemSelected.country  = regeocode.country;
+            weakSelf.areaItemSelected.province = regeocode.province;
+            weakSelf.areaItemSelected.city     = regeocode.city;
+            weakSelf.areaItemSelected.district = regeocode.district;
+            // TODO 街区定位
         }];
     }
     return _detailLocation;
@@ -404,20 +482,91 @@ dispatch_semaphore_t semaphore ;
 - (NSString *)queryCondiction {
     NSMutableString *mutString = [NSMutableString string];
     [mutString appendString:@"?"];
+    
+    // 类目限定
     if(self.catagoryItemSelected) {
-        NSLog(@"%@",self.catagoryItemSelected.name);
-        [mutString appendString:[NSString stringWithFormat:@"type=%@&", self.catagoryItemSelected.name]];
+        if(self.catagoryItemSelected.name) {
+            [mutString appendString:[NSString stringWithFormat:@"type='%@'&", self.catagoryItemSelected.name]];
+        }
+        if(self.catagoryItemSelected.subName) {
+            [mutString appendString:[NSString stringWithFormat:@"subType='%@'&", self.catagoryItemSelected.subName]];
+        }
+    }
+    
+    // 区域限定
+    if(self.locationItem) {
+        if(self.locationItem.reGecode) {
+            AMapLocationReGeocode *reGeocode = self.locationItem.reGecode;
+            if(reGeocode.country) {
+                [mutString appendString:[NSString stringWithFormat:@"country='%@'&", reGeocode.country]];
+            }
+            if(reGeocode.province) {
+                [mutString appendString:[NSString stringWithFormat:@"province='%@'&", reGeocode.province]];
+            }
+            if(reGeocode.city) {
+                [mutString appendString:[NSString stringWithFormat:@"city='%@'&", reGeocode.city]];
+            }
+            if(reGeocode.district) {
+                [mutString appendString:[NSString stringWithFormat:@"district='%@'&", reGeocode.district]];
+            }
+        }
+        
     }
     if(self.areaItemSelected) {
-        NSLog(@"%@",self.areaItemSelected.name);
-        [mutString appendString:[NSString stringWithFormat:@"area=%@&", self.areaItemSelected.name]];
+        if(self.areaItemSelected.country) {
+            [mutString appendString:[NSString stringWithFormat:@"country='%@'&", self.areaItemSelected.country]];
+        }
+        if(self.areaItemSelected.province) {
+            [mutString appendString:[NSString stringWithFormat:@"province='%@'&", self.areaItemSelected.province]];
+        }
+        if(self.areaItemSelected.city) {
+            [mutString appendString:[NSString stringWithFormat:@"city='%@'&", self.areaItemSelected.city]];
+        }
+        if(self.areaItemSelected.district) {
+            [mutString appendString:[NSString stringWithFormat:@"district='%@'&", self.areaItemSelected.district]];
+        }
+        if(self.areaItemSelected.neigborhood) {
+            [mutString appendString:[NSString stringWithFormat:@"neigborhood='%@'&", self.areaItemSelected.neigborhood]];
+        }
     }
+    
+    // 排序方式
     if(self.sortItemSelected) {
-        NSLog(@"%@",self.sortItemSelected.name);
-        [mutString appendString:[NSString stringWithFormat:@"sort=%@&", self.sortItemSelected.name]];
+        if(self.sortItemSelected.subName) {
+            [mutString appendString:[NSString stringWithFormat:@"sort='%@'&", self.sortItemSelected.subName]];
+        }
     }
-    _queryCondiction = mutString;
+    NSLog(@"查询条件：%@", mutString);
+    _queryCondiction = [mutString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
     return _queryCondiction;
 }
 
+- (SFLocationItem *)locationItem {
+    if(!_locationItem) {
+        _locationItem = [SFLocationItem new];
+    }
+    return _locationItem;
+}
+
+- (SUNeigborhoodItem *)areaItemSelected {
+    if(!_areaItemSelected) {
+        _areaItemSelected = [SUNeigborhoodItem new];
+    }
+    return _areaItemSelected;
+}
+
+- (SFSubCatagory *)catagoryItemSelected {
+    if(!_catagoryItemSelected) {
+        _catagoryItemSelected = [SFSubCatagory new];
+        _catagoryItemSelected.name = @"全部";
+    }
+    return _catagoryItemSelected;
+}
+
+- (SFSubCatagory *)sortItemSelected {
+    if(!_sortItemSelected) {
+        _sortItemSelected = [SFSubCatagory new];
+    }
+    return _sortItemSelected;
+}
 @end

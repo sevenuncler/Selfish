@@ -8,6 +8,7 @@
 
 #import "SUItem.h"
 #import <CoreLocation/CoreLocation.h>
+#import "SFLocationItem.h"
 
 @class SUSQLManager;
 
@@ -15,6 +16,10 @@ typedef NS_ENUM(NSInteger, SFShopType) {
     SFShopTypeDefault    = 0,
     SFShopTypeFood       = 1,
     SFShopTypeEnternment = 2
+};
+
+typedef NS_ENUM(NSInteger, SFShopSubType) {
+    SFShopFoodSubTypeDefault = 0
 };
 
 @interface SFShopQueryItem : NSObject
@@ -25,6 +30,11 @@ typedef NS_ENUM(NSInteger, SFShopType) {
 @property(nonatomic,copy)   NSString   *keyWords;
 @property(nonatomic,assign) NSInteger  page;
 @property(nonatomic,assign) NSInteger  offset;
+@end
+
+@interface SFShopTypeItem : NSObject
+@property(nonatomic,copy) NSString *type;
+@property(nonatomic,copy) NSString *subType;
 @end
 
 @interface SFShopItem : SUItem
@@ -42,6 +52,8 @@ typedef NS_ENUM(NSInteger, SFShopType) {
 @property(nonatomic,assign) CGFloat         starLevel;
 @property(nonatomic,assign) SFShopType      type;
 @property(nonatomic,copy)   NSArray         *foods;
+@property(nonatomic,strong) SFShopTypeItem  *shopType;
+@property(nonatomic,strong) SFLocationItem  *locationItem;
 
 + (void)createItemWithDictionary:(NSDictionary *)json;
 + (void)queryByAccountID:(NSString *)sid complection:(Handler)handler;

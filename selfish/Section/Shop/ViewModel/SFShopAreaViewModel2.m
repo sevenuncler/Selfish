@@ -1,18 +1,18 @@
 //
-//  SFShopCatagoryViewModel2.m
+//  SFShopAreaViewModel2.m
 //  selfish
 //
-//  Created by He on 2017/11/27.
-//  Copyright © 2017年 He. All rights reserved.
+//  Created by He on 2018/1/6.
+//  Copyright © 2018年 He. All rights reserved.
 //
 
-#import "SFShopCatagoryViewModel2.h"
+#import "SFShopAreaViewModel2.h"
 #import "SFShopSelectionCell.h"
 
-@implementation SFShopCatagoryViewModel2
+@implementation SFShopAreaViewModel2
 static NSString * const reuseID = @"reuseID";
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.item.subCatagories.count;
+    return self.item.subNeigborhoods.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -22,8 +22,8 @@ static NSString * const reuseID = @"reuseID";
         cell.backgroundColor = [UIColor lightGrayColor];
     }
     cell.selectionButton.selected = NO;
-    SFSubCatagory *subCatagory = [self.item.subCatagories objectAtIndex:indexPath.row];
-    cell.nameLabel.text = subCatagory.subName;
+    SFNeigborhoodItem *subCatagory = [self.item.subNeigborhoods objectAtIndex:indexPath.row];
+    cell.nameLabel.text = subCatagory.name;
     return cell;
 }
 
@@ -40,9 +40,4 @@ static NSString * const reuseID = @"reuseID";
     cell.selectionButton.selected = NO;
 }
 
-- (void)setItem:(SFCatagoryItem *)item {
-    if(_item != item) {
-        _item = item;
-    }
-}
 @end

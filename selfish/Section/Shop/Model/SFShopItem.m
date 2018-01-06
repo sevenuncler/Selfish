@@ -14,6 +14,9 @@
 @implementation SFShopQueryItem
 @end
 
+@implementation SFShopTypeItem
+@end
+
 @implementation SFShopItem
 
 

@@ -46,37 +46,37 @@ static NSString * const reuseID = @"reuseID";
             NSMutableArray *items = @[].mutableCopy;
             {
                 SFSubCatagory *subCatagory = [SFSubCatagory new];
-                subCatagory.name = @"火锅";
+                subCatagory.subName = @"火锅";
                 subCatagory.count = 999;
                 [items addObject:subCatagory];
             }
             {
                 SFSubCatagory *subCatagory = [SFSubCatagory new];
-                subCatagory.name = @"干锅";
+                subCatagory.subName = @"干锅";
                 subCatagory.count = 999;
                 [items addObject:subCatagory];
             }
             {
                 SFSubCatagory *subCatagory = [SFSubCatagory new];
-                subCatagory.name = @"烤鱼";
+                subCatagory.subName = @"烤鱼";
                 subCatagory.count = 999;
                 [items addObject:subCatagory];
             }
             {
                 SFSubCatagory *subCatagory = [SFSubCatagory new];
-                subCatagory.name = @"火锅";
+                subCatagory.subName = @"火锅";
                 subCatagory.count = 999;
                 [items addObject:subCatagory];
             }
             {
                 SFSubCatagory *subCatagory = [SFSubCatagory new];
-                subCatagory.name = @"干锅";
+                subCatagory.subName = @"干锅";
                 subCatagory.count = 999;
                 [items addObject:subCatagory];
             }
             {
                 SFSubCatagory *subCatagory = [SFSubCatagory new];
-                subCatagory.name = @"烤鱼";
+                subCatagory.subName = @"烤鱼";
                 subCatagory.count = 999;
                 [items addObject:subCatagory];
             }
@@ -89,31 +89,31 @@ static NSString * const reuseID = @"reuseID";
             NSMutableArray *items = @[].mutableCopy;
             {
                 SFSubCatagory *subCatagory = [SFSubCatagory new];
-                subCatagory.name = @"KTV";
+                subCatagory.subName = @"KTV";
                 subCatagory.count = 999;
                 [items addObject:subCatagory];
             }
             {
                 SFSubCatagory *subCatagory = [SFSubCatagory new];
-                subCatagory.name = @"看书";
+                subCatagory.subName = @"看书";
                 subCatagory.count = 999;
                 [items addObject:subCatagory];
             }
             {
                 SFSubCatagory *subCatagory = [SFSubCatagory new];
-                subCatagory.name = @"逛商场";
+                subCatagory.subName = @"逛商场";
                 subCatagory.count = 999;
                 [items addObject:subCatagory];
             }
             {
                 SFSubCatagory *subCatagory = [SFSubCatagory new];
-                subCatagory.name = @"看书";
+                subCatagory.subName = @"看书";
                 subCatagory.count = 999;
                 [items addObject:subCatagory];
             }
             {
                 SFSubCatagory *subCatagory = [SFSubCatagory new];
-                subCatagory.name = @"逛商场";
+                subCatagory.subName = @"逛商场";
                 subCatagory.count = 999;
                 [items addObject:subCatagory];
             }
