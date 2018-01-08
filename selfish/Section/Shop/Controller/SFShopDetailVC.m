@@ -17,6 +17,11 @@
 #import "SFCommentCell.h"
 #import "StatusCell.h"
 #import "SFCommentListVC.h"
+#import "SUImageManager.h"
+#import "SFFoodItem.h"
+#import <SVProgressHUD/SVProgressHUD.h>
+#import <MJExtension/MJExtension.h>
+#import "SFCommentItem.h"
 
 @interface SFShopDetailVC ()
 
@@ -30,8 +35,10 @@
     [self.tableView registerClass:[SFShopDetailTitleCell class] forCellReuseIdentifier:@"SFShopDetailTitleCell"];
     [self.tableView registerClass:[SFShopDetailMenuCell class] forCellReuseIdentifier:@"SFShopDetailMenuCell"];
     [self.tableView registerClass:[SongViewCell class] forCellReuseIdentifier:@"SongViewCell"];
-    
+    self.tableView.tableFooterView = [UIView new];
     self.title = @"店铺名称";
+    [self loadData];
+    [self loadComments];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -44,21 +51,140 @@
 }
 
 - (void)loadData {
-//    {
-//        SUTableViewItem *tableViewItem = [SUTableViewItem new];
-//
-//        SFShopDetailCoverItem *coverItem = [SFShopDetailCoverItem new];
-//        coverItem.pics= self.shopItem.pics.copy;
-//        coverItem.itemFrame = CGRectMake(0, 0, self.view.size.width, self.view.size.width*0.618);
-//
-//    }
+    // 加载菜单
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSString *url = [NSString stringWithFormat:@"%@/shop/foods?sid=%@", SELFISH_HOST, self.shopItem.sid];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
+    [request addValue:@"application/json;charset=utf-8" forHTTPHeaderField:@"content-type"];
+    request.HTTPMethod = @"GET";
+    
+    NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        if(error) {
+            NSLog(@"请求出错: %@", error);
+            [SVProgressHUD showErrorWithStatus:@"加载失败"];
+            [SVProgressHUD dismissWithDelay:0.25];
+            return;
+        }
+        NSError *jsonError;
+        NSDictionary *result = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&jsonError];
+        if(jsonError) {
+            NSLog(@"结果解析错误:%@", jsonError);
+            [SVProgressHUD showErrorWithStatus:@"加载失败"];
+            [SVProgressHUD dismissWithDelay:0.25];
+            return;
+        }
+        
+        if([result[@"success"] isEqualToString:@"true"]) {
+           
+            NSArray *content = result[@"content"];
+            [content enumerateObjectsUsingBlock:^(NSDictionary *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                SFFoodItem *item = [SFFoodItem mj_objectWithKeyValues:obj];
+                [self.items addObject:item];
+                
+            }];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.tableView reloadData];
+            });
+        }
+        [SVProgressHUD showSuccessWithStatus:@"加载成功"];
+        [SVProgressHUD dismissWithDelay:0.25];
+    }];
+    [SVProgressHUD showWithStatus:@"加载数据中..."];
+    [dataTask resume];
+    // 加载评论
+}
+
+- (void)loadComments {
+    if(self.shopItem.sid == nil) {
+        return;
+    }
+    //    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSString *url = [NSString stringWithFormat:@"%@/shop/comments?sid=%@", SELFISH_HOST, self.shopItem.sid];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
+    [request addValue:@"application/json;charset=utf-8" forHTTPHeaderField:@"content-type"];
+    request.HTTPMethod = @"GET";
+    
+    __weak typeof(self) weakSelf = self;
+    NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        if(error) {
+            NSLog(@"添加菜品出错: %@", error);
+            return;
+        }
+        NSError *jsonError;
+        NSDictionary *result = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&jsonError];
+        if(jsonError) {
+            NSLog(@"结果解析错误:%@", jsonError);
+            return;
+        }
+        
+        if([result[@"success"] isEqualToString:@"true"]) {
+            NSLog(@"菜单获取成功%@", result);
+            NSArray *content = result[@"content"];
+            NSMutableArray *array = [NSMutableArray array];
+//            weakSelf.commentsSema = dispatch_semaphore_create(-content.count);
+            [content enumerateObjectsUsingBlock:^(NSDictionary *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                SFCommentItem *item = [SFCommentItem mj_objectWithKeyValues:obj];
+                [array addObject:item];
+                [weakSelf itemHeight:item];
+            }];
+            weakSelf.shopItem.comments = array.copy;
+            if(array.count>0) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    NSMutableIndexSet *set = [NSMutableIndexSet indexSet];
+                    [set addIndex:2];
+                    [weakSelf.tableView reloadSections:set withRowAnimation:UITableViewRowAnimationAutomatic];
+                });
+            }
+        }
+//        dispatch_group_notify(weakSelf.group, dispatch_get_main_queue(), ^{
+//            [SVProgressHUD showSuccessWithStatus:@"加载成功"];
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                [self.tableView reloadData];
+//            });
+//            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//                [self.tableView reloadData];
+//            });
+//            [SVProgressHUD dismissWithDelay:0.25];
+//        });
+    }];
+    [SVProgressHUD showWithStatus:@"加载数据中..."];
+    [dataTask resume];
+    
+    
+}
+
+- (void)itemHeight:(SFCommentItem *)item {
+    //    static SongStatusView *songStatusView;
+    //    static dispatch_once_t onceToken;
+    //    dispatch_once(&onceToken, ^{
+    //
+    //        songStatusView = [[SongViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"一天时间浪费在了这里"];
+    //    });
+    dispatch_async(dispatch_get_main_queue(), ^{
+        static SongStatusView *songStatusView;
+        static dispatch_once_t onceToken;
+        dispatch_once(&onceToken, ^{
+            songStatusView = [[SongStatusView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 0)];
+        });
+        songStatusView.nameLabel.text = @"德维恩韦德";
+        songStatusView.dateLabel.text = @"昨天 22:47";
+        songStatusView.contentLabel.text = item.content;
+        songStatusView.images         = item.pics.mutableCopy;
+        [songStatusView setNeedsLayout];
+        [songStatusView layoutIfNeeded];
+        item.itemFrame = CGRectMake(0, 0, 0, songStatusView.size.height);
+        //计算高度
+//        [self.items addObject:item];
+    });
 }
 
 #pragma mark - UITableViewDelegate
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if(indexPath.section == 2 && indexPath.row == 0) {
         SFCommentListVC *vc = [SFCommentListVC new];
-        vc.sid = @"1";
+        vc.sid = self.shopItem.sid;
         if(self.navigationController) {
             [self.navigationController pushViewController:vc animated:YES];
         }else {
@@ -79,7 +205,10 @@
     }else if(1 == section) {
         return 1;
     }else if(2 == section) {
-        return 1;
+        if(self.shopItem.comments && self.shopItem.comments.count>0) {
+            return 1;
+        }
+        return 0;
     }
     return 0;
 }
@@ -90,7 +219,8 @@
         if(0 == indexPath.row) {
             SFShopDetailCoverCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SFShopDetailCoverCell" forIndexPath:indexPath];
             if(self.shopItem.pics.count>0) {
-                
+                SUImageManager *imageManager = [SUImageManager defaultImageManager];
+                [imageManager setImageView:cell.imageView withURL:[NSURL URLWithString:self.shopItem.pics[0]]];
             }
             [cell.picNumberButton setTitle:[NSString stringWithFormat:@"图片(%ld)", self.shopItem.pics.count] forState:UIControlStateNormal];
             return cell;
@@ -103,11 +233,26 @@
     }else if(1 == indexPath.section) {
         if(0 == indexPath.row) {
             SFShopDetailMenuCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SFShopDetailMenuCell" forIndexPath:indexPath];
+            NSMutableString *string = [NSMutableString string];
+            [self.shopItem.foods enumerateObjectsUsingBlock:^(SFFoodItem *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                [string appendString:obj.name];
+                [string appendString:@" "];
+            }];
+            cell.menuLabel.text = string;
             return cell;
         }
     }else if(2 == indexPath.section) {
         if(0 == indexPath.row) {
             SongViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SongViewCell" forIndexPath:indexPath];
+            if(self.shopItem.comments && self.shopItem.comments.count>0) {
+                SFCommentItem *commentItem = [self.shopItem.comments objectAtIndex:0];
+                // 头像
+                // 用户名
+                // 时间
+                // 评论文字
+                cell.songStatusView.images = commentItem.pics.copy;
+                cell.songStatusView.contentLabel.text = commentItem.content;
+            }
             return cell;
         }
     }
@@ -127,7 +272,11 @@
         }
     }else if(2 == indexPath.section) {
         if(0 == indexPath.row) {
-            return 700;
+            if(self.shopItem.comments && self.shopItem.comments.count>0) {
+                SFCommentItem *commentItem = [self.shopItem.comments objectAtIndex:0];
+                return commentItem.itemFrame.size.height;
+            }
+            return 0;
         }
     }
     return 44;

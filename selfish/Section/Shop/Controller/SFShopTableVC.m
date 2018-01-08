@@ -65,6 +65,7 @@ static BOOL isRefresh = YES;
     //vc.view往下移动，不让其被导航栏遮挡，与automaticalAjustScrollViewInsect差不多（略微差别）
     self.edgesForExtendedLayout  = UIRectEdgeNone;
     self.navigationController.navigationBar.translucent = NO;
+    
     [self.view addSubview:self.catagorySegment];
     [self.view addSubview:self.tableView];
     [self.view addSubview:self.shopCatagoryView];
@@ -74,17 +75,17 @@ static BOOL isRefresh = YES;
     [self.tableView registerClass:[SFShopTableViewCell class] forCellReuseIdentifier:reuseIdentifier];
 
     [self setUpBind];
-    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        if(dispatch_semaphore_wait(semaphore, dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC * 1)) != 0) {
+            [self loadShops];
+        }
+    });
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self setUpNavigator];
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-        if(dispatch_semaphore_wait(semaphore, dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC * 3)) != 0) {
-            [self loadShops];
-        }
-    });
+    
 }
 
 - (void)setUpNavigator {
@@ -98,12 +99,27 @@ static BOOL isRefresh = YES;
 }
 
 - (void)setUpBind {
+    
+    // 下拉刷新
+    __weak typeof(self) weakSelf = self;
+    UIPanGestureRecognizer *panGR = [[UIPanGestureRecognizer alloc] init];
+    panGR.delegate = self;
+    [[panGR rac_gestureSignal] subscribeNext:^(UIPanGestureRecognizer *x) {
+        if(x.state == UIGestureRecognizerStateEnded && weakSelf.tableView.contentOffset.y < -100) {
+            [weakSelf loadShops];
+        }
+    }];
+    [self.tableView addGestureRecognizer:panGR];
+    
+//    [RACObserve(self.tableView, contentOffset) subscribeNext:^(id x) {
+//        NSLog(@"%@", x);
+//    }];
+    
     // 类别
     self.shopCatagoryView.menuTableView.dataSource = self.shopCatagoryViewModel;
     self.shopCatagoryView.menuTableView.delegate = self.shopCatagoryViewModel;
     self.shopCatagoryView.contentTableView.dataSource = self.shopCatagoryViewModel2;
     self.shopCatagoryView.contentTableView.delegate = self.shopCatagoryViewModel2;
-    __weak typeof(self) weakSelf = self;
     self.shopCatagoryViewModel.handler = ^void(NSIndexPath *indexPath, SFCatagoryItem *item) {
         weakSelf.shopCatagoryViewModel2.item = item;
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -114,14 +130,16 @@ static BOOL isRefresh = YES;
     ComplectionHandler complectionHander = ^void(SFCatagoryItem *item, NSInteger idx) {
         NSLog(@"%@ %ld", item, idx);
         weakSelf.shopCatagoryView.hidden = YES;
+        weakSelf.catagoryItemSelected.name = item.name;
+        [weakSelf.catagorySegment.leftButton setTitle:item.name forState:UIControlStateNormal];
         if(item && idx >= 0 && item.subCatagories.count>0 ) {
             SFSubCatagory *subCatagory = [item.subCatagories objectAtIndex:idx];
             weakSelf.catagoryItemSelected = subCatagory;
+            [weakSelf.catagorySegment.leftButton setTitle:subCatagory.subName forState:UIControlStateNormal];
         }
         if(idx == -1) {
             weakSelf.catagoryItemSelected.subName = nil;
         }
-        weakSelf.catagoryItemSelected.name = item.name;
         [weakSelf loadShops];
     };
     self.shopCatagoryViewModel.complectionHandler = complectionHander;
@@ -160,6 +178,7 @@ static BOOL isRefresh = YES;
     void(^complectionHander4)(SFDistrictItem *item, NSInteger idx)  = ^void(SFDistrictItem *item, NSInteger idx) {
         if(item && idx >= 0 && item.subNeigborhoods) {
             weakSelf.areaItemSelected.neigborhood = item.subNeigborhoods[idx].name;
+            [weakSelf.catagorySegment.centerButton setTitle:weakSelf.areaItemSelected.neigborhood forState:UIControlStateNormal];
         }
         weakSelf.shopAreaView.hidden = YES;
         [weakSelf loadShops];
@@ -172,6 +191,8 @@ static BOOL isRefresh = YES;
     ComplectionHandler complectionHander3 = ^void(SFCatagoryItem *item, NSInteger idx) {
         NSLog(@"%@ %ld", item, idx);
         weakSelf.sortItemSelected = item.subCatagories[idx];
+        [weakSelf.catagorySegment.rightButton setTitle:weakSelf.sortItemSelected.subName forState:UIControlStateNormal];
+
         weakSelf.shopSortView.hidden = YES;
         [weakSelf loadShops];
     };
@@ -191,7 +212,6 @@ static BOOL isRefresh = YES;
 
 
 - (void)loadShops {
-    
     NSURLSession *session = [NSURLSession sharedSession];
     NSString *queryParams = self.queryCondiction;
     NSString *url = [NSString stringWithFormat:@"%@/shop%@", SELFISH_HOST, queryParams?queryParams:@""];
@@ -234,6 +254,13 @@ static BOOL isRefresh = YES;
     }];
     [SVProgressHUD showWithStatus:@"加载数据中..."];
     [dataTask resume];
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+    if ([otherGestureRecognizer.view isKindOfClass:[UITableView class]]) {
+        return YES;
+    }
+    return NO;
 }
 
 #pragma mark - Action Handler
@@ -352,7 +379,8 @@ static BOOL isRefresh = YES;
 
 - (UITableView *)tableView {
     if(!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, self.catagorySegment.botton, SCREEN_WIDTH, self.view.size.height-88) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, self.catagorySegment.botton, SCREEN_WIDTH, self.view.size.height-self.catagorySegment.botton - 44 - 44 - 22) style:UITableViewStylePlain];
+        _tableView.tableFooterView = [UIView new];
     }
     return _tableView;
 }
@@ -473,7 +501,7 @@ static BOOL isRefresh = YES;
 
 - (UITableView *)shopSortView {
     if(!_shopSortView) {
-        _shopSortView = [[UITableView alloc] initWithFrame:CGRectMake(0, self.catagorySegment.botton, SCREEN_WIDTH, SCREEN_WIDTH/0.85) style:UITableViewStyleGrouped];
+        _shopSortView = [[UITableView alloc] initWithFrame:CGRectMake(0, self.catagorySegment.botton, SCREEN_WIDTH, SCREEN_WIDTH/0.85) style:UITableViewStylePlain];
         _shopSortView.hidden = YES;
     }
     return _shopSortView;

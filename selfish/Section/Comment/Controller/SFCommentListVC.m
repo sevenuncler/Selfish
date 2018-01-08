@@ -89,11 +89,12 @@ static NSString * const reuseID = @"reuseID";
 #pragma mark - Private
 
 - (void)itemHeight:(SFCommentItem *)item {
-    static SongStatusView *songStatusView;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        songStatusView = [[SongViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"一天时间浪费在了这里"];
-    });
+//    static SongStatusView *songStatusView;
+//    static dispatch_once_t onceToken;
+//    dispatch_once(&onceToken, ^{
+//
+//        songStatusView = [[SongViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"一天时间浪费在了这里"];
+//    });
     dispatch_async(dispatch_get_main_queue(), ^{
                 dispatch_group_enter(self.group);
         static SongStatusView *songStatusView;

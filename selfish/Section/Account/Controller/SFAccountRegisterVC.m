@@ -85,7 +85,7 @@
 }
 
 - (void)onRegisterAction:(id)sender {
-        NSString *path = [NSString stringWithFormat:@"%@http://localhost:8080/account", @""];
+        NSString *path = [NSString stringWithFormat:@"%@/account", SELFISH_HOST];
         NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:path]];
         [request setValue:@"application/json;charset=utf-8" forHTTPHeaderField:@"content-type"];
         request.HTTPMethod = @"POST";

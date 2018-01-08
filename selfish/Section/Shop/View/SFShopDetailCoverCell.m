@@ -62,7 +62,9 @@
 - (UIButton *)picNumberButton {
     if(!_picNumberButton) {
         _picNumberButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_picNumberButton setImage:[UIImage imageNamed:@"image"] forState:UIControlStateNormal];
+//        [_picNumberButton setImage:[UIImage imageNamed:@"image"] forState:UIControlStateNormal];
+        [_picNumberButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        _picNumberButton.titleLabel.font = [UIFont systemFontOfSize:8];
     }
     return _picNumberButton;
 }

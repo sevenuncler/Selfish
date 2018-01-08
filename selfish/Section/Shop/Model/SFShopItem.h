@@ -9,6 +9,8 @@
 #import "SUItem.h"
 #import <CoreLocation/CoreLocation.h>
 #import "SFLocationItem.h"
+#import "SFCommentItem.h"
+#import "SFFoodItem.h"
 
 @class SUSQLManager;
 
@@ -51,9 +53,10 @@ typedef NS_ENUM(NSInteger, SFShopSubType) {
 @property(nonatomic,assign) CGFloat         averageCost;
 @property(nonatomic,assign) CGFloat         starLevel;
 @property(nonatomic,assign) SFShopType      type;
-@property(nonatomic,copy)   NSArray         *foods;
+@property(nonatomic,copy)   NSArray<SFFoodItem *>   *foods;
 @property(nonatomic,strong) SFShopTypeItem  *shopType;
 @property(nonatomic,strong) SFLocationItem  *locationItem;
+@property(nonatomic,copy)   NSArray<SFCommentItem *> *comments;
 
 + (void)createItemWithDictionary:(NSDictionary *)json;
 + (void)queryByAccountID:(NSString *)sid complection:(Handler)handler;
