@@ -37,8 +37,7 @@
     [self.tableView registerClass:[SongViewCell class] forCellReuseIdentifier:@"SongViewCell"];
     self.tableView.tableFooterView = [UIView new];
     self.title = @"店铺名称";
-    [self loadData];
-    [self loadComments];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -49,9 +48,15 @@
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self loadData];
+    [self loadComments];
+}
 
 - (void)loadData {
     // 加载菜单
+    __weak typeof(self) weakSelf = self;
     NSURLSession *session = [NSURLSession sharedSession];
     NSString *url = [NSString stringWithFormat:@"%@/shop/foods?sid=%@", SELFISH_HOST, self.shopItem.sid];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
@@ -75,16 +80,19 @@
         }
         
         if([result[@"success"] isEqualToString:@"true"]) {
-           
             NSArray *content = result[@"content"];
+            NSMutableArray *array = [NSMutableArray array];
             [content enumerateObjectsUsingBlock:^(NSDictionary *obj, NSUInteger idx, BOOL * _Nonnull stop) {
                 SFFoodItem *item = [SFFoodItem mj_objectWithKeyValues:obj];
-                [self.items addObject:item];
+                [array addObject:item];
                 
             }];
+            weakSelf.shopItem.foods = array.copy;
             dispatch_async(dispatch_get_main_queue(), ^{
-                [self.tableView reloadData];
-            });
+                    NSMutableIndexSet *set = [NSMutableIndexSet indexSet];
+                    [set addIndex:1];
+                    [weakSelf.tableView reloadSections:set withRowAnimation:UITableViewRowAnimationAutomatic];            
+        });
         }
         [SVProgressHUD showSuccessWithStatus:@"加载成功"];
         [SVProgressHUD dismissWithDelay:0.25];
@@ -268,7 +276,7 @@
         }
     }else if(1 == indexPath.section) {
         if(0 == indexPath.row) {
-            return 55;
+            return 50;
         }
     }else if(2 == indexPath.section) {
         if(0 == indexPath.row) {

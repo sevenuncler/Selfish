@@ -308,6 +308,8 @@
 		877C84261FF6854000882C64 /* SULocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 877C84251FF6854000882C64 /* SULocationManager.m */; };
 		877C84291FFA71AD00882C64 /* SFHomeDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 877C84281FFA71AD00882C64 /* SFHomeDetailVC.m */; };
 		877C842C1FFBDF8400882C64 /* SUAdvancedScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 877C842B1FFBDF8400882C64 /* SUAdvancedScrollView.m */; };
+		87803ABE20043D2700518734 /* SFAddressVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 87803ABD20043D2700518734 /* SFAddressVC.m */; };
+		87803AC22004405B00518734 /* address.json in Resources */ = {isa = PBXBuildFile; fileRef = 87803AC12004405B00518734 /* address.json */; };
 		8789C5E91FFEF67B0089D4DA /* SFShopSelectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8789C5E81FFEF67B0089D4DA /* SFShopSelectionCell.m */; };
 		8789C5EC20009CF00089D4DA /* SFLocationItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8789C5EB20009CF00089D4DA /* SFLocationItem.m */; };
 		8789C5EF2000BF810089D4DA /* SFShopAreaViewModel2.m in Sources */ = {isa = PBXBuildFile; fileRef = 8789C5EE2000BF810089D4DA /* SFShopAreaViewModel2.m */; };
@@ -712,6 +714,9 @@
 		877C84281FFA71AD00882C64 /* SFHomeDetailVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFHomeDetailVC.m; sourceTree = "<group>"; };
 		877C842A1FFBDF8400882C64 /* SUAdvancedScrollView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SUAdvancedScrollView.h; sourceTree = "<group>"; };
 		877C842B1FFBDF8400882C64 /* SUAdvancedScrollView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SUAdvancedScrollView.m; sourceTree = "<group>"; };
+		87803ABC20043D2700518734 /* SFAddressVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFAddressVC.h; sourceTree = "<group>"; };
+		87803ABD20043D2700518734 /* SFAddressVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFAddressVC.m; sourceTree = "<group>"; };
+		87803AC12004405B00518734 /* address.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = address.json; sourceTree = "<group>"; };
 		8789C5E71FFEF67B0089D4DA /* SFShopSelectionCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFShopSelectionCell.h; sourceTree = "<group>"; };
 		8789C5E81FFEF67B0089D4DA /* SFShopSelectionCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFShopSelectionCell.m; sourceTree = "<group>"; };
 		8789C5EA20009CF00089D4DA /* SFLocationItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFLocationItem.h; sourceTree = "<group>"; };
@@ -910,6 +915,8 @@
 				877030791FD4439D006F410D /* SFShopFoodRandomVC.m */,
 				877C83F71FEB321C00882C64 /* SFShopFoodListVC.h */,
 				877C83F81FEB321C00882C64 /* SFShopFoodListVC.m */,
+				87803ABC20043D2700518734 /* SFAddressVC.h */,
+				87803ABD20043D2700518734 /* SFAddressVC.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1380,6 +1387,14 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		87803ABF20043E9A00518734 /* json */ = {
+			isa = PBXGroup;
+			children = (
+				87803AC12004405B00518734 /* address.json */,
+			);
+			path = json;
+			sourceTree = "<group>";
+		};
 		87ACCDDE1FC4F85C0008F7BA = {
 			isa = PBXGroup;
 			children = (
@@ -1543,6 +1558,7 @@
 		87ACCE281FC4FF940008F7BA /* source */ = {
 			isa = PBXGroup;
 			children = (
+				87803ABF20043E9A00518734 /* json */,
 				87ACCE291FC4FF940008F7BA /* video */,
 				87ACCE2A1FC4FF940008F7BA /* image */,
 			);
@@ -1914,6 +1930,7 @@
 				87702FFB1FCAF030006F410D /* cm2_play_icn_dld_ok_prs@3x.png in Resources */,
 				87702FA81FCAF030006F410D /* cm2_icn_one_prs.png in Resources */,
 				87702FCE1FCAF030006F410D /* cm2_icn_one_prs@3x.png in Resources */,
+				87803AC22004405B00518734 /* address.json in Resources */,
 				877030921FD4467B006F410D /* 4@2x.png in Resources */,
 				87702FC61FCAF030006F410D /* cm2_btm_icn_discovery@2x.png in Resources */,
 				87702F841FCAF030006F410D /* cm2_topbar_icn_playing4_prs@2x.png in Resources */,
@@ -2066,6 +2083,7 @@
 				87ACCE321FC5AF4C0008F7BA /* UIImage+Size.m in Sources */,
 				87ACCE371FC5B1EF0008F7BA /* HomeVC.m in Sources */,
 				877C84071FED45FC00882C64 /* SUTextField.m in Sources */,
+				87803ABE20043D2700518734 /* SFAddressVC.m in Sources */,
 				877030571FD2AA85006F410D /* Model.xcdatamodeld in Sources */,
 				8770303F1FCB8A84006F410D /* SFShopCatagoryView.m in Sources */,
 				877631FB1FE8902F009EA696 /* SUAlbumsTableViewCell.m in Sources */,

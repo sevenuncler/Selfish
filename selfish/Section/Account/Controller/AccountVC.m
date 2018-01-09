@@ -27,9 +27,10 @@ static NSString * const reuseCell2= @"reuseAccountCell2";
 - (void)viewDidLoad {
     [super viewDidLoad];
     //vc.view往下移动，不让其被导航栏遮挡，与automaticalAjustScrollViewInsect差不多（略微差别）
+    self.title = @"个人中心";
     self.edgesForExtendedLayout  = UIRectEdgeNone;
     self.navigationController.navigationBar.translucent = NO;
-    
+    self.tableView.tableFooterView = [UIView new];
     [self loadData];
     
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:reuseCell];
@@ -75,7 +76,7 @@ static NSString * const reuseCell2= @"reuseAccountCell2";
             {
                 SUSettingItem *settingItem = [SUSettingItem new];
                 settingItem.leftImage = @"cm2_set_icn_mail";
-                settingItem.title     = @"我的消息";
+                settingItem.title     = @"我的订单";
                 settingItem.style     = 1;
                 settingItem.itemFrame = CGRectMake(0, 0, 0, 40);
                 [generalItem.contentItems addObject:settingItem];
@@ -99,20 +100,21 @@ static NSString * const reuseCell2= @"reuseAccountCell2";
                 settingItem.itemFrame = CGRectMake(0, 0, 0, 40);
                 [generalItem.contentItems addObject:settingItem];
             }
-            {
-                SUSettingItem *settingItem = [SUSettingItem new];
-                settingItem.leftImage = @"cm2_set_icn_store";
-                settingItem.title     = @"商城";
-                settingItem.style     = 1;
-                settingItem.itemFrame = CGRectMake(0, 0, 0, 40);
-                [generalItem.contentItems addObject:settingItem];
-            }
+//            {
+//                SUSettingItem *settingItem = [SUSettingItem new];
+//                settingItem.leftImage = @"cm2_set_icn_store";
+//                settingItem.title     = @"商城";
+//                settingItem.style     = 1;
+//                settingItem.itemFrame = CGRectMake(0, 0, 0, 40);
+//                [generalItem.contentItems addObject:settingItem];
+//            }
             {
                 SUSettingItem *settingItem = [SUSettingItem new];
                 settingItem.leftImage = @"cm2_set_icn_combo";
                 settingItem.title     = @"商店管理";
                 settingItem.style     = 1;
                 settingItem.itemFrame = CGRectMake(0, 0, 0, 40);
+                __weak typeof(self) weakSelf = self;
                 settingItem.hander = ^{
                     NSString *aid = [[NSUserDefaults standardUserDefaults] valueForKey:@"aid"];
                     dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
@@ -137,8 +139,15 @@ static NSString * const reuseCell2= @"reuseAccountCell2";
                         }
                     }
                     
-                    NSDictionary *dict = @{@"navi": self.navigationController};
-                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url] options:dict completionHandler:nil];
+//                    NSDictionary *dict = @{@"navi": self.navigationController};
+//                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url] options:dict completionHandler:nil];
+                    Class clz = NSClassFromString(@"SFShopCustomeVC");
+                    UIViewController *vc = [clz new];
+                    if(self.navigationController) {
+                        [self.navigationController pushViewController:vc animated:YES];
+                    }else {
+                        [weakSelf presentViewController:vc animated:YES completion:nil];
+                    }
                 };
                 [generalItem.contentItems addObject:settingItem];
             }
@@ -177,14 +186,14 @@ static NSString * const reuseCell2= @"reuseAccountCell2";
                 settingItem.itemFrame = CGRectMake(0, 0, 0, 40);
                 [generalItem.contentItems addObject:settingItem];
             }
-            {
-                SUSettingItem *settingItem = [SUSettingItem new];
-                settingItem.leftImage = @"cm2_set_icn_night";
-                settingItem.title     = @"夜间模式";
-                settingItem.style     = 1;
-                settingItem.itemFrame = CGRectMake(0, 0, 0, 40);
-                [generalItem.contentItems addObject:settingItem];
-            }
+//            {
+//                SUSettingItem *settingItem = [SUSettingItem new];
+//                settingItem.leftImage = @"cm2_set_icn_night";
+//                settingItem.title     = @"夜间模式";
+//                settingItem.style     = 1;
+//                settingItem.itemFrame = CGRectMake(0, 0, 0, 40);
+//                [generalItem.contentItems addObject:settingItem];
+//            }
         }
         [self.items addObject:generalItem];
     }

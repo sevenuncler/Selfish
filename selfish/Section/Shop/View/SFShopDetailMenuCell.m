@@ -45,7 +45,7 @@
         _menuLabel = [UILabel new];
         _menuLabel.text = @"梅干菜 扣肉 红烧鱼 红烧肉 永康肉麦饼 烤鱼 干锅 火锅 拌饭 卤肉饭 哈尔滨快餐 砂锅 过桥米线 酸菜鸡杂米线"; //我饿了
         _menuLabel.font = [UIFont systemFontOfSize:13];
-        _menuLabel.numberOfLines = 0;
+        _menuLabel.numberOfLines = 2;
     }
     return _menuLabel;
 }

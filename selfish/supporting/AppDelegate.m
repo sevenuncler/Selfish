@@ -22,6 +22,7 @@
 #import "RoutesConfig.h"
 #import <AMapFoundationKit/AMapFoundationKit.h>
 #import <AMapLocationKit/AMapLocationKit.h>
+#import "SFAddressVC.h"
 
 @interface AppDelegate ()
 
@@ -32,7 +33,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     UIWindow *window = [[UIWindow alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
-    UIViewController *vc = [SFTabBarController new];
+    UIViewController *vc = [SFAddressVC new];
     window.rootViewController = vc;
     self.window = window;
     [self.window makeKeyAndVisible];
