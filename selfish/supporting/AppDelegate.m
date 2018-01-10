@@ -33,7 +33,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     UIWindow *window = [[UIWindow alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
-    UIViewController *vc = [SFAddressVC new];
+    UIViewController *vc = [SFTabBarController new];
     window.rootViewController = vc;
     self.window = window;
     [self.window makeKeyAndVisible];

@@ -13,8 +13,10 @@
 #import <SVProgressHUD/SVProgressHUD.h>
 #import "SFShopItem.h"
 #import <MJExtension/MJExtension.h>
+#import "SFAddressItem.h"
 
-@interface SFShopCustomeVC ()
+
+@interface SFShopCustomeVC ()<UIPickerViewDataSource, UIPickerViewDelegate>
 @property(nonatomic,strong) UILabel  *menuLabel;
 @property(nonatomic,strong) UIButton *menuAddButton;
 
@@ -32,7 +34,12 @@
 @property(nonatomic,strong) SFShopEditTextView *shopAvgCost;
 @property(nonatomic,strong) SFShopEditTextView *shopStarLevel;
 @property(nonatomic,strong) HCSStarRatingView  *startRatingView;
-
+@property(nonatomic,strong) UIPickerView       *addressPickerView;
+@property(nonatomic,strong) NSMutableArray     *cities;
+@property(nonatomic,strong) SFDistrictItem     *district;
+@property(nonatomic,strong) SFCityItem         *city;
+@property(nonatomic,strong) SFProvinceItem     *province;
+@property(nonatomic,strong) SFCountryItem      *country;
 @end
 
 static  CGFloat padding = 15;
@@ -60,11 +67,29 @@ static  CGFloat padding = 15;
     // Do any additional setup after loading the view.
     [self setUpNavigatorBar];
     [self loadShopData];
+    [self setUpBinding];
 }
 
 - (void)setUpNavigatorBar {
     self.title = @"商铺信息";
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"修改" style:UIBarButtonItemStylePlain target:self action:@selector(updateShop:)];
+}
+
+- (void)setUpBinding {
+    self.addressPickerView.delegate = self;
+    self.shopAddress.textField.inputView = self.addressPickerView;
+    
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"address" ofType:@".json"];
+    NSData *data = [NSData dataWithContentsOfFile:filePath];
+    NSError *error = nil;
+    NSDictionary *addresses = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&error];
+    SFCountryItem *coutry = [SFCountryItem mj_objectWithKeyValues:addresses];
+    self.country = coutry;
+    if(coutry && coutry.subAddress && coutry.subAddress.count>0) {
+        self.province = [SFProvinceItem mj_objectWithKeyValues:coutry.subAddress[0]];
+    }
+    self.city = self.province.subAddress[0];
+    NSLog(@"%@ %@", addresses, self.province);
 }
 
 - (void)loadShopData {
@@ -256,9 +281,58 @@ static  CGFloat padding = 15;
     self.shopDetailLabel.centerY  = self.shopDetailAddButton.centerY;
 }
 
+#pragma mark - UIPickerViewDelegate
+
+- (nullable NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+    if(component == 0) {
+        return self.country.subAddress[row].name;
+    }else if(1 == component) {
+        
+        return self.province.subAddress[row].name;
+    }else if(2 == component) {
+        ;
+        return self.city.subAddress[row].name;
+    }
+    return @"xxxx";
+}
+
+- (CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component {
+    return 44;
+}
+
+#pragma mark - UIPickViewDatasource
+
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+    return 3;
+}
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
+    if(component == 0) {
+        return self.country.subAddress.count;
+    }else if(1 == component) {
+        return self.province.subAddress.count;
+    }else if(2 == component) {
+        return self.city.subAddress.count;
+    }
+    return 0;
+}
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+    if(0 == component) {
+        self.province = self.country.subAddress[row];
+        [self.addressPickerView reloadComponent:1];
+        [self.addressPickerView reloadComponent:2];
+    }else if(1 == component) {
+        self.city = self.province.subAddress[row];
+        [self.addressPickerView reloadComponent:2];
+
+    }else if(2 == component) {
+        self.district = self.city.subAddress[row];
+        NSLog(@"%@ %@ %@", self.province.name, self.city.name, self.district.name);
+    }
+}
+
 #pragma mark - Action Handler
-
-
 
 - (void)handleFoodAction:(id)sender {
     // 1. 获取有所菜单列表
@@ -379,6 +453,13 @@ static  CGFloat padding = 15;
         [_shopDetailAddButton addTarget:self action:@selector(handleShopAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _shopDetailAddButton;
+}
+
+- (UIPickerView *)addressPickerView {
+    if(!_addressPickerView) {
+        _addressPickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_WIDTH*0.618f)];
+    }
+    return _addressPickerView;
 }
 
 @end

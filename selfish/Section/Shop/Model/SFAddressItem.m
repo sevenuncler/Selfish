@@ -14,16 +14,29 @@
 @end
 
 @implementation SFDistrictItem
++(NSDictionary *)objectClassInArray{
+    return @{@"subAddress":@"SFStreetItem"};
+}
 @end
 
 @implementation SFCityItem
-
++(NSDictionary *)objectClassInArray{
+    return @{@"subAddress":@"SFDistrictItem"};
+}
 @end
 
 @implementation SFProvinceItem
+
++(NSDictionary *)objectClassInArray{
+    return @{@"subAddress":@"SFCityItem"};
+}
+
 @end
 
 @implementation SFCountryItem
++(NSDictionary *)objectClassInArray{
+    return @{@"subAddress":@"SFProvinceItem"};
+}
 @end
 
 @implementation SFUUIDItem
