@@ -310,6 +310,14 @@
 		877C842C1FFBDF8400882C64 /* SUAdvancedScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 877C842B1FFBDF8400882C64 /* SUAdvancedScrollView.m */; };
 		87803ABE20043D2700518734 /* SFAddressVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 87803ABD20043D2700518734 /* SFAddressVC.m */; };
 		87803AC22004405B00518734 /* address.json in Resources */ = {isa = PBXBuildFile; fileRef = 87803AC12004405B00518734 /* address.json */; };
+		87803AC52006618B00518734 /* SFMapVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 87803AC42006618B00518734 /* SFMapVC.m */; };
+		87803ACB2006643E00518734 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87803ACA2006643400518734 /* Security.framework */; };
+		87803ACE2006647E00518734 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87803ACC2006647700518734 /* GLKit.framework */; };
+		87803ACF2006647E00518734 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87803ACD2006647700518734 /* OpenGLES.framework */; };
+		87803AD12006649000518734 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87803AD02006648A00518734 /* UIKit.framework */; };
+		87803AD52006653C00518734 /* MAMapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87803AD42006653C00518734 /* MAMapKit.framework */; };
+		87803AD72006656B00518734 /* AMapSearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87803AD62006656B00518734 /* AMapSearchKit.framework */; };
+		87803ADB2006696C00518734 /* AMap.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 87803ADA2006696B00518734 /* AMap.bundle */; };
 		8789C5E91FFEF67B0089D4DA /* SFShopSelectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8789C5E81FFEF67B0089D4DA /* SFShopSelectionCell.m */; };
 		8789C5EC20009CF00089D4DA /* SFLocationItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8789C5EB20009CF00089D4DA /* SFLocationItem.m */; };
 		8789C5EF2000BF810089D4DA /* SFShopAreaViewModel2.m in Sources */ = {isa = PBXBuildFile; fileRef = 8789C5EE2000BF810089D4DA /* SFShopAreaViewModel2.m */; };
@@ -717,6 +725,15 @@
 		87803ABC20043D2700518734 /* SFAddressVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFAddressVC.h; sourceTree = "<group>"; };
 		87803ABD20043D2700518734 /* SFAddressVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFAddressVC.m; sourceTree = "<group>"; };
 		87803AC12004405B00518734 /* address.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = address.json; sourceTree = "<group>"; };
+		87803AC32006618B00518734 /* SFMapVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFMapVC.h; sourceTree = "<group>"; };
+		87803AC42006618B00518734 /* SFMapVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFMapVC.m; sourceTree = "<group>"; };
+		87803ACA2006643400518734 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		87803ACC2006647700518734 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		87803ACD2006647700518734 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		87803AD02006648A00518734 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		87803AD42006653C00518734 /* MAMapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MAMapKit.framework; sourceTree = "<group>"; };
+		87803AD62006656B00518734 /* AMapSearchKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AMapSearchKit.framework; sourceTree = "<group>"; };
+		87803ADA2006696B00518734 /* AMap.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = AMap.bundle; path = MAMapKit.framework/AMap.bundle; sourceTree = "<group>"; };
 		8789C5E71FFEF67B0089D4DA /* SFShopSelectionCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFShopSelectionCell.h; sourceTree = "<group>"; };
 		8789C5E81FFEF67B0089D4DA /* SFShopSelectionCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFShopSelectionCell.m; sourceTree = "<group>"; };
 		8789C5EA20009CF00089D4DA /* SFLocationItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFLocationItem.h; sourceTree = "<group>"; };
@@ -767,6 +784,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				87803AD72006656B00518734 /* AMapSearchKit.framework in Frameworks */,
+				87803AD12006649000518734 /* UIKit.framework in Frameworks */,
+				87803ACE2006647E00518734 /* GLKit.framework in Frameworks */,
+				87803AD52006653C00518734 /* MAMapKit.framework in Frameworks */,
+				87803ACF2006647E00518734 /* OpenGLES.framework in Frameworks */,
+				87803ACB2006643E00518734 /* Security.framework in Frameworks */,
 				87089B191FFE606B00FE7629 /* SystemConfiguration.framework in Frameworks */,
 				87089B1B1FFE607800FE7629 /* libz.tbd in Frameworks */,
 				87089B171FFE604E00FE7629 /* CoreLocation.framework in Frameworks */,
@@ -917,6 +940,8 @@
 				877C83F81FEB321C00882C64 /* SFShopFoodListVC.m */,
 				87803ABC20043D2700518734 /* SFAddressVC.h */,
 				87803ABD20043D2700518734 /* SFAddressVC.m */,
+				87803AC32006618B00518734 /* SFMapVC.h */,
+				87803AC42006618B00518734 /* SFMapVC.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1398,6 +1423,7 @@
 		87ACCDDE1FC4F85C0008F7BA = {
 			isa = PBXGroup;
 			children = (
+				87803ADA2006696B00518734 /* AMap.bundle */,
 				87ACCDE91FC4F85C0008F7BA /* selfish */,
 				87ACCE021FC4F85C0008F7BA /* selfishTests */,
 				87ACCE0D1FC4F85C0008F7BA /* selfishUITests */,
@@ -1607,6 +1633,12 @@
 		B5F79913E1CABDDFDEA59921 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				87803AD62006656B00518734 /* AMapSearchKit.framework */,
+				87803AD42006653C00518734 /* MAMapKit.framework */,
+				87803AD02006648A00518734 /* UIKit.framework */,
+				87803ACC2006647700518734 /* GLKit.framework */,
+				87803ACD2006647700518734 /* OpenGLES.framework */,
+				87803ACA2006643400518734 /* Security.framework */,
 				87089B1E1FFE60A200FE7629 /* libstdc++.6.0.9.tbd */,
 				87089B1C1FFE608300FE7629 /* libc++.tbd */,
 				87089B1A1FFE607700FE7629 /* libz.tbd */,
@@ -1956,6 +1988,7 @@
 				877030011FCAF030006F410D /* cm2_icn_list_prs.png in Resources */,
 				8770308D1FD4467B006F410D /* 1@3x.png in Resources */,
 				87702FB21FCAF030006F410D /* cm4_my_icn_music.png in Resources */,
+				87803ADB2006696C00518734 /* AMap.bundle in Resources */,
 				87702FFC1FCAF030006F410D /* cm2_poplay_icn_share_prs@3x.png in Resources */,
 				87702F8B1FCAF030006F410D /* cm4_disc_topbtn_daily@3x.png in Resources */,
 				87702F7E1FCAF030006F410D /* cm4_disc_topbtn_list@3x.png in Resources */,
@@ -2099,6 +2132,7 @@
 				877C84011FED395D00882C64 /* SFShopEditTextView.m in Sources */,
 				87702E5A1FCA9DE9006F410D /* SFShopDetailVC.m in Sources */,
 				877030671FD2EAA0006F410D /* SFShopCustomeFoodVC.m in Sources */,
+				87803AC52006618B00518734 /* SFMapVC.m in Sources */,
 				87089B0F1FFD130800FE7629 /* SFAritcleItem.m in Sources */,
 				877C84231FF4777A00882C64 /* SFCommentListVC.m in Sources */,
 				877C84041FED450F00882C64 /* UITextField+Insect.m in Sources */,
@@ -2288,6 +2322,30 @@
 				INFOPLIST_FILE = selfish/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					"\"FLAnimatedImage\"",
+					"-framework",
+					"\"HCSStarRatingView\"",
+					"-framework",
+					"\"JLRoutes\"",
+					"-framework",
+					"\"MBProgressHUD\"",
+					"-framework",
+					"\"MJExtension\"",
+					"-framework",
+					"\"MMMarkdown\"",
+					"-framework",
+					"\"Masonry\"",
+					"-framework",
+					"\"ReactiveCocoa\"",
+					"-framework",
+					"\"SDWebImage\"",
+					"-framework",
+					"\"SVProgressHUD\"",
+					"-ObjC",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.netease.NIM.demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -2313,6 +2371,30 @@
 				INFOPLIST_FILE = selfish/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					"\"FLAnimatedImage\"",
+					"-framework",
+					"\"HCSStarRatingView\"",
+					"-framework",
+					"\"JLRoutes\"",
+					"-framework",
+					"\"MBProgressHUD\"",
+					"-framework",
+					"\"MJExtension\"",
+					"-framework",
+					"\"MMMarkdown\"",
+					"-framework",
+					"\"Masonry\"",
+					"-framework",
+					"\"ReactiveCocoa\"",
+					"-framework",
+					"\"SDWebImage\"",
+					"-framework",
+					"\"SVProgressHUD\"",
+					"-ObjC",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.netease.NIM.demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

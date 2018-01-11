@@ -76,6 +76,7 @@ static  CGFloat padding = 15;
 }
 
 - (void)setUpBinding {
+    __weak typeof(self) weakSelf = self;
     self.addressPickerView.delegate = self;
     self.shopAddress.textField.inputView = self.addressPickerView;
     
@@ -90,6 +91,15 @@ static  CGFloat padding = 15;
     }
     self.city = self.province.subAddress[0];
     NSLog(@"%@ %@", addresses, self.province);
+    
+    // 取消手势
+    UITapGestureRecognizer *tapGR = [[UITapGestureRecognizer alloc] initWithTarget:self action:nil];
+    [[tapGR rac_gestureSignal] subscribeNext:^(id x) {
+        NSString *address = [NSString stringWithFormat:@"%@,%@,%@", weakSelf.province.name, weakSelf.city.name, weakSelf.district.name];
+        weakSelf.shopAddress.textField.text = address;
+        [weakSelf.shopAddress.textField resignFirstResponder];
+    }];
+    [self.view addGestureRecognizer:tapGR];
 }
 
 - (void)loadShopData {
@@ -322,10 +332,12 @@ static  CGFloat padding = 15;
         self.province = self.country.subAddress[row];
         [self.addressPickerView reloadComponent:1];
         [self.addressPickerView reloadComponent:2];
+        [pickerView selectRow:0 inComponent:1 animated:YES];
+        [pickerView selectRow:0 inComponent:2 animated:YES];
     }else if(1 == component) {
         self.city = self.province.subAddress[row];
         [self.addressPickerView reloadComponent:2];
-
+        [pickerView selectRow:0 inComponent:2 animated:YES];
     }else if(2 == component) {
         self.district = self.city.subAddress[row];
         NSLog(@"%@ %@ %@", self.province.name, self.city.name, self.district.name);
@@ -338,7 +350,6 @@ static  CGFloat padding = 15;
     // 1. 获取有所菜单列表
     // 2. 获取制定菜品的详细信息
     // 3. 展示、修改
-    
     NSString *url = @"Selfish://push/SFShopFoodListVC";
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url] options:@{} completionHandler:nil];
 }

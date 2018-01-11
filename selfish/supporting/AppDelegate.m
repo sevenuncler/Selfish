@@ -23,6 +23,7 @@
 #import <AMapFoundationKit/AMapFoundationKit.h>
 #import <AMapLocationKit/AMapLocationKit.h>
 #import "SFAddressVC.h"
+#import "SFMapVC.h"
 
 @interface AppDelegate ()
 
@@ -32,14 +33,15 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [AMapServices sharedServices].apiKey =@"1406a9037028798d4f810fd69062d175";
+
     UIWindow *window = [[UIWindow alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
-    UIViewController *vc = [SFTabBarController new];
+    UIViewController *vc = [SFMapVC new];
     window.rootViewController = vc;
     self.window = window;
     [self.window makeKeyAndVisible];
     [RoutesConfig setUpRoutes:@"Selfish"];
     window.tintColor = SELFISH_MAJRO_COLOR;
-    [AMapServices sharedServices].apiKey =@"1406a9037028798d4f810fd69062d175";
     return YES;
 }
     
