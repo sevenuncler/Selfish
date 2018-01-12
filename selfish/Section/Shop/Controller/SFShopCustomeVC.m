@@ -14,6 +14,8 @@
 #import "SFShopItem.h"
 #import <MJExtension/MJExtension.h>
 #import "SFAddressItem.h"
+#import "SFMapVC.h"
+#import "SFLocationItem.h"
 
 
 @interface SFShopCustomeVC ()<UIPickerViewDataSource, UIPickerViewDelegate>
@@ -40,6 +42,8 @@
 @property(nonatomic,strong) SFCityItem         *city;
 @property(nonatomic,strong) SFProvinceItem     *province;
 @property(nonatomic,strong) SFCountryItem      *country;
+@property(nonatomic,strong) UIButton           *locationAnnocationButton;
+@property(nonatomic,strong) SFLocationItem     *locationItem;
 @end
 
 static  CGFloat padding = 15;
@@ -63,11 +67,61 @@ static  CGFloat padding = 15;
     [self.view addSubview:self.menuAddButton];
     [self.view addSubview:self.shopDetailLabel];
     [self.view addSubview:self.shopDetailAddButton];
+    [self.shopAddress addSubview:self.locationAnnocationButton];
     
     // Do any additional setup after loading the view.
     [self setUpNavigatorBar];
     [self loadShopData];
     [self setUpBinding];
+}
+
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    
+    self.shopName.left = padding;
+    self.shopName.top  = padding;
+    
+    self.shopAddress.left = self.shopName.left;
+    self.shopAddress.top  = self.shopName.botton + padding;
+    
+    self.locationAnnocationButton.right = self.shopAddress.size.width - 5;;
+    self.locationAnnocationButton.centerY = self.shopAddress.size.height/2;
+    
+    self.shopAnnouncment.left = self.shopName.left;
+    self.shopAnnouncment.top  = self.shopAddress.botton + padding;
+    
+    self.shopTypes.left     =   self.shopName.left;
+    self.shopTypes.top      =   self.shopAnnouncment.botton + padding;
+    
+    self.shopAvgCost.left   = self.shopTypes.left;
+    self.shopAvgCost.top    = self.shopTypes.botton + padding;
+    
+    self.shopTags.left   = self.shopAvgCost.left;
+    self.shopTags.top    = self.shopAvgCost.botton + padding;
+    
+    self.shopStarLevel.left   = self.shopTags.left;
+    self.shopStarLevel.top    = self.shopTags.botton + padding;
+    self.shopStarLevel.textField.hidden = YES;
+    self.startRatingView.left = self.shopStarLevel.label.right + padding;
+    self.startRatingView.centerY = self.shopStarLevel.size.height / 2;
+    
+    self.menuAddButton.size    = CGSizeMake(60, 60);
+    self.menuAddButton.centerX = self.view.size.width / 2;;
+    self.menuAddButton.top = self.shopStarLevel.botton + padding;
+    
+    [self.menuLabel sizeToFit];
+    self.menuLabel.left     = self.shopName.left;
+    self.menuLabel.centerY  = self.menuAddButton.centerY;
+    
+    
+    
+    self.shopDetailAddButton.size    = CGSizeMake(60, 60);
+    self.shopDetailAddButton.centerX = self.view.size.width / 2;;
+    self.shopDetailAddButton.top     = self.menuAddButton.botton + 20;
+    
+    [self.shopDetailLabel sizeToFit];
+    self.shopDetailLabel.left     = 15;
+    self.shopDetailLabel.centerY  = self.shopDetailAddButton.centerY;
 }
 
 - (void)setUpNavigatorBar {
@@ -100,6 +154,20 @@ static  CGFloat padding = 15;
         [weakSelf.shopAddress.textField resignFirstResponder];
     }];
     [self.view addGestureRecognizer:tapGR];
+    
+    [[self.locationAnnocationButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+        SFMapVC *vc = [SFMapVC new];
+        vc.locationHandler = ^(SFLocationItem *item) {
+            weakSelf.locationItem = item;
+            NSString *address = [NSString stringWithFormat:@"%@,%@,%@", item.mapReGeocode.addressComponent.province,item.mapReGeocode.addressComponent.city, item.mapReGeocode.addressComponent.district];
+            weakSelf.shopAddress.textField.text = address;
+        };
+        if(weakSelf.navigationController) {
+            [weakSelf.navigationController pushViewController:vc animated:YES];
+        }else {
+            [weakSelf presentViewController:vc animated:YES completion:nil];
+        }
+    }];
 }
 
 - (void)loadShopData {
@@ -245,51 +313,7 @@ static  CGFloat padding = 15;
     // Dispose of any resources that can be recreated.
 }
 
-- (void)viewWillLayoutSubviews {
-    [super viewWillLayoutSubviews];
 
-    self.shopName.left = padding;
-    self.shopName.top  = padding;
-    
-    self.shopAddress.left = self.shopName.left;
-    self.shopAddress.top  = self.shopName.botton + padding;
-    
-    self.shopAnnouncment.left = self.shopName.left;
-    self.shopAnnouncment.top  = self.shopAddress.botton + padding;
-    
-    self.shopTypes.left     =   self.shopName.left;
-    self.shopTypes.top      =   self.shopAnnouncment.botton + padding;
-    
-    self.shopAvgCost.left   = self.shopTypes.left;
-    self.shopAvgCost.top    = self.shopTypes.botton + padding;
-    
-    self.shopTags.left   = self.shopAvgCost.left;
-    self.shopTags.top    = self.shopAvgCost.botton + padding;
-    
-    self.shopStarLevel.left   = self.shopTags.left;
-    self.shopStarLevel.top    = self.shopTags.botton + padding;
-    self.shopStarLevel.textField.hidden = YES;
-    self.startRatingView.left = self.shopStarLevel.label.right + padding;
-    self.startRatingView.centerY = self.shopStarLevel.size.height / 2;
-    
-    self.menuAddButton.size    = CGSizeMake(60, 60);
-    self.menuAddButton.centerX = self.view.size.width / 2;;
-    self.menuAddButton.top = self.shopStarLevel.botton + padding;
-    
-    [self.menuLabel sizeToFit];
-    self.menuLabel.left     = self.shopName.left;
-    self.menuLabel.centerY  = self.menuAddButton.centerY;
-    
-    
-    
-    self.shopDetailAddButton.size    = CGSizeMake(60, 60);
-    self.shopDetailAddButton.centerX = self.view.size.width / 2;;
-    self.shopDetailAddButton.top     = self.menuAddButton.botton + 20;
-    
-    [self.shopDetailLabel sizeToFit];
-    self.shopDetailLabel.left     = 15;
-    self.shopDetailLabel.centerY  = self.shopDetailAddButton.centerY;
-}
 
 #pragma mark - UIPickerViewDelegate
 
@@ -471,6 +495,15 @@ static  CGFloat padding = 15;
         _addressPickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_WIDTH*0.618f)];
     }
     return _addressPickerView;
+}
+
+- (UIButton *)locationAnnocationButton {
+    if(!_locationAnnocationButton) {
+        _locationAnnocationButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_locationAnnocationButton setImage:[UIImage imageNamed:@"image"] forState:UIControlStateNormal];
+        _locationAnnocationButton.size = CGSizeMake(40, 40);
+    }
+    return _locationAnnocationButton;
 }
 
 @end

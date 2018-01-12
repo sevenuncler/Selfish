@@ -7,10 +7,7 @@
 //
 
 #import "SFMapVC.h"
-#import <AMapFoundationKit/AMapFoundationKit.h>
-#import <MAMapKit/MAMapKit.h>
-#import <AMapLocationKit/AMapLocationKit.h>
-#import <AMapSearchKit/AMapSearchKit.h>
+
 
 @interface SFMapVC () <MAMapViewDelegate,AMapSearchDelegate>
 @property(nonatomic,strong) AMapSearchAPI *search;
@@ -59,11 +56,13 @@
     {
         CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(request.location.latitude, request.location.longitude);
         //添加一根针
-//        ReGeocodeAnnotation *reGeocodeAnnotation = [[ReGeocodeAnnotation alloc] initWithCoordinate:coordinate
-//                                                                                         reGeocode:response.regeocode];
-//
-//        [self.mapView addAnnotation:reGeocodeAnnotation];//要添加标注
-//        [self.mapView selectAnnotation:reGeocodeAnnotation animated:YES];//标注是否有动画效果
+        if(self.locationHandler) {
+            SFLocationItem *locationItem = [SFLocationItem new];
+            locationItem.mapReGeocode = response.regeocode;
+            locationItem.latitude = request.location.latitude;
+            locationItem.longitude = request.location.longitude;
+            self.locationHandler(locationItem);
+        }
     }
 }
 

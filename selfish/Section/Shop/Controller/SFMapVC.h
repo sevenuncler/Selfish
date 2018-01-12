@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AMapFoundationKit/AMapFoundationKit.h>
+#import <MAMapKit/MAMapKit.h>
+#import <AMapLocationKit/AMapLocationKit.h>
+#import <AMapSearchKit/AMapSearchKit.h>
+#import "SFLocationItem.h"
 
 @interface SFMapVC : UIViewController
-
+@property(nonatomic,copy)void(^locationHandler)(SFLocationItem *item);
 @end

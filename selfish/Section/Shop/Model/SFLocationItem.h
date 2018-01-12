@@ -9,8 +9,11 @@
 #import "SUItem.h"
 #import <AMapLocationKit/AMapLocationKit.h>
 #import <AMapFoundationKit/AMapFoundationKit.h>
+#import <AMapSearchKit/AMapSearchKit.h>
+
 @interface SFLocationItem : SUItem
 @property(nonatomic,strong) AMapLocationReGeocode *reGecode;
+@property(nonatomic,strong) AMapReGeocode *mapReGeocode;
 ///纬度
 @property (nonatomic, assign) CGFloat latitude;
 ///经度

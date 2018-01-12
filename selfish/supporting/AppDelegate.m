@@ -36,7 +36,7 @@
     [AMapServices sharedServices].apiKey =@"1406a9037028798d4f810fd69062d175";
 
     UIWindow *window = [[UIWindow alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
-    UIViewController *vc = [SFMapVC new];
+    UIViewController *vc = [SFTabBarController new];
     window.rootViewController = vc;
     self.window = window;
     [self.window makeKeyAndVisible];
