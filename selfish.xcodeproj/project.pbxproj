@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4A703EAB200A032D0007648A /* SUImageBrowserVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A703EAA200A032D0007648A /* SUImageBrowserVC.m */; };
 		4ABAFCF80B53792B92DC492E /* Pods_selfish.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F814782EE40278912260C417 /* Pods_selfish.framework */; };
 		4ACC3E511FE9F40600ABE49D /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4ACC3E501FE9F40600ABE49D /* libsqlite3.0.tbd */; };
 		87089B0F1FFD130800FE7629 /* SFAritcleItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 87089B0E1FFD130800FE7629 /* SFAritcleItem.m */; };
@@ -358,6 +359,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4A703EA9200A032D0007648A /* SUImageBrowserVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUImageBrowserVC.h; sourceTree = "<group>"; };
+		4A703EAA200A032D0007648A /* SUImageBrowserVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SUImageBrowserVC.m; sourceTree = "<group>"; };
 		4ACC3E501FE9F40600ABE49D /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		71E838DD0DEEB7533B44F0DE /* Pods-selfish.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-selfish.release.xcconfig"; path = "Pods/Target Support Files/Pods-selfish/Pods-selfish.release.xcconfig"; sourceTree = "<group>"; };
 		788519F427174B6659B77C89 /* Pods-selfish.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-selfish.debug.xcconfig"; path = "Pods/Target Support Files/Pods-selfish/Pods-selfish.debug.xcconfig"; sourceTree = "<group>"; };
@@ -1088,6 +1091,8 @@
 				87702E801FCAEBE5006F410D /* SFTabBarController.m */,
 				8770303A1FCAFD27006F410D /* SFNavigationController.h */,
 				8770303B1FCAFD27006F410D /* SFNavigationController.m */,
+				4A703EA9200A032D0007648A /* SUImageBrowserVC.h */,
+				4A703EAA200A032D0007648A /* SUImageBrowserVC.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2028,8 +2033,10 @@
 				"${BUILT_PRODUCTS_DIR}/JLRoutes/JLRoutes.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/MJExtension/MJExtension.framework",
+				"${BUILT_PRODUCTS_DIR}/MMMarkdown/MMMarkdown.framework",
 				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
 				"${BUILT_PRODUCTS_DIR}/ReactiveCocoa/ReactiveCocoa.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -2039,8 +2046,10 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JLRoutes.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJExtension.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MMMarkdown.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveCocoa.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2078,7 +2087,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -2125,6 +2134,7 @@
 				877030511FCE3580006F410D /* SUSQLManager.m in Sources */,
 				877C840E1FF3DE7D00882C64 /* SFCommentItem.m in Sources */,
 				87702E7B1FCAB884006F410D /* SFShopItem.m in Sources */,
+				4A703EAB200A032D0007648A /* SUImageBrowserVC.m in Sources */,
 				87702E541FC9B737006F410D /* SFShopTableVC.m in Sources */,
 				8770304E1FCD9182006F410D /* SFShopCreateVC.m in Sources */,
 				87ACCE491FC91E4F0008F7BA /* HomeInteractiveAnimator.m in Sources */,
