@@ -22,6 +22,7 @@
 #import <SVProgressHUD/SVProgressHUD.h>
 #import <MJExtension/MJExtension.h>
 #import "SFCommentItem.h"
+#import "SUImageBrowserVC.h"
 
 @interface SFShopDetailVC ()
 
@@ -190,7 +191,13 @@
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if(indexPath.section == 2 && indexPath.row == 0) {
+    if(indexPath.section == 0 && indexPath.row == 0) {
+        SUImageBrowserVC *vc = [SUImageBrowserVC new];
+        vc.images = self.shopItem.pics.copy;
+        if(self.navigationController) {
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+    }else if(indexPath.section == 2 && indexPath.row == 0) {
         SFCommentListVC *vc = [SFCommentListVC new];
         vc.sid = self.shopItem.sid;
         if(self.navigationController) {

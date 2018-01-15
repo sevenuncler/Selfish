@@ -11,6 +11,7 @@
 #import "StatusCell.h"
 #import <MJExtension/MJExtension.h>
 #import <SVProgressHUD/SVProgressHUD.h>
+#import "SUImageBrowserVC.h"
 
 @interface SFCommentListVC ()
 @property(nonatomic,strong) dispatch_semaphore_t commentsSema;
@@ -65,8 +66,9 @@ static NSString * const reuseID = @"reuseID";
             NSArray *content = result[@"content"];
             weakSelf.commentsSema = dispatch_semaphore_create(-content.count);
             [content enumerateObjectsUsingBlock:^(NSDictionary *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                __strong typeof(weakSelf) strongSelf = weakSelf;
                 SFCommentItem *item = [SFCommentItem mj_objectWithKeyValues:obj];
-                [weakSelf itemHeight:item];
+                [strongSelf itemHeight:item];
             }];
         }
         dispatch_group_notify(weakSelf.group, dispatch_get_main_queue(), ^{
@@ -137,7 +139,19 @@ static NSString * const reuseID = @"reuseID";
     cell.songStatusView.images = item.pics.mutableCopy;
     cell.songStatusView.contentLabel.text = item.content;
     cell.songStatusView.nameLabel.text = item.content;
+    UITapGestureRecognizer *tapGR = [[UITapGestureRecognizer alloc] init];
+    __weak typeof(cell) weakCell = cell;
+    [[tapGR rac_gestureSignal] subscribeNext:^(UITapGestureRecognizer *x) {
+        __strong typeof(weakCell) strongCell = weakCell;
+        SUImageBrowserVC *vc = [SUImageBrowserVC new];
+        vc.images = strongCell.songStatusView.images.copy;
+        if(self.navigationController) {
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+    }];
+    [cell.songStatusView.contentView addGestureRecognizer:tapGR];
     [cell.songStatusView setNeedsLayout];
+    
     return cell;
 }
 

@@ -319,6 +319,7 @@
 		87803AD52006653C00518734 /* MAMapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87803AD42006653C00518734 /* MAMapKit.framework */; };
 		87803AD72006656B00518734 /* AMapSearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87803AD62006656B00518734 /* AMapSearchKit.framework */; };
 		87803ADB2006696C00518734 /* AMap.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 87803ADA2006696B00518734 /* AMap.bundle */; };
+		87803ADE200BA76F00518734 /* SUImageBrowserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 87803ADD200BA76F00518734 /* SUImageBrowserCell.m */; };
 		8789C5E91FFEF67B0089D4DA /* SFShopSelectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8789C5E81FFEF67B0089D4DA /* SFShopSelectionCell.m */; };
 		8789C5EC20009CF00089D4DA /* SFLocationItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8789C5EB20009CF00089D4DA /* SFLocationItem.m */; };
 		8789C5EF2000BF810089D4DA /* SFShopAreaViewModel2.m in Sources */ = {isa = PBXBuildFile; fileRef = 8789C5EE2000BF810089D4DA /* SFShopAreaViewModel2.m */; };
@@ -737,6 +738,8 @@
 		87803AD42006653C00518734 /* MAMapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MAMapKit.framework; sourceTree = "<group>"; };
 		87803AD62006656B00518734 /* AMapSearchKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AMapSearchKit.framework; sourceTree = "<group>"; };
 		87803ADA2006696B00518734 /* AMap.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = AMap.bundle; path = MAMapKit.framework/AMap.bundle; sourceTree = "<group>"; };
+		87803ADC200BA76F00518734 /* SUImageBrowserCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SUImageBrowserCell.h; sourceTree = "<group>"; };
+		87803ADD200BA76F00518734 /* SUImageBrowserCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SUImageBrowserCell.m; sourceTree = "<group>"; };
 		8789C5E71FFEF67B0089D4DA /* SFShopSelectionCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFShopSelectionCell.h; sourceTree = "<group>"; };
 		8789C5E81FFEF67B0089D4DA /* SFShopSelectionCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFShopSelectionCell.m; sourceTree = "<group>"; };
 		8789C5EA20009CF00089D4DA /* SFLocationItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFLocationItem.h; sourceTree = "<group>"; };
@@ -1123,6 +1126,8 @@
 				877631FC1FE8908B009EA696 /* SUTopBarView.xib */,
 				87702E711FCAB4D7006F410D /* SUTableViewCell.h */,
 				87702E701FCAB4D6006F410D /* SUTableViewCell.m */,
+				87803ADC200BA76F00518734 /* SUImageBrowserCell.h */,
+				87803ADD200BA76F00518734 /* SUImageBrowserCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2087,7 +2092,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -2126,6 +2131,7 @@
 				87ACCE371FC5B1EF0008F7BA /* HomeVC.m in Sources */,
 				877C84071FED45FC00882C64 /* SUTextField.m in Sources */,
 				87803ABE20043D2700518734 /* SFAddressVC.m in Sources */,
+				87803ADE200BA76F00518734 /* SUImageBrowserCell.m in Sources */,
 				877030571FD2AA85006F410D /* Model.xcdatamodeld in Sources */,
 				8770303F1FCB8A84006F410D /* SFShopCatagoryView.m in Sources */,
 				877631FB1FE8902F009EA696 /* SUAlbumsTableViewCell.m in Sources */,

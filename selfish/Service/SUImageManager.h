@@ -17,6 +17,7 @@
 
 - (void)setImageView:(UIImageView *)imageView withUrl:(NSString *)url;
 - (void)setImageView:(UIImageView *)imageView withURL:(NSURL *)url;
+- (void)setImageView:(UIImageView *)imageView withID:(id)obj;
 
 - (void)fetchImageWithURL:(NSString *)url finish:(void(^)(UIImage *))finishHandler;
 

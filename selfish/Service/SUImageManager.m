@@ -21,6 +21,16 @@
     return imageManager;
 }
 
+- (void)setImageView:(UIImageView *)imageView withID:(id)obj {
+    if([obj isKindOfClass:[UIImage class]]) {
+        imageView.image = obj;
+    }else if([obj isKindOfClass:[NSURL class]]) {
+        [self setImageView:imageView withURL:obj];
+    }else if([obj isKindOfClass:[NSString class]]) {
+        [self setImageView:imageView withUrl:obj];
+    }
+}
+
 - (void)setImageView:(UIImageView *)imageView withUrl:(NSString *)url {
     if([self objectForKey:url]) {
         dispatch_async(dispatch_get_main_queue(), ^{
