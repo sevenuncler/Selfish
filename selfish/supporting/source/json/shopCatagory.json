@@ -2,14 +2,14 @@
     "catagories" : [
                     {
                         "name" : "美食",
-                        "subtype"  : [
+                        "subTypes"  : [
                                       {"name" : "火锅"},
                                       {"name" : "自助"},
                                       {"name" : "面条馆"}
                         ]
                     },{
                         "name" : "娱乐",
-                        "subtype"  : [
+                        "subTypes"  : [
                                       {"name" : "一人KTV"},
                                       {"name" : "自助"},
                                       {"name" : "面条馆"}

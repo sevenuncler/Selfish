@@ -15,11 +15,44 @@
 }
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
+    switch (component) {
+        case 0:
+            return self.items.count;
+        case 1:
+            return self.items[self.currentIdx].subTypes.count;
+        default:
+            break;
+    }
     return 2;
 }
 
-- (nullable NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+    switch (component) {
+        case 0:
+            return self.items[row].name;
+        case 1:
+            return self.items[self.currentIdx].subTypes[row].name;
+        default:
+            break;
+    }
     return @"类型";
+}
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+    switch (component) {
+        case 0:
+            self.currentIdx  = row;
+            [pickerView reloadComponent:1];
+            break;
+        case 1:
+            if(self.complectionHandler) {
+                self.complectionHandler(self.items[self.currentIdx], row);
+            }
+            break;
+        default:
+            break;
+    }
+    
 }
 
 - (NSMutableArray *)items {

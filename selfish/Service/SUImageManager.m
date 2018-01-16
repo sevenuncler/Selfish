@@ -72,7 +72,18 @@
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
             UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
             if(image == nil) {
-                [imageView sd_setImageWithURL:url];
+//                [imageView sd_setImageWithURL:url];
+//                NSString* strUrl = @"http://xxx.com/x.jpg";
+                SDWebImageManager *manager = [SDWebImageManager sharedManager];
+                NSString* key = [manager cacheKeyForURL:url];
+                SDImageCache* cache = [SDImageCache sharedImageCache];
+                //此方法会先从memory中取。
+                image = [cache imageFromDiskCacheForKey:key];
+                if(image) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        imageView.image = [self objectForKey:url];
+                    });
+                }
                 return;
             }
             [self setObject:image forKey:url];

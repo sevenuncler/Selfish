@@ -8,7 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "SFShopType1.h"
 
 @interface SFShopTypeViewModel : NSObject <UIPickerViewDataSource, UIPickerViewDelegate>
-@property(nonatomic,strong) NSMutableArray *items;
+@property(nonatomic,strong) NSMutableArray<SFShopType1 *> *items;
+@property(nonatomic,copy)   void(^complectionHandler)(SFShopType1 *type, NSInteger idx);
+@property(nonatomic,assign) NSInteger currentIdx;
 @end

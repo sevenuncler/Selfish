@@ -119,7 +119,7 @@ static NSString * const reuseID = @"reuseID";
     cell.textLabel.text = foodItem.name;
     if(foodItem.pics.count>0) {
         NSString *src = foodItem.pics[0];
-        
+        cell.imageView.image = [UIImage imageNamed:@"image"];
         SUImageManager *imageManager = [SUImageManager defaultImageManager];
         [imageManager setImageView:cell.imageView withURL:[NSURL URLWithString:src]];
     }

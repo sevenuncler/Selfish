@@ -17,6 +17,8 @@
 #import "SFMapVC.h"
 #import "SFLocationItem.h"
 #import "SFShopTypeViewModel.h"
+#import "SFShopType1.h"
+
 
 
 @interface SFShopCustomeVC ()<UIPickerViewDataSource, UIPickerViewDelegate>
@@ -137,9 +139,27 @@ static  CGFloat padding = 15;
     self.addressPickerView.delegate = self;
     self.shopAddress.textField.inputView = self.addressPickerView;
     
+    NSString *filePath1 = [[NSBundle mainBundle] pathForResource:@"shopCatagory" ofType:@".json"];
+    NSData *data1 = [NSData dataWithContentsOfFile:filePath1];
+    NSError *error1 = nil;
+    NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data1 options:NSJSONReadingAllowFragments error:&error1];
+    NSArray *array = dict[@"catagories"];
+    NSMutableArray *mutableArray = [NSMutableArray array];
+    [array enumerateObjectsUsingBlock:^(NSDictionary *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        SFShopType1 *type = [SFShopType1 mj_objectWithKeyValues:obj];
+        [mutableArray addObject:type];
+    }];
+    
     self.typePickerView.delegate   = self.shopTypeViewModel;
     self.typePickerView.dataSource = self.shopTypeViewModel;
     self.shopTypes.textField.inputView = self.typePickerView;
+    self.shopTypeViewModel.items = mutableArray.copy;
+    self.shopTypeViewModel.complectionHandler = ^(SFShopType1 *type, NSInteger idx) {
+        if(type && idx>=0) {
+            weakSelf.shopTypes.textField.text = [NSString stringWithFormat:@"%@,%@", type.name, type.subTypes[idx].name];
+            [weakSelf.view endEditing:YES];
+        }
+    };
     
     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"address" ofType:@".json"];
     NSData *data = [NSData dataWithContentsOfFile:filePath];
@@ -529,6 +549,13 @@ static  CGFloat padding = 15;
 //        [_typePickerView rac_signalForSelector:@selector(pickerViewDelegateAction) fromProtocol:@protocol(UIPickerViewDelegate)];
     }
     return _typePickerView;
+}
+
+- (SFShopTypeViewModel *)shopTypeViewModel {
+    if(!_shopTypeViewModel) {
+        _shopTypeViewModel = [SFShopTypeViewModel new];
+    }
+    return _shopTypeViewModel;
 }
 
 @end
