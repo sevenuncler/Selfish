@@ -320,6 +320,8 @@
 		87803AD72006656B00518734 /* AMapSearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87803AD62006656B00518734 /* AMapSearchKit.framework */; };
 		87803ADB2006696C00518734 /* AMap.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 87803ADA2006696B00518734 /* AMap.bundle */; };
 		87803ADE200BA76F00518734 /* SUImageBrowserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 87803ADD200BA76F00518734 /* SUImageBrowserCell.m */; };
+		87803AE0200CEF4600518734 /* shopCatagory.json in Resources */ = {isa = PBXBuildFile; fileRef = 87803ADF200CEF4600518734 /* shopCatagory.json */; };
+		87803AE3200CFE9400518734 /* SFShopTypeViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 87803AE2200CFE9400518734 /* SFShopTypeViewModel.m */; };
 		8789C5E91FFEF67B0089D4DA /* SFShopSelectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8789C5E81FFEF67B0089D4DA /* SFShopSelectionCell.m */; };
 		8789C5EC20009CF00089D4DA /* SFLocationItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8789C5EB20009CF00089D4DA /* SFLocationItem.m */; };
 		8789C5EF2000BF810089D4DA /* SFShopAreaViewModel2.m in Sources */ = {isa = PBXBuildFile; fileRef = 8789C5EE2000BF810089D4DA /* SFShopAreaViewModel2.m */; };
@@ -740,6 +742,9 @@
 		87803ADA2006696B00518734 /* AMap.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = AMap.bundle; path = MAMapKit.framework/AMap.bundle; sourceTree = "<group>"; };
 		87803ADC200BA76F00518734 /* SUImageBrowserCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SUImageBrowserCell.h; sourceTree = "<group>"; };
 		87803ADD200BA76F00518734 /* SUImageBrowserCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SUImageBrowserCell.m; sourceTree = "<group>"; };
+		87803ADF200CEF4600518734 /* shopCatagory.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = shopCatagory.json; sourceTree = "<group>"; };
+		87803AE1200CFE9400518734 /* SFShopTypeViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFShopTypeViewModel.h; sourceTree = "<group>"; };
+		87803AE2200CFE9400518734 /* SFShopTypeViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFShopTypeViewModel.m; sourceTree = "<group>"; };
 		8789C5E71FFEF67B0089D4DA /* SFShopSelectionCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFShopSelectionCell.h; sourceTree = "<group>"; };
 		8789C5E81FFEF67B0089D4DA /* SFShopSelectionCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFShopSelectionCell.m; sourceTree = "<group>"; };
 		8789C5EA20009CF00089D4DA /* SFLocationItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFLocationItem.h; sourceTree = "<group>"; };
@@ -921,6 +926,8 @@
 				877030601FD2E435006F410D /* SFShopCustomeRowViewModel.m */,
 				8770306C1FD2EFC2006F410D /* SFShopFoodCustomeViewModel.h */,
 				8770306D1FD2EFC2006F410D /* SFShopFoodCustomeViewModel.m */,
+				87803AE1200CFE9400518734 /* SFShopTypeViewModel.h */,
+				87803AE2200CFE9400518734 /* SFShopTypeViewModel.m */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1426,6 +1433,7 @@
 			isa = PBXGroup;
 			children = (
 				87803AC12004405B00518734 /* address.json */,
+				87803ADF200CEF4600518734 /* shopCatagory.json */,
 			);
 			path = json;
 			sourceTree = "<group>";
@@ -1784,6 +1792,7 @@
 				87702FB81FCAF030006F410D /* cm2_runfm_btn_loved_prs.png in Resources */,
 				877030281FCAF030006F410D /* cm2_playlist_icn_one@2x.png in Resources */,
 				87702F901FCAF030006F410D /* cm2_play_disc@3x.png in Resources */,
+				87803AE0200CEF4600518734 /* shopCatagory.json in Resources */,
 				877030321FCAF030006F410D /* home_tab_selected.png in Resources */,
 				87702F7B1FCAF030006F410D /* cm2_playlist_icn_shuffle@2x.png in Resources */,
 				87702FD21FCAF030006F410D /* cm2_runfm_btn_pause.png in Resources */,
@@ -2127,6 +2136,7 @@
 				877030741FD3DC81006F410D /* SFAccountRegisterVC.m in Sources */,
 				87702E7E1FCAC113006F410D /* SFShopDetailCoverItem.m in Sources */,
 				8770305A1FD2DA4A006F410D /* SFShopCustomeDecorationVC.m in Sources */,
+				87803AE3200CFE9400518734 /* SFShopTypeViewModel.m in Sources */,
 				87ACCE321FC5AF4C0008F7BA /* UIImage+Size.m in Sources */,
 				87ACCE371FC5B1EF0008F7BA /* HomeVC.m in Sources */,
 				877C84071FED45FC00882C64 /* SUTextField.m in Sources */,

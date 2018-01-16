@@ -16,6 +16,7 @@
 #import "SFAddressItem.h"
 #import "SFMapVC.h"
 #import "SFLocationItem.h"
+#import "SFShopTypeViewModel.h"
 
 
 @interface SFShopCustomeVC ()<UIPickerViewDataSource, UIPickerViewDelegate>
@@ -37,6 +38,7 @@
 @property(nonatomic,strong) SFShopEditTextView *shopStarLevel;
 @property(nonatomic,strong) HCSStarRatingView  *startRatingView;
 @property(nonatomic,strong) UIPickerView       *addressPickerView;
+@property(nonatomic,strong) UIPickerView       *typePickerView;
 @property(nonatomic,strong) NSMutableArray     *cities;
 @property(nonatomic,strong) SFDistrictItem     *district;
 @property(nonatomic,strong) SFCityItem         *city;
@@ -44,6 +46,7 @@
 @property(nonatomic,strong) SFCountryItem      *country;
 @property(nonatomic,strong) UIButton           *locationAnnocationButton;
 @property(nonatomic,strong) SFLocationItem     *locationItem;
+@property(nonatomic,strong) SFShopTypeViewModel*shopTypeViewModel;
 @end
 
 static  CGFloat padding = 15;
@@ -134,6 +137,10 @@ static  CGFloat padding = 15;
     self.addressPickerView.delegate = self;
     self.shopAddress.textField.inputView = self.addressPickerView;
     
+    self.typePickerView.delegate   = self.shopTypeViewModel;
+    self.typePickerView.dataSource = self.shopTypeViewModel;
+    self.shopTypes.textField.inputView = self.typePickerView;
+    
     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"address" ofType:@".json"];
     NSData *data = [NSData dataWithContentsOfFile:filePath];
     NSError *error = nil;
@@ -149,9 +156,17 @@ static  CGFloat padding = 15;
     // 取消手势
     UITapGestureRecognizer *tapGR = [[UITapGestureRecognizer alloc] initWithTarget:self action:nil];
     [[tapGR rac_gestureSignal] subscribeNext:^(id x) {
-        NSString *address = [NSString stringWithFormat:@"%@,%@,%@", weakSelf.province.name, weakSelf.city.name, weakSelf.district.name];
-        weakSelf.shopAddress.textField.text = address;
-        [weakSelf.shopAddress.textField resignFirstResponder];
+        if(weakSelf.shopAddress.textField.isFirstResponder) {
+            NSString *address = [NSString stringWithFormat:@"%@,%@,%@", weakSelf.province.name, weakSelf.city.name, weakSelf.district.name];
+            weakSelf.shopAddress.textField.text = address;
+            [weakSelf.shopAddress.textField resignFirstResponder];
+        }
+        if(weakSelf.shopTypes.textField.isFirstResponder) {
+            NSString *address = [NSString stringWithFormat:@"%@,%@,%@", weakSelf.province.name, weakSelf.city.name, weakSelf.district.name];
+            weakSelf.shopTypes.textField.text = address;
+            [weakSelf.shopTypes.textField resignFirstResponder];
+        }
+        [weakSelf.view endEditing:YES];
     }];
     [self.view addGestureRecognizer:tapGR];
     
@@ -313,7 +328,9 @@ static  CGFloat padding = 15;
     // Dispose of any resources that can be recreated.
 }
 
-
+- (void)pickerViewDelegateAction {
+    
+}
 
 #pragma mark - UIPickerViewDelegate
 
@@ -492,7 +509,7 @@ static  CGFloat padding = 15;
 
 - (UIPickerView *)addressPickerView {
     if(!_addressPickerView) {
-        _addressPickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_WIDTH*0.618f)];
+        _addressPickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_WIDTH*0.6)];
     }
     return _addressPickerView;
 }
@@ -504,6 +521,14 @@ static  CGFloat padding = 15;
         _locationAnnocationButton.size = CGSizeMake(40, 40);
     }
     return _locationAnnocationButton;
+}
+
+- (UIPickerView *)typePickerView {
+    if(!_typePickerView) {
+        _typePickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_WIDTH*0.6)];
+//        [_typePickerView rac_signalForSelector:@selector(pickerViewDelegateAction) fromProtocol:@protocol(UIPickerViewDelegate)];
+    }
+    return _typePickerView;
 }
 
 @end
