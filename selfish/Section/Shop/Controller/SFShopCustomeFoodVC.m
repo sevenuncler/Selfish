@@ -192,6 +192,8 @@ static NSString * const reuseTableViewCell = @"SUTableViewCell";
         if(0 == indexPath.row) {
             SFShopCustomeFoodRowView *foodRowView = [[SFShopCustomeFoodRowView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44)];
             cell.myContentView = foodRowView;
+            foodRowView.namelabel.text = @"单价";
+            foodRowView.contentView.text = @"￥99.99";
         }else if(1 == indexPath.row) {
             SFShopCustomeFoodRowView *foodRowView = [[SFShopCustomeFoodRowView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44)];
             cell.myContentView = foodRowView;

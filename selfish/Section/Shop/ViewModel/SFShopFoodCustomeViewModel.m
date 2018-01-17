@@ -77,7 +77,11 @@ static NSString * const reuseID = @"SFShopCustomeRowPic";
 //            });
         }
     };
-    
+    if(indexPath.item == self.pics.count-1) {
+        cell.deleteButton.hidden = YES;
+    }else {
+        cell.deleteButton.hidden = NO;
+    }
     
     return cell;
 }
@@ -89,6 +93,7 @@ static NSString * const reuseID = @"SFShopCustomeRowPic";
 }
     
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"selected at %zi", indexPath.row);
     if(indexPath.item == self.pics.count - 1) {
         SUImagePickerViewController *imagePickerVC = [SUImagePickerViewController new];
         __weak typeof(self) weakSelf = self;

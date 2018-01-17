@@ -10,6 +10,7 @@
 
 @interface SFShopCustomeFoodRowView : UIView
 @property(nonatomic,strong) UILabel  *namelabel;
-@property(nonatomic,strong) UILabel  *contentView;
+@property(nonatomic,strong) UITextField *contentView;
 @property(nonatomic,strong) UIButton *rightButton;
+@property(nonatomic,copy) void(^buttonHandler)(id sender);
 @end

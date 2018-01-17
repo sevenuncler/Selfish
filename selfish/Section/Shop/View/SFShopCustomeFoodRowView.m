@@ -50,13 +50,17 @@
     if(!_rightButton) {
         _rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_rightButton setImage:[UIImage imageNamed:@"image"] forState:UIControlStateNormal];
+        __weak typeof(self) weakSelf = self;
+        [[_rightButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+            [weakSelf.contentView becomeFirstResponder];
+        }];
     }
     return _rightButton;
 }
 
-- (UILabel *)contentView {
+- (UITextField *)contentView {
     if(!_contentView) {
-        _contentView = [UILabel new];
+        _contentView = [UITextField new];
         _contentView.text = @"内容";
     }
     return _contentView;

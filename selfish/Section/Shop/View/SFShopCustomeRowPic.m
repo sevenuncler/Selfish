@@ -31,12 +31,27 @@
     self.deleteButton.center = CGPointMake(0, 0);
 }
 
+// 让删除超出父类部门按钮生效
+- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
+    UIView *view = [super hitTest:point withEvent:event];
+    if (view == nil) {
+        // 转换坐标系
+        CGPoint newPoint = [self.deleteButton convertPoint:point fromView:self];
+        // 判断触摸点是否在button上
+        if (CGRectContainsPoint(self.deleteButton.bounds, newPoint)) {
+            view = self.deleteButton;
+        }
+    }
+    return view;
+}
+
 - (UIImageView *)imageView {
     if(!_imageView) {
         _imageView = [[UIImageView alloc] init];
         _imageView.image = [UIImage imageNamed:@"image"];
         _imageView.layer.masksToBounds = YES;
         _imageView.layer.cornerRadius  = 10;
+        _imageView.userInteractionEnabled = YES;
     }
     return _imageView;
 }
@@ -51,5 +66,6 @@
     }
     return _deleteButton;
 }
+
 
 @end
