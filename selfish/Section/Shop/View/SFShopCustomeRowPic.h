@@ -10,4 +10,6 @@
 
 @interface SFShopCustomeRowPic : UICollectionViewCell
 @property(nonatomic,strong) UIImageView *imageView;
+@property(nonatomic,strong) UIButton    *deleteButton;
+@property(nonatomic,copy) void(^deleteHandler)(void);
 @end

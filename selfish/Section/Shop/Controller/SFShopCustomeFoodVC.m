@@ -108,9 +108,17 @@ static NSString * const reuseTableViewCell = @"SUTableViewCell";
 }
 
 -(void)setUpDataBinding {
+    __weak typeof(self) weakSelf = self;
     self.foodPicViewModel = [SFShopFoodCustomeViewModel new];
     self.foodPicView.picsCollectionView.dataSource  = self.foodPicViewModel;
     self.foodPicView.picsCollectionView.delegate    = self.foodPicViewModel;
+    
+    UITapGestureRecognizer *tapGR = [UITapGestureRecognizer new];
+    [[tapGR rac_gestureSignal] subscribeNext:^(UITapGestureRecognizer *x) {
+        [weakSelf.view endEditing:YES];
+    }];
+    tapGR.numberOfTapsRequired = 2;
+    [self.view addGestureRecognizer:tapGR];
 }
 
 #pragma mark - Table view Delegate
@@ -164,7 +172,7 @@ static NSString * const reuseTableViewCell = @"SUTableViewCell";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     SUTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseTableViewCell forIndexPath:indexPath];
-    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     // Configure the cell...
     if(0 == indexPath.section) { // 标题
         if(0 == indexPath.row) {

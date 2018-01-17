@@ -67,6 +67,18 @@ static NSString * const reuseID = @"SFShopCustomeRowPic";
         SUImageManager *imageManager = [SUImageManager defaultImageManager];
         [imageManager setImageView:cell.imageView withUrl:obj];
     }
+    __weak typeof(self) weakSelf = self;
+    cell.deleteHandler = ^{
+        NSLog(@"%ld %ld", indexPath.row, weakSelf.pics.count);
+        if(indexPath.row<weakSelf.pics.count) {
+            [weakSelf.pics removeObjectAtIndex:indexPath.row];
+//            dispatch_async(dispatch_get_main_queue(), ^{
+                [_internalCollection reloadData];
+//            });
+        }
+    };
+    
+    
     return cell;
 }
 

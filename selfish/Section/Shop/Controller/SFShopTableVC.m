@@ -321,6 +321,7 @@ static BOOL isRefresh = YES;
     cell.shopNameLabel.text        = item.name;
     cell.shopAvergaeCostLabel.text = [NSString stringWithFormat:@"人均:￥%.2lf",item.averageCost];
     cell.shopLocationLabel.text    = item.locationName;
+//    cell.shopTypeLabel.text = item.type;
     switch (item.type) {
         case SFShopTypeEnternment:
             cell.shopTypeLabel.text = @"娱乐";

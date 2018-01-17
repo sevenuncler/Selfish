@@ -120,6 +120,7 @@ static NSString * const reuseID = @"reuseID";
     if(foodItem.pics.count>0) {
         NSString *src = foodItem.pics[0];
         cell.imageView.image = [UIImage imageNamed:@"image"];
+        cell.imageView.contentMode = UIViewContentModeScaleAspectFit;
         SUImageManager *imageManager = [SUImageManager defaultImageManager];
         [imageManager setImageView:cell.imageView withURL:[NSURL URLWithString:src]];
     }

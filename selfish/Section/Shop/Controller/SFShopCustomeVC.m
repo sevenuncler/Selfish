@@ -330,7 +330,7 @@ static  CGFloat padding = 15;
     self.shopItem.averageCost  = [self.shopAvgCost.textField.text floatValue];
     self.shopItem.announcement = self.shopAnnouncment.textField.text;
     self.shopItem.tags = [self.shopTags.textField.text componentsSeparatedByString:@","];
-    self.shopItem.type = [self.shopTypes.textField.text intValue];
+    self.shopItem.type = self.shopTypes.textField.text;
     self.shopItem.starLevel = self.startRatingView.value;
     
 }
