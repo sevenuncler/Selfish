@@ -21,17 +21,19 @@
     if(self=[super initWithFrame:frame]){
         if(!_imageViewOfPhoto){
             _imageViewOfPhoto   =   [UIImageView new];
+            _imageViewOfPhoto.contentMode = UIViewContentModeScaleAspectFill;
             [self.contentView addSubview:_imageViewOfPhoto];
             [_imageViewOfPhoto mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.edges.equalTo(self);
             }];
+            _imageViewOfPhoto.clipsToBounds = YES;
             self.backgroundColor    =   [UIColor redColor];
             _imageViewOfPhoto.userInteractionEnabled    =   YES;
         }
         _selectedButton   =   [UIButton buttonWithType:UIButtonTypeCustom];
         [_selectedButton addTarget:self action:@selector(selectPhoto:) forControlEvents:UIControlEventTouchUpInside];
-        [_selectedButton setImage:[UIImage imageNamed:@"motobike"] forState:UIControlStateNormal];
-        [_selectedButton setImage:[UIImage imageNamed:@"orange"] forState:UIControlStateSelected];
+        [_selectedButton setImage:[UIImage imageNamed:@"image"] forState:UIControlStateNormal];
+        [_selectedButton setImage:[UIImage imageNamed:@"placeholder"] forState:UIControlStateSelected];
         [self.contentView addSubview:_selectedButton];
         [_selectedButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.trailing.equalTo(self.mas_trailing).offset(-5);

@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface SFShopCustomeDecorationVC : UIViewController
-
+@property(nonatomic,strong) NSMutableArray *doors;
+@property(nonatomic,strong) NSMutableArray *environment;
+@property(nonatomic,strong) NSMutableArray *seats;
 @end

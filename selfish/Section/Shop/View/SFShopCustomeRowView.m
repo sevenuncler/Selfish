@@ -48,6 +48,7 @@
     if(!_picsCollectionView) {
         _picsCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, 100, 100) collectionViewLayout:self.flowLayout];
         _picsCollectionView.backgroundColor = [UIColor whiteColor];
+        _picsCollectionView.clipsToBounds = NO;
     }
     return _picsCollectionView;
 }

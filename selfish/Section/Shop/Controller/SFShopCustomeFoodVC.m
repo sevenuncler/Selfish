@@ -46,6 +46,8 @@ static NSString * const reuseTableViewCell = @"SUTableViewCell";
     });
 }
 
+
+
 - (void)loadFood {
     if(self.fid) {
         dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
@@ -165,6 +167,8 @@ static NSString * const reuseTableViewCell = @"SUTableViewCell";
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if(section == 0) {
         return 3;
+    }else if(1 == section) {
+        return 1;
     }
     return 2;
 }

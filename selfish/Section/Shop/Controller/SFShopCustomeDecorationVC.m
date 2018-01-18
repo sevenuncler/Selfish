@@ -18,6 +18,8 @@
 @property(nonatomic, strong) SFShopCustomeRowView *VRView;
 @property(nonatomic, strong) UIScrollView         *contentScrollView;
 @property(nonatomic, strong) SFShopCustomeRowViewModel *viewModel;
+@property(nonatomic, strong) SFShopCustomeRowViewModel *environmentVM;
+@property(nonatomic, strong) SFShopCustomeRowViewModel *seatsVM;
 @property(nonatomic, strong) UIButton             *submitButton;
 @end
 
@@ -35,7 +37,7 @@
     [self.contentScrollView addSubview:self.VRView];
     [self.contentScrollView addSubview: self.submitButton];
     [self.view addSubview:self.contentScrollView];
-    
+    [self setUpNavigator];
     [self setUpDataBinding];
 }
 
@@ -51,16 +53,25 @@
     self.contentScrollView.contentSize = CGSizeMake(self.view.size.width, self.submitButton.botton + 100);
 }
 
+- (void)setUpNavigator {
+    self.title = @"店铺图片";
+    
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:@"修改" style:UIBarButtonItemStyleDone target:self action:nil];
+    self.navigationItem.rightBarButtonItem = item;
+}
+
 - (void)setUpDataBinding {
     self.viewModel = [SFShopCustomeRowViewModel new];
     self.gateView.picsCollectionView.dataSource = self.viewModel;
     self.gateView.picsCollectionView.delegate   = self.viewModel;
     
-    self.enviromentView.picsCollectionView.dataSource = self.viewModel;
-    self.enviromentView.picsCollectionView.delegate   = self.viewModel;
+    self.environmentVM = [SFShopCustomeRowViewModel new];
+    self.enviromentView.picsCollectionView.dataSource = self.environmentVM;
+    self.enviromentView.picsCollectionView.delegate   = self.environmentVM;
     
-    self.diningTableView.picsCollectionView.dataSource = self.viewModel;
-    self.diningTableView.picsCollectionView.delegate   = self.viewModel;
+    self.seatsVM = [SFShopCustomeRowViewModel new];
+    self.diningTableView.picsCollectionView.dataSource = self.seatsVM;
+    self.diningTableView.picsCollectionView.delegate   = self.seatsVM;
 }
 
 - (void)didReceiveMemoryWarning {

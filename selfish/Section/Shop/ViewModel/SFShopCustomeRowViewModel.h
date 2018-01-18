@@ -10,5 +10,5 @@
 #import <UIKit/UIKit.h>
 
 @interface SFShopCustomeRowViewModel : NSObject <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
-
+@property(nonatomic,strong) NSMutableArray *pics;
 @end
